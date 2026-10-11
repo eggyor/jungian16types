@@ -11,70 +11,40 @@ description: '開始經典榮格類型測驗前，了解測驗用途與作答方
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="{{ page.description | escape }}">
 <title>{{ page.title | escape }}｜經典榮格 Classic Jung</title>
-<style>
-:root{--fg:#263044;--muted:#667085;--accent:#a8b686;--yellow:#ffe16c;--line:#e5e7eb}
+<style>:root{--fg:#263044;--muted:#667085;--accent:#a8b686;--yellow:#ffe16c;--line:#e5e7eb}
 *{box-sizing:border-box}
 body{margin:0;color:var(--fg);background:#fff;font:17px/1.85 system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif}
 main{width:min(1320px,calc(100% - 64px));max-width:none;margin:0 auto;padding:48px 0 72px}
-h1{font-size:clamp(32px,3.4vw,44px);line-height:1.4;margin:0 0 16px}
-h2{font-size:clamp(26px,2.5vw,32px);line-height:1.5;margin:0 0 22px}
-p{margin:0 0 18px}.lead{font-size:20px;font-weight:600}.checklist{padding-left:1.5em}.checklist li{margin:4px 0}
-.btn{display:inline-block;margin:12px 12px 12px 0;padding:12px 28px;border-radius:4px;color:#263044;background:var(--yellow);font-size:19px;font-weight:700;text-decoration:none}.btn:hover{filter:brightness(.97)}
-.notice{margin-top:30px;padding:18px 20px;border-left:4px solid var(--accent);background:#f5f6f2;color:#596246}
-@media(max-width:600px){main{width:calc(100% - 32px);padding:30px 0 48px}.btn{display:block;width:max-content;max-width:100%}}
-</style>
+h1{font-size:clamp(32px,3.4vw,44px);line-height:1.4;margin:0 0 16px}h2{font-size:clamp(26px,2.5vw,32px);line-height:1.5;margin:0 0 22px}p{margin:0 0 18px}.lead{font-size:20px;font-weight:600}.checklist{padding-left:1.5em}.checklist li{margin:4px 0}.btn{display:inline-block;margin:12px 12px 12px 0;padding:12px 28px;border-radius:4px;color:#263044;background:var(--yellow);font-size:19px;font-weight:700;text-decoration:none}.btn:hover{filter:brightness(.97)}.notice{margin-top:30px;padding:18px 20px;border-left:4px solid var(--accent);background:#f5f6f2;color:#596246}
+.quiz-compass-page{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-rows:1fr auto;align-items:stretch;min-height:min(690px,calc(100svh - 174px));overflow:hidden;margin:20px auto!important;padding:0!important;border:1px solid #c6b27c;border-radius:5px;background:linear-gradient(110deg,#fcfaf4 0%,#f6f1e5 54%,#efe7d3 100%);box-shadow:0 12px 34px rgba(52,65,55,.07),inset 0 0 0 5px #fff9ed,inset 0 0 0 6px rgba(167,131,62,.15)}
+.quiz-compass-page:before{position:absolute;inset:10px;content:"";border:1px solid rgba(167,131,62,.24);pointer-events:none}.quiz-compass-page:after{position:absolute;top:0;bottom:0;left:52%;width:1px;content:"";background:linear-gradient(transparent,rgba(167,131,62,.4) 14%,rgba(167,131,62,.2) 82%,transparent);pointer-events:none}
+.quiz-compass-left{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,4vw,58px) clamp(28px,4vw,62px)}.quiz-compass-kicker{display:flex;align-items:center;gap:12px;margin:0 0 12px;color:#a7833e;font-size:11px;letter-spacing:.22em}.quiz-compass-kicker:before{content:"";width:28px;border-top:1px solid #a7833e}.quiz-compass-page h1{margin:0;color:#263d31;font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;font-size:clamp(42px,5.2vw,70px);font-weight:500;line-height:1.13;letter-spacing:.1em}.quiz-compass-subtitle{max-width:26em;margin:12px 0 17px;color:#53644f;font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;font-size:clamp(19px,2.1vw,26px);line-height:1.5}.quiz-compass-ready{display:flex;align-items:center;gap:12px;margin:0;color:#8b713b;font-size:14px;letter-spacing:.08em}.quiz-compass-ready:before,.quiz-compass-ready:after{content:"";height:1px;background:rgba(167,131,62,.45)}.quiz-compass-ready:before{width:25px}.quiz-compass-ready:after{width:50px}.quiz-compass-visual{position:absolute;z-index:-1;left:50%;top:50%;width:min(39vw,450px);aspect-ratio:1;transform:translate(-28%,-50%);opacity:.13;color:#a7833e;pointer-events:none}.quiz-compass-visual svg{width:100%;height:100%}.quiz-compass-page .quiz-compass-start{position:relative;display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;min-width:270px;min-height:62px;margin:23px 0 0;padding:13px 42px;border:1px solid #b89a5b;border-radius:3px;background:linear-gradient(115deg,#294738,#3d604b 48%,#294738);box-shadow:inset 0 0 0 3px rgba(230,215,178,.15),inset 0 1px 0 rgba(255,255,255,.13),0 5px 13px rgba(38,61,49,.19);color:#fffaf0;text-decoration:none;font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;font-size:19px;font-weight:600;letter-spacing:.16em;text-align:center;text-shadow:0 1px 2px rgba(16,35,25,.44);transition:transform .22s,box-shadow .22s,background .22s,border-color .22s}.quiz-compass-start:before{position:absolute;inset:5px;content:"";border:1px solid rgba(223,199,125,.5);border-radius:1px;pointer-events:none}.quiz-compass-start:after{position:absolute;top:50%;right:23px;content:"›";transform:translateY(-54%);color:#e6d7b2;font:300 36px/.8 Georgia,"Times New Roman",serif;letter-spacing:0;transition:transform .22s,color .22s}.quiz-compass-start:hover{transform:translateY(-3px);border-color:#d3b767;background:linear-gradient(115deg,#365a45,#4d7057 48%,#365a45);box-shadow:inset 0 0 0 3px rgba(230,215,178,.22),inset 0 1px 0 rgba(255,255,255,.21),0 9px 18px rgba(38,61,49,.22)}.quiz-compass-start:hover:after{transform:translate(3px,-54%);color:#fff2c9}.quiz-compass-start:focus-visible{outline:3px solid #a7833e;outline-offset:4px}.quiz-compass-start:active{transform:translateY(-1px);box-shadow:inset 0 2px 5px rgba(20,45,34,.5),0 2px 5px rgba(38,61,49,.15)}
+.quiz-compass-right{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-start;padding:clamp(34px,4.2vw,52px) clamp(26px,3.5vw,48px) 24px clamp(34px,4.2vw,58px)}.quiz-compass-right:before{position:absolute;top:50%;left:50%;width:min(35vw,390px);aspect-ratio:1;transform:translate(-50%,-50%);content:"";border:1px solid rgba(167,131,62,.12);border-radius:50%;box-shadow:0 0 0 16px rgba(167,131,62,.03),0 0 0 48px rgba(167,131,62,.02);pointer-events:none}.quiz-compass-section{position:relative}.quiz-compass-section+.quiz-compass-section{margin-top:16px;padding-top:14px;border-top:1px solid rgba(167,131,62,.25)}.quiz-compass-label{display:flex;align-items:center;gap:10px;margin:0 0 10px;color:#806739;font-size:15px;font-weight:600;letter-spacing:.16em}.quiz-compass-label:after{content:"";height:1px;background:rgba(167,131,62,.27);flex:1}.quiz-compass-list{display:grid;grid-template-columns:1fr;gap:3px;margin:0;padding:0;list-style:none}.quiz-compass-list li{position:relative;padding-left:17px;color:#4d5c51;font-size:15px;line-height:1.65}.quiz-compass-list li:before{position:absolute;left:0;content:"✧";color:#a7833e}.quiz-compass-right p{margin:0 0 8px;color:#505b52;font-size:15px;line-height:1.68}.quiz-compass-right p:last-child{margin-bottom:0}.quiz-compass-disclaimer{grid-column:1/-1;position:relative;z-index:2;margin:0;padding:13px 28px 14px;border-top:1px solid rgba(167,131,62,.28);background:linear-gradient(90deg,#eee5d1,#f9f5e9 50%,#eee5d1);color:#6c7168}.quiz-compass-disclaimer strong{margin-right:7px;color:#806739;font-size:13px;letter-spacing:.1em}.quiz-compass-disclaimer p{display:inline;margin:0;color:#73766d;font-size:13px;line-height:1.75}
+@media(max-height:760px) and (min-width:801px){.site-header{min-height:64px}.quiz-compass-page{min-height:0;height:calc(100svh - 174px)}.quiz-compass-left{padding-top:24px;padding-bottom:24px}.quiz-compass-right{padding-top:22px;padding-bottom:18px}.quiz-compass-section+.quiz-compass-section{margin-top:12px;padding-top:11px}.quiz-compass-label{margin-bottom:7px}.quiz-compass-page .quiz-compass-start{min-width:250px;min-height:54px;margin-top:16px;font-size:17px}.quiz-compass-right p,.quiz-compass-list li{font-size:14px}.quiz-compass-disclaimer{padding-top:9px;padding-bottom:10px}}
+@media(max-width:800px){.quiz-compass-page{display:grid;grid-template-columns:1fr;grid-template-rows:auto auto auto;min-height:0;margin:16px auto!important;overflow:hidden}.quiz-compass-page:after{display:none}.quiz-compass-left,.quiz-compass-right{display:contents}.quiz-compass-kicker{grid-row:1;margin:30px 27px 12px}.quiz-compass-page h1{grid-row:2;margin:0 27px}.quiz-compass-subtitle{grid-row:3;margin:9px 27px 12px}.quiz-compass-ready{grid-row:4;margin:0 27px 4px}.quiz-compass-section:first-child{grid-row:5;margin:16px 27px 0}.quiz-compass-section:nth-child(2){grid-row:6;margin:14px 27px 0;padding-top:13px}.quiz-compass-page .quiz-compass-start{grid-row:7;align-self:center;justify-self:center;width:min(100% - 30px,300px);min-width:0;min-height:58px;margin:16px 0 20px}.quiz-compass-disclaimer{grid-row:8;margin:0 18px 18px;padding:12px 0 0;border-top:1px solid rgba(167,131,62,.28);background:none}.quiz-compass-visual{left:auto;right:-28px;top:130px;width:250px;transform:none;opacity:.16}.quiz-compass-right:before{display:none}}
+@media(max-width:460px){main.quiz-compass-page{width:calc(100% - 20px);margin:10px auto!important}.quiz-compass-page:before{inset:6px}.quiz-compass-kicker{margin:24px 21px 10px}.quiz-compass-page h1{margin:0 21px;font-size:44px}.quiz-compass-subtitle{margin:9px 21px 12px;font-size:18px}.quiz-compass-ready{margin:0 21px 4px}.quiz-compass-section:first-child{margin:14px 21px 0}.quiz-compass-section:nth-child(2){margin:12px 21px 0;padding-top:11px}.quiz-compass-right p,.quiz-compass-list li{font-size:14px;line-height:1.65;text-wrap:pretty;line-break:strict}.quiz-compass-keep{white-space:nowrap}.quiz-compass-page .quiz-compass-start{width:min(100% - 30px,300px);min-width:0;min-height:58px;margin:15px 0 18px}.quiz-compass-disclaimer{margin:0 15px 16px;padding-top:10px}.quiz-compass-disclaimer p{font-size:12px}.quiz-compass-visual{right:-34px;width:200px}}
+@media(prefers-reduced-motion:reduce){.quiz-compass-start{transition:none}}</style>
 <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/site-theme.css' | relative_url }}">
 </head>
 <body id="site-top">
 {% include header.html %}
-<main class="quiz-landing">
-  <section class="quiz-landing-hero">
-    <div class="quiz-landing-hero-copy">
-      <h1>類型測驗</h1>
-      <h2>歡迎來到尋找自己榮格類型的大門。</h2>
-      <p class="lead">你準備好了嗎？</p>
-    </div>
-    <svg class="quiz-landing-engraving" viewBox="0 0 300 220" aria-hidden="true" focusable="false">
-      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="150" cy="48" r="25" stroke-width="1.25"/>
-        <ellipse cx="150" cy="48" rx="43" ry="15" stroke-width=".8" opacity=".72" transform="rotate(-24 150 48)"/>
-        <path d="M150 10v9m0 58v9m-48-38h9m78 0h9M116 14l5 8m58 51 5 8m0-67-5 8m-58 51-5 8" stroke-width="1"/>
-        <path d="m150 32 3.5 11 11.5 4-11.5 4-3.5 12-3.5-12-11.5-4 11.5-4z" stroke-width="1"/>
-        <path d="M150 116c-27-17-61-23-101-16v67c39-8 74-3 101 15 27-18 62-23 101-15v-67c-40-7-74-1-101 16z" stroke-width="1.5"/>
-        <path d="M150 116v66m-89-72c30-4 57 1 79 12m-79 1c29-4 55 1 79 12m-79 1c28-3 54 2 79 12m89-37c-30-4-57 1-79 12m79 1c-29-4-55 1-79 12m79 1c-28-3-54 2-79 12" stroke-width=".8" opacity=".75"/>
-        <path d="m49 100-11-9m11 76-11 8m212-75 11-9m-11 76 11 8" stroke-width="1"/>
-      </g>
-    </svg>
+<main class="quiz-landing quiz-compass-page">
+  <section class="quiz-compass-left">
+    <p class="quiz-compass-kicker" aria-hidden="true">✧　序　章</p>
+    <h1>類型測驗</h1>
+    <p class="quiz-compass-subtitle">歡迎來到尋找自己榮格類型的大門。</p>
+    <p class="quiz-compass-ready">你準備好了嗎？</p>
+    <a class="quiz-compass-start" href="{{ '/page-2793.html' | relative_url }}">開始測驗</a>
+    <div class="quiz-compass-visual" aria-hidden="true"><svg viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="1"><circle cx="200" cy="200" r="174"/><circle cx="200" cy="200" r="157" stroke-dasharray="1 6"/><circle cx="200" cy="200" r="122"/><path d="M200 24v352M24 200h352M76 76l248 248M324 76 76 324"/><path d="m200 52 23 125 125 23-125 23-23 125-23-125-125-23 125-23z"/><circle cx="200" cy="200" r="19"/><path d="M200 75v23m0 204v23M75 200h23m204 0h23M112 112l16 16m144 144 16 16m0-176-16 16M128 272l-16 16"/></svg></div>
   </section>
-  <div class="quiz-landing-grid">
-    <section class="quiz-landing-why">
-      <p>如果你……</p>
-      <ul class="checklist">
-        <li>想深入理解自我和榮格心理學</li>
-        <li>想認識比 MBTI 或 16p 更深入的理論</li>
-        <li>想透過心理功能理解自己與他人</li>
-        <li>希望作答後有理論文章深入解釋</li>
-      </ul>
-      <p>那你就來對地方了。</p>
-      <p>這裡沒有時間限制，你可以按照自己的步伐反思。<br>這裡也沒有外界目光，你可以誠實地面對自己。</p>
-      <p>測驗完全免費且不記名作答，你可以安心填寫。</p>
-      <hr>
-    </section>
-    <section class="quiz-landing-how">
-      <p>測驗共有 20 題，分成兩部分作答。進入第二部分後可返回修改第一部分；重新進入第二部分時，第二部分答案會重設，需重新作答。</p>
-      <p>回答問題時，只要把中間的拉桿按照同意程度拉動到更認同的一方即可。</p>
-      <p>全部作答完成並送出後可查看結果。</p>
-      <a class="btn quiz-landing-start" href="{{ '/page-2793.html' | relative_url }}">開始測驗</a>
-    </section>
-  </div>
-  <section class="quiz-landing-disclaimer">
-    <hr>
-    <p><strong>聲明：</strong></p>
-    <p>人格測驗的信效度受制於測驗者對自身的了解程度，以及容易受測驗時的狀態影響，因此我們不建議將測驗結果視為最終判斷。本測驗結果僅供參考，詳細請參考我們的理論文章以加深對經典榮格理論的認識，方便作自我判型。</p>
-    <p>本網站的測驗結果與理論均與目前坊間流行的 MBTI、榮格八維以及 16personalities.com 不兼容。</p>
+  <section class="quiz-compass-right">
+    <div class="quiz-compass-section"><h2 class="quiz-compass-label">如果你……</h2><ul class="quiz-compass-list"><li>想深入理解自我和榮格心理學</li><li>想認識比 MBTI 或 16p 更深入的理論</li><li>想透過心理功能理解自己與他人</li><li>希望作答後有理論文章深入解釋</li></ul><p style="margin-top:9px">那你就來對地方了。</p><p>這裡沒有時間限制，你可以按照自己的步伐<span class="quiz-compass-keep">反思。</span><br>這裡也沒有外界目光，你可以誠實地<span class="quiz-compass-keep">面對自己。</span></p><p>測驗完全免費且不記名作答，你可以安心填寫。</p></div>
+    <div class="quiz-compass-section"><h2 class="quiz-compass-label">作答方式</h2><p>測驗共有 20 題，分成兩部分作答。進入第二部分後可返回修改第一部分；重新進入第二部分時，第二部分答案會重設，需重新作答。</p><p>回答問題時，只要把中間的拉桿按照同意程度拉動到更認同的一方即可。</p><p>全部作答完成並送出後可查看結果。</p></div>
   </section>
+  <section class="quiz-compass-disclaimer"><strong>聲明：</strong><p>人格測驗的信效度受制於測驗者對自身的了解程度，以及容易受測驗時的狀態影響，因此我們不建議將測驗結果視為最終判斷。本測驗結果僅供參考，詳細請參考我們的理論文章以加深對經典榮格理論的認識，方便作自我判型。</p><p>本網站的測驗結果與理論均與目前坊間流行的 MBTI、榮格八維以及 16personalities.com 不兼容。</p></section>
 </main>
 {% include footer.html %}
 </body>
 </html>
+
