@@ -26,7 +26,7 @@
       <a href="{{ '/' | relative_url }}">主頁</a>
       <a href="{{ '/page-1324.html' | relative_url }}">類型測驗</a>
       <div class="nav-dropdown">
-        <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="theory-submenu">理論文章 <span class="nav-caret" aria-hidden="true"></span></button>
+        <a class="nav-dropdown-toggle" href="{{ '/theory/' | relative_url }}" aria-expanded="false" aria-controls="theory-submenu">理論文章 <span class="nav-caret" aria-hidden="true"></span></a>
         <div class="dropdown-menu" id="theory-submenu" aria-label="理論文章分類">
           <a href="{{ '/page-1259.html' | relative_url }}">基礎概念101</a>
           <a href="{{ '/page-1271.html' | relative_url }}">類型描述</a>
@@ -46,16 +46,16 @@
   const toggle=document.querySelector('.nav-dropdown-toggle');
   const submenu=document.querySelector('#theory-submenu');
   if(!menu||!toggle||!submenu)return;
-  let pinnedOpen=false,hoverOpen=false,suppressHover=false,closeTimer=null;
-  function update(){const open=pinnedOpen||hoverOpen;menu.classList.toggle('is-open',open);toggle.setAttribute('aria-expanded',String(open));}
+  let hoverOpen=false,closeTimer=null;
+  function update(){menu.classList.toggle('is-open',hoverOpen);toggle.setAttribute('aria-expanded',String(hoverOpen));}
   function keepOpen(){if(closeTimer){clearTimeout(closeTimer);closeTimer=null;}}
-  function scheduleClose(){keepOpen();closeTimer=setTimeout(function(){closeTimer=null;if(!pinnedOpen){hoverOpen=false;suppressHover=false;update();}},300);}
-  toggle.addEventListener('pointerenter',function(){keepOpen();if(!suppressHover){hoverOpen=true;update();}});
+  function scheduleClose(){keepOpen();closeTimer=setTimeout(function(){closeTimer=null;hoverOpen=false;update();},300);}
+  toggle.addEventListener('pointerenter',function(){keepOpen();hoverOpen=true;update();});
   toggle.addEventListener('pointerleave',scheduleClose);
-  submenu.addEventListener('pointerenter',function(){keepOpen();if(hoverOpen||pinnedOpen)update();});
+  submenu.addEventListener('pointerenter',function(){keepOpen();if(hoverOpen)update();});
   submenu.addEventListener('pointerleave',scheduleClose);
-  toggle.addEventListener('click',function(){keepOpen();if(pinnedOpen){pinnedOpen=false;hoverOpen=false;suppressHover=true;}else{pinnedOpen=true;hoverOpen=false;suppressHover=false;}update();});
-  document.addEventListener('click',function(event){if(!menu.contains(event.target)){keepOpen();pinnedOpen=false;hoverOpen=false;suppressHover=false;update();}});
-  document.addEventListener('keydown',function(event){if(event.key==='Escape'){keepOpen();pinnedOpen=false;hoverOpen=false;suppressHover=false;update();toggle.focus();}});
+  menu.addEventListener('focusin',function(){keepOpen();hoverOpen=true;update();});
+  menu.addEventListener('focusout',function(event){if(!menu.contains(event.relatedTarget))scheduleClose();});
+  document.addEventListener('keydown',function(event){if(event.key==='Escape'){keepOpen();hoverOpen=false;update();toggle.focus();}});
 })();
 </script>
