@@ -1,0 +1,15 @@
+經典榮格 Jekyll 網站檔案
+
+這個資料夾就是網站根目錄。上傳時請上傳裡面的所有檔案與資料夾，保留目前層級。
+
+首頁：index.html（已由原 home.html 放到 Jekyll 首頁位置）
+頁首／頁尾：_includes/header.html、_includes/footer.html
+文章：_posts/
+分類頁：根目錄的 page-*.html 與 theory/
+樣式：assets/css/
+圖片：assets/images/ 與 img/
+
+已整合文章 ZIP 的文章與媒體，以及分類頁 ZIP 中較新的頁首、頁尾和分類頁。原始 ZIP 與原 home.html 均保留在 dynamic pages 其他位置，沒有覆寫。
+標籤索引：tags/index.html；各標籤文章頁位於 tags/<標籤名稱>/index.html。
+編碼：_config.yml 指定 UTF-8，中文內容和標籤路徑均以 UTF-8 儲存。
+

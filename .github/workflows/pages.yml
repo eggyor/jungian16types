@@ -1,0 +1,49 @@
+name: Build and publish Jekyll site
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 10 * * *' # 每天 UTC 10:17 更新 Instagram 貼文
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the website files
+        uses: actions/checkout@v4
+      - name: Prepare Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Update Instagram posts
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+        run: python scripts/update_instagram.py
+      - name: Find similar articles from their text
+        run: python scripts/build_related.py
+      - name: Prepare GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Build the Jekyll website
+        uses: actions/jekyll-build-pages@v1
+      - name: Package the website
+        uses: actions/upload-pages-artifact@v3
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Publish the website
+        id: deployment
+        uses: actions/deploy-pages@v4

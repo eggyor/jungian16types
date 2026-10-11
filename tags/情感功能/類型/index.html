@@ -1,0 +1,59 @@
+---
+layout: null
+title: 情感功能/類型
+permalink: /tags/情感功能/類型/
+tag_name: "情感功能/類型"
+description: '瀏覽以「情感功能/類型」為標籤的經典榮格文章，查看相關概念與類型學內容。文章清單會隨網站發佈更新。'
+---
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description | escape }}">
+  <title>{{ page.title | escape }}｜標籤文章｜{{ site.title | default: "經典榮格 Classic Jung" | escape }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
+  <style>
+    :root { --ink:#202536; --muted:#667085; --line:#e7e9ee; --green:#a8b686; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:#fff; font:17px/1.8 system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif; }
+    main { max-width:1000px; margin:0 auto; padding:48px 22px 72px; }
+    h1 { margin:0 0 12px; font-size:clamp(2rem,5vw,3rem); line-height:1.3; }
+    .intro { margin:0 0 28px; color:var(--muted); }
+    .post-list { margin:0; padding-left:1.5em; }
+    .post-list li { padding:10px 0; border-bottom:1px solid var(--line); }
+    .post-list a { color:var(--ink); text-decoration:underline; text-decoration-color:var(--green); text-underline-offset:4px; }
+    .post-list a:hover { color:#65764a; }
+    time { margin-left:9px; color:var(--muted); font-size:.9em; }
+    .empty { padding:18px; background:#f7f8f5; color:var(--muted); }
+    .page-actions { display:flex; flex-wrap:wrap; gap:12px; margin:0 0 26px; }
+    .page-button { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:9px 18px; border:1px solid #a8b686; border-radius:4px; background:#a8b686; color:#202536; font-size:15px; font-weight:700; text-decoration:none; transition:filter .15s ease,transform .15s ease; }
+    .page-button:hover { filter:brightness(.96); transform:translateY(-1px); }
+    .page-button:focus-visible { outline:3px solid rgba(61,112,183,.35); outline-offset:2px; }
+    @media(max-width:560px) { .page-actions { gap:8px; } .page-button { min-height:42px; padding:8px 12px; font-size:14px; } }
+  </style>
+</head>
+<body id="site-top">
+  {% include header.html %}
+  <main>
+    <nav class="page-actions" aria-label="標籤頁導覽">
+      <a class="page-button" href="{{ '/theory/' | relative_url }}">回到理論文章</a>
+      <a class="page-button" href="{{ '/tags/' | relative_url }}">查看所有標籤索引</a>
+    </nav>
+    <h1>{{ page.tag_name | escape }}</h1>
+    <p class="intro">使用此標籤的文章（依發佈日期由新到舊）</p>
+    {% assign tag_posts = site.tags[page.tag_name] | sort: "date" | reverse %}
+    {% if tag_posts and tag_posts.size > 0 %}
+      <ul class="post-list">
+        {% for post in tag_posts %}
+          <li><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y年%-m月%-d日" }}</time></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty">目前沒有使用此標籤的文章。</p>
+    {% endif %}
+  </main>
+  {% include footer.html %}
+</body>
+</html>
+

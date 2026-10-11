@@ -1,0 +1,17 @@
+/* 共用頁首與頁尾樣式；六個理論分類頁共同載入 */
+.cj-top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;color:#263044}
+.cj-wrap{max-width:1120px;margin:0 auto;padding-left:20px;padding-right:20px}
+.cj-topin{min-height:62px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.cj-brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:#263044;font-weight:700;font-size:19px;white-space:nowrap}
+.cj-brand img{width:36px;height:36px;border-radius:50%;object-fit:cover}.cj-brand span{font-weight:400;color:#667085;font-size:14px}
+.cj-nav{display:flex;align-items:center;gap:4px}.cj-nav a{color:#263044;text-decoration:none;padding:6px 12px;border-radius:8px;font-size:15px}
+.cj-nav a:hover,.cj-nav a.on{background:#eef1e8;color:#65764a}
+.cj-menu-toggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.cj-burger{display:none;font-size:25px;line-height:1;cursor:pointer;color:#263044}
+.cj-subnav{border-top:1px solid #f0f1f3;font-size:14px}.cj-subnavin{display:flex;gap:18px;overflow-x:auto;white-space:nowrap;padding-top:7px;padding-bottom:7px}
+.cj-subnav a{color:#667085;text-decoration:none}.cj-subnav a:hover,.cj-subnav a.on{color:#65764a;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:760px){.cj-topin{position:relative;min-height:62px}.cj-burger{display:block;margin-left:auto}.cj-nav{display:none;position:absolute;top:62px;left:-20px;right:-20px;background:#fff;flex-direction:column;align-items:stretch;padding:8px 18px;border-bottom:1px solid #e5e7eb;box-shadow:0 8px 16px rgba(0,0,0,.08)}#cj-menu-toggle:checked~.cj-nav{display:flex}.cj-nav a{padding:10px 12px}.cj-brand span{display:none}.cj-subnavin{gap:16px}}
+
+.cj-footer{border-top:1px solid #e5e7eb;color:#667085;font-size:14px;padding:26px 0;text-align:center;background:#fff}
+.cj-footer small{font-size:12px}
+.cj-footer .cj-wrap{max-width:1120px;margin:0 auto;padding:0 20px}

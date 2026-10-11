@@ -1,0 +1,48 @@
+---
+layout: null
+title: 標籤文章索引
+permalink: /tags/
+description: '按主題標籤查找經典榮格心理類型學文章；各標籤頁會列出使用該標籤的文章。'
+---
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description | escape }}">
+  <title>{{ page.title | escape }}｜{{ site.title | default: "經典榮格 Classic Jung" | escape }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
+  <style>
+    :root { --ink:#202536; --muted:#667085; --line:#e7e9ee; --green:#a8b686; --soft:#f7f8f5; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:#fff; font:17px/1.8 system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif; }
+    main { max-width:1000px; margin:0 auto; padding:48px 22px 72px; }
+    h1 { margin:0 0 12px; font-size:clamp(2rem,5vw,3rem); line-height:1.3; }
+    .intro { margin:0 0 30px; color:var(--muted); }
+    .tag-list { margin:0; padding-left:1.5em; }
+    .tag-list li { padding:8px 0; border-bottom:1px solid var(--line); }
+    .tag-list a { color:var(--ink); text-decoration:underline; text-decoration-color:var(--green); text-underline-offset:4px; }
+    .tag-list a:hover { color:#65764a; }
+    .count { margin-left:8px; color:var(--muted); font-size:.9em; }
+    .back-link { display:inline-block; margin-bottom:22px; color:inherit; }
+  </style>
+</head>
+<body id="site-top">
+  {% include header.html %}
+  <main>
+    <a class="back-link" href="{{ '/theory/' | relative_url }}">← 回到理論文章</a>
+    <h1>標籤文章索引</h1>
+    <p class="intro">選擇標籤，查看使用該標籤的文章。每個標籤都有獨立頁面，文章清單會在網站重新發佈時自動更新。</p>
+    <ul class="tag-list">
+      {% assign sorted_tags = site.tags | sort %}
+      {% for tag_pair in sorted_tags %}
+        {% assign tag_name = tag_pair[0] %}
+        {% assign tag_posts = tag_pair[1] %}
+        {% capture tag_page_path %}/tags/{{ tag_name }}/{% endcapture %}
+        <li><a href="{{ tag_page_path | relative_url }}">{{ tag_name | escape }}</a><span class="count">{{ tag_posts.size }} 篇文章</span></li>
+      {% endfor %}
+    </ul>
+  </main>
+  {% include footer.html %}
+</body>
+</html>

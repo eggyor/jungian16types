@@ -1,0 +1,53 @@
+---
+title: "榮格原文"
+permalink: /page-1292.html
+description: '閱讀《心理類型》的榮格原文節錄與相關詞條，從原始文本理解內傾、外傾及四種心理功能。'
+---
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description | escape }}">
+<title>{{ page.title | escape }}｜{{ site.title | default: "經典榮格 Classic Jung" | escape }}</title>
+<style>
+:root{--fg:#263044;--muted:#667085;--line:#e5e7eb;--card:#fff;--soft:#f5f6f4;--accent:#a8b686;--shadow:0 8px 24px rgba(20,28,42,.10)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--fg);background:#fff;font:16px/1.65 system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif}
+a{color:inherit}
+main{max-width:1120px;margin:0 auto;padding:36px 20px 68px}
+h1{font-size:clamp(28px,4vw,36px);line-height:1.3;margin:0 0 8px}
+.count{margin:0 0 26px;color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.card{position:relative;display:block;min-width:0;overflow:hidden;aspect-ratio:4/3;background:linear-gradient(135deg,#e7ecdf,#edf0f3);border-radius:12px;text-decoration:none;box-shadow:0 2px 10px rgba(20,28,42,.06);isolation:isolate}
+.visual{position:absolute;inset:0}
+.visual img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .45s ease}
+.card:hover .visual img{transform:scale(1.035)}
+.placeholder{width:100%;height:100%;background:linear-gradient(145deg,#e7ebdf,#f0f1ef)}
+.title-panel{position:absolute;left:0;right:0;bottom:0;height:34%;min-height:64px;padding:12px 14px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;background:rgba(21,27,37,.70);backdrop-filter:blur(3px);transition:height .28s ease,background-color .28s ease}
+.card:hover .title-panel,.card:focus-visible .title-panel{height:50%;background:rgba(21,27,37,.80)}
+.title-panel h2{margin:0;font-size:clamp(15px,1.4vw,19px);line-height:1.45;font-weight:600;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.empty{padding:26px 0;color:var(--muted)}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.grid{grid-template-columns:1fr;gap:0}.card{aspect-ratio:auto;min-height:0;border-radius:0;box-shadow:none;background:#fff;border-bottom:1px solid var(--line)}.visual{display:none}.title-panel{position:static;min-height:0;height:auto!important;padding:15px 2px;display:block;text-align:left;color:var(--fg);background:transparent!important;backdrop-filter:none}.title-panel h2{font-size:16px;line-height:1.55;display:block;overflow:visible}main{padding-top:28px}.count{margin-bottom:12px}}
+</style>
+<link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
+</head>
+<body>
+{% include header.html current_category="榮格原文" %}
+<main>
+  <h1>{{ page.title | escape }}</h1>
+  {% assign sorted_posts = site.posts | sort: "date" | reverse %}
+  {% assign article_count = 0 %}
+  {% for post in sorted_posts %}{% if post.categories contains "理論文章" and post.subcategory == "榮格原文" %}{% assign article_count = article_count | plus: 1 %}{% endif %}{% endfor %}
+  <p class="count">共 {{ article_count }} 篇文章</p>
+  {% if article_count > 0 %}<div class="grid">
+    {% for post in sorted_posts %}{% if post.categories contains "理論文章" and post.subcategory == "榮格原文" %}
+      <a class="card" href="{{ post.url | relative_url }}">
+        <div class="visual">{% if post.cover %}<img src="{{ post.cover | relative_url | escape }}" alt="{{ post.cover_alt | default: post.title | escape }}" loading="lazy">{% else %}<div class="placeholder" aria-hidden="true"></div>{% endif %}</div>
+        <div class="title-panel"><h2>{{ post.title | escape }}</h2></div>
+      </a>
+    {% endif %}{% endfor %}
+  </div>{% else %}<p class="empty">目前沒有填入此分類的文章。</p>{% endif %}
+</main>
+{% include footer.html %}
+</body></html>

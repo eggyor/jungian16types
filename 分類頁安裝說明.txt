@@ -1,0 +1,17 @@
+Jekyll 理論文章分類頁｜共用頁首與頁尾
+========================================
+
+這份 ZIP 把頁首與頁尾改成獨立的 Jekyll 部件，讓六個分類頁在適當位置讀取共用檔案：
+- _includes/header.html：網站標誌、主導覽列、六個分類連結，以及手機版導覽按鈕。
+- _includes/footer.html：原網站頁尾文字。
+- assets/css/site-chrome.css：共用頁首、頁尾樣式，六頁共同載入。
+- page-1259.html、page-1271.html、page-1286.html、page-1292.html、page-1298.html、page-1304.html：各自以 Liquid include 讀取共用頁首／頁尾，內容區保留每頁自己的分類動態清單。
+- img/logo2.jpeg：原網站頁首使用的標誌圖。
+
+每個分類頁以 `{% include header.html current_category="分類名稱" %}` 讀入頁首，並以 `{% include footer.html %}` 讀入頁尾。要修改全站這六頁的導覽或頁尾，只需修改 `_includes` 裡的共用檔案。
+
+安裝：將 ZIP 內的檔案與資料夾合併到 Jekyll 專案根目錄，確保 `_includes`、`assets/css`、`img` 和六個 HTML 頁面在根目錄中。原網站的主導覽路徑保留為 page-*.html / all.html；如果新網站使用不同網址，請在 `_includes/header.html` 一次調整連結。
+
+動態文章顯示仍依文章 Front Matter 欄位 `categories: [理論文章]`、`subcategory`、`date` 和 `cover` 篩選、排序與顯示。已經有的文章若未填這些欄位，仍需補齊。桌機為每列四張等比例圖片卡；標題半透明覆蓋圖片，滑鼠移入時高度動畫增加。手機改為單欄標題清單並隱藏封面。
+
+這些是 Jekyll 範本頁，不可直接用瀏覽器開啟原始 HTML 來預覽；GitHub Pages 必須透過 Jekyll 建置，Liquid include 才會展開。

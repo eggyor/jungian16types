@@ -1,0 +1,16 @@
+---
+title: 理論文章
+permalink: /theory/
+description: '按基礎概念、類型描述、常見問題、榮格原文、系統對比及站主銳評瀏覽經典榮格心理類型學文章。'
+---
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description | escape }}"><title>{{ page.title }}｜{{ site.title }}</title><link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
+<style>body{font:17px/1.8 system-ui,"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#202536;margin:0}main{max-width:1000px;margin:auto;padding:40px 22px}h1{font-size:2.5rem}.group{margin:42px 0}.entry{padding:15px 0;border-bottom:1px solid #e7e9ee}.date{color:#667085;font-size:.9rem}a{color:inherit}</style></head>
+<body>{% include header.html %}<main><p><a href="{{ '/' | relative_url }}">回到主頁</a></p><h1>理論文章</h1>
+{% assign subcategories = "基礎概念101|類型描述|常見問題|榮格原文|系統對比|站主銳評" | split: "|" %}
+{% for group in subcategories %}<section class="group"><h2>{{ group }}</h2>
+{% assign found = 0 %}
+{% for post in site.posts %}{% if post.categories contains "理論文章" and post.subcategory == group %}<article class="entry"><a href="{{ post.url | relative_url }}"><strong>{{ post.title | escape }}</strong></a><div class="date">{{ post.date | date: "%Y年%-m月%-d日" }}</div></article>{% assign found = found | plus: 1 %}{% endif %}{% endfor %}
+{% if found == 0 %}<p>此分類目前沒有文章。</p>{% endif %}</section>{% endfor %}
+</main>{% include footer.html %}</body></html>

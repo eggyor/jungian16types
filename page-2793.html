@@ -1,0 +1,33 @@
+---
+layout: null
+title: 類型測驗｜作答頁面
+permalink: /page-2793.html
+description: '回答以雙向拉桿呈現的經典榮格類型題目，依內傾與外傾及心理功能偏好完成分階段測驗；結果只供初步參考。'
+---
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description | escape }}">
+<title>{{ page.title | escape }}｜經典榮格 Classic Jung</title>
+<link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/quiz.css' | relative_url }}">
+</head>
+<body id="site-top">
+{% include header.html %}
+<main class="quiz-page">
+  <header class="quiz-intro">
+    <p class="quiz-kicker">經典榮格類型測驗</p>
+    <h1>類型測驗</h1>
+    <p>每題左右兩側代表不同描述。把拉桿移向較符合你的一側；越靠近一端，代表認同程度越高。測驗分兩部分，完成第一部分後會依分數進入相應的第二部分。</p>
+  </header>
+  <section id="quiz-app" aria-live="polite">
+    <div class="quiz-loading">正在載入測驗…</div>
+  </section>
+  <noscript><p class="quiz-message error">這份測驗需要啟用瀏覽器 JavaScript 才能計分和顯示結果。</p></noscript>
+</main>
+{% include footer.html %}
+<script src="{{ '/assets/js/quiz.js' | relative_url }}" defer></script>
+</body>
+</html>
