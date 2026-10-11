@@ -1046,3 +1046,49 @@ body:has(.quiz-landing) .quiz-landing-hero .lead{display:inline-block;margin:0;p
 @media (prefers-reduced-motion: reduce) {
   .article-link-preview { transition: none; translate: 0 0; }
 }
+
+/* Desktop homepage: keep the Jung portrait and companion copy within one snap screen. */
+@media (min-width: 901px) {
+  body:has(.home-main) .home-main > .home-section:has(.about-jung) {
+    padding-block: clamp(18px, 2.6vh, 30px);
+  }
+
+  body:has(.home-main) .about-jung {
+    grid-template-columns: minmax(0, .84fr) minmax(0, 1fr);
+    gap: clamp(28px, 3.6vw, 56px);
+  }
+
+  body:has(.home-main) .jung-photo {
+    height: min(64svh, 620px);
+    min-height: 0;
+    max-height: min(64svh, 620px);
+    object-position: center 30%;
+  }
+
+  body:has(.home-main) .about-text h2 {
+    font-size: clamp(30px, 2.7vw, 44px);
+    margin-bottom: 16px;
+  }
+
+  body:has(.home-main) .about-text p {
+    font-size: clamp(15px, .98vw, 18px);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  body:has(.home-main) .about-text hr {
+    margin: 22px 0 18px;
+  }
+}
+
+/* Keep the homepage book cover complete while bounding its desktop footprint. */
+@media (min-width: 901px) {
+  body:has(.home-main) .hero-book {
+    width: 100%;
+    height: min(68svh, 720px);
+    max-width: 100%;
+    max-height: min(68svh, 720px);
+    object-fit: contain;
+    object-position: center;
+  }
+}
