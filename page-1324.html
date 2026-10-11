@@ -28,29 +28,41 @@ p{margin:0 0 18px}.lead{font-size:20px;font-weight:600}.checklist{padding-left:1
 </head>
 <body id="site-top">
 {% include header.html %}
-<main>
-  <h1>類型測驗</h1>
-  <h2>歡迎來到尋找自己榮格類型的大門。</h2>
-  <p class="lead">你準備好了嗎？</p>
-  <p>如果你……</p>
-  <ul class="checklist">
-    <li>想深入理解自我和榮格心理學</li>
-    <li>想認識比 MBTI 或 16p 更深入的理論</li>
-    <li>想透過心理功能理解自己與他人</li>
-    <li>希望作答後有理論文章深入解釋</li>
-  </ul>
-  <p>那你就來對地方了。</p>
-  <p>這裡沒有時間限制，你可以按照自己的步伐反思。<br>這裡也沒有外界目光，你可以誠實地面對自己。</p>
-  <p>測驗完全免費且不記名作答，你可以安心填寫。</p>
-  <hr>
-  <p>測驗共有 20 題，分成兩部分作答。進入第二部分後可返回修改第一部分；重新進入第二部分時，第二部分答案會重設，需重新作答。</p>
-  <p>回答問題時，只要把中間的拉桿按照同意程度拉動到更認同的一方即可。</p>
-  <p>全部作答完成並送出後可查看結果。</p>
-  <a class="btn" href="{{ '/page-2793.html' | relative_url }}">開始測驗</a>
-  <hr>
-  <p><strong>聲明：</strong></p>
-  <p>人格測驗的信效度受制於測驗者對自身的了解程度，以及容易受測驗時的狀態影響，因此我們不建議將測驗結果視為最終判斷。本測驗結果僅供參考，詳細請參考我們的理論文章以加深對經典榮格理論的認識，方便作自我判型。</p>
-  <p>本網站的測驗結果與理論均與目前坊間流行的 MBTI、榮格八維以及 16personalities.com 不兼容。</p>
+<main class="quiz-landing">
+  <section class="quiz-landing-hero">
+    <div class="quiz-landing-hero-copy">
+      <h1>類型測驗</h1>
+      <h2>歡迎來到尋找自己榮格類型的大門。</h2>
+      <p class="lead">你準備好了嗎？</p>
+    </div>
+  </section>
+  <div class="quiz-landing-grid">
+    <section class="quiz-landing-why">
+      <p>如果你……</p>
+      <ul class="checklist">
+        <li>想深入理解自我和榮格心理學</li>
+        <li>想認識比 MBTI 或 16p 更深入的理論</li>
+        <li>想透過心理功能理解自己與他人</li>
+        <li>希望作答後有理論文章深入解釋</li>
+      </ul>
+      <p>那你就來對地方了。</p>
+      <p>這裡沒有時間限制，你可以按照自己的步伐反思。<br>這裡也沒有外界目光，你可以誠實地面對自己。</p>
+      <p>測驗完全免費且不記名作答，你可以安心填寫。</p>
+      <hr>
+    </section>
+    <section class="quiz-landing-how">
+      <p>測驗共有 20 題，分成兩部分作答。進入第二部分後可返回修改第一部分；重新進入第二部分時，第二部分答案會重設，需重新作答。</p>
+      <p>回答問題時，只要把中間的拉桿按照同意程度拉動到更認同的一方即可。</p>
+      <p>全部作答完成並送出後可查看結果。</p>
+      <a class="btn quiz-landing-start" href="{{ '/page-2793.html' | relative_url }}">開始測驗</a>
+    </section>
+  </div>
+  <section class="quiz-landing-disclaimer">
+    <hr>
+    <p><strong>聲明：</strong></p>
+    <p>人格測驗的信效度受制於測驗者對自身的了解程度，以及容易受測驗時的狀態影響，因此我們不建議將測驗結果視為最終判斷。本測驗結果僅供參考，詳細請參考我們的理論文章以加深對經典榮格理論的認識，方便作自我判型。</p>
+    <p>本網站的測驗結果與理論均與目前坊間流行的 MBTI、榮格八維以及 16personalities.com 不兼容。</p>
+  </section>
 </main>
 {% include footer.html %}
 </body>
