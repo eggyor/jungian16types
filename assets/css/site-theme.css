@@ -268,3 +268,163 @@ body:has(main .grid) .card:hover .title-panel,body:has(main .grid) .card:focus-v
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
 }
+
+
+/* Shared editorial scale for the main landing and index pages */
+:root{
+  --cj-title-lg:clamp(2rem,3.4vw,2.75rem);
+  --cj-title-md:clamp(1.55rem,2.5vw,2rem);
+  --cj-body-size:1.0625rem;
+  --cj-body-leading:1.85;
+  --cj-reading-width:68ch;
+  --cj-button-height:48px;
+}
+.home-copy,.about-panel,.shop-panel,.contact-intro,.quiz-landing-copy{
+  font-size:var(--cj-body-size);line-height:var(--cj-body-leading)
+}
+.hero h1,.home-main h2,.theory-main>h1,.theory-main .section-heading,
+body:has(main .grid)>main>h1,body:has(main .checklist)>main>h1,
+body:has(.about-shop-grid) .content h2{
+  font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
+  color:var(--cj-green-deep);font-weight:500;letter-spacing:.025em
+}
+.hero h1{font-size:clamp(2.25rem,4.6vw,3.6rem);line-height:1.28;margin-bottom:22px}
+.home-main h2,.theory-main .section-heading{font-size:var(--cj-title-md);line-height:1.35}
+.theory-main>h1,body:has(main .grid)>main>h1,body:has(main .checklist)>main>h1{
+  font-size:var(--cj-title-lg);line-height:1.3;margin-bottom:14px
+}
+.hero-copy .home-copy,.about-text,.feature-copy,.site-about{max-width:var(--cj-reading-width)}
+.home-copy p{margin-bottom:1.05em}
+.feature-copy h2,.about-text h2,.social-about h2,.type-section h2{
+  font-size:var(--cj-title-md);line-height:1.35;margin-bottom:20px
+}
+.latest-head h2{font-size:var(--cj-title-md)}
+.type-section h2{margin-bottom:32px}
+.home-note{max-width:var(--cj-reading-width);line-height:1.7}
+.home-btn,.category-link,.btn,.page-button,.quiz-btn,.quiz-result-page .btn{
+  min-height:var(--cj-button-height);padding:10px 22px;font-size:16px;line-height:1.35;
+  font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
+  font-weight:600;letter-spacing:.02em
+}
+.home-btn.green{background:var(--cj-paper-light);color:var(--cj-green-deep)}
+.article-card .article-title{font-size:clamp(1.05rem,1.3vw,1.3rem)}
+.article-card .article-excerpt{font-size:14px;line-height:1.7}
+
+/* Theory overview: consistent title, card copy and reading width */
+.theory-main{max-width:1320px}
+.theory-main>h1{margin-bottom:28px}
+.theory-main .section-heading{margin-bottom:20px}
+.category-card{min-height:0}
+.category-name{font-size:18px;font-weight:600;line-height:1.45}
+.category-description{font-size:16px;line-height:1.75}
+.category-link{min-width:100px}
+.latest-heading{margin-bottom:20px}
+.latest-meta h3{font-size:18px;line-height:1.5}
+.latest-excerpt{font-size:14px;line-height:1.7}
+
+/* Six theory category pages */
+body:has(main .grid)>main>h1{margin-bottom:12px}
+body:has(main .grid) .title-panel{padding:14px 16px}
+body:has(main .grid) .title-panel h2{font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;font-size:clamp(15px,1.35vw,18px);line-height:1.5;font-weight:600}
+
+/* Quiz landing and questionnaire */
+body:has(main .checklist) main{
+  width:min(820px,calc(100% - 48px));max-width:none;
+  padding:clamp(34px,5vw,56px) 0 68px;font-size:var(--cj-body-size);line-height:var(--cj-body-leading)
+}
+body:has(main .checklist)>main>h1{margin-bottom:10px}
+body:has(main .checklist)>main>h2{
+  max-width:var(--cj-reading-width);margin:0 0 20px;
+  color:var(--cj-green);font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
+  font-size:var(--cj-title-md);line-height:1.5;font-weight:500
+}
+body:has(main .checklist) .lead{font-size:18px;line-height:1.65;color:var(--cj-green-deep)}
+body:has(main .checklist) main>p,body:has(main .checklist) .checklist{max-width:var(--cj-reading-width)}
+body:has(main .checklist) .checklist{padding-left:1.5em}
+body:has(main .checklist) hr{max-width:var(--cj-reading-width);margin:30px 0;border:0;border-top:1px solid var(--cj-gold-soft)}
+body:has(main .checklist) .notice{border-color:var(--cj-gold);background:var(--cj-paper-deep);color:var(--cj-green-deep)}
+.quiz-intro h1{font-size:var(--cj-title-lg);line-height:1.3}
+.quiz-intro>p:last-child{max-width:66ch;font-size:16px;line-height:1.8}
+.quiz-group-title{font-size:20px;color:var(--cj-green-deep)}
+.quiz-question{font-size:16px;line-height:1.55}
+.quiz-btn{min-width:116px}
+.quiz-actions{gap:14px}
+
+/* About page: constrain text measure and align section headings */
+body:has(.about-shop-grid) main{padding:clamp(30px,4.5vw,54px) 24px 64px}
+body:has(.about-shop-grid) .content{width:min(1160px,100%);max-width:none}
+body:has(.about-shop-grid) .announcement-carousel{
+  width:min(1160px,calc(100vw - 48px));margin:0 auto 48px;left:auto;transform:none
+}
+body:has(.about-shop-grid) .announcement-heading{
+  font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
+  font-size:var(--cj-title-lg);line-height:1.3;color:var(--cj-green-deep);margin-bottom:20px
+}
+body:has(.about-shop-grid) .announcement-window{border:1px solid var(--cj-line);background:var(--cj-paper-deep)}
+body:has(.about-shop-grid) .announcement-body{background:var(--cj-paper-light);color:var(--cj-ink)}
+body:has(.about-shop-grid) .announcement-label{color:var(--cj-gold);font-size:14px}
+body:has(.about-shop-grid) .announcement-title{font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;color:var(--cj-green-deep);font-size:clamp(19px,2vw,24px)}
+body:has(.about-shop-grid) .announcement-read{
+  min-height:var(--cj-button-height);padding:12px 22px;border:1px solid var(--cj-green);
+  background:var(--cj-green);color:#fff;font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
+  transition:background-color .2s ease,transform .2s ease
+}
+body:has(.about-shop-grid) .announcement-read:hover{background:var(--cj-green-deep);transform:translateY(-1px)}
+body:has(.about-shop-grid) .announcement-control{
+  width:52px;height:52px;border:1px solid var(--cj-gold-soft);border-radius:50%;
+  background:var(--cj-paper-light);color:var(--cj-green-deep);font-size:26px;
+  transition:background-color .2s ease,color .2s ease,transform .2s ease
+}
+body:has(.about-shop-grid) .announcement-control:hover{
+  background:var(--cj-green);color:#fff;transform:translateY(-1px)
+}
+body:has(.about-shop-grid) .announcement-dots button{background:var(--cj-gold-soft)}
+body:has(.about-shop-grid) .announcement-dots button[aria-current=true]{background:var(--cj-green)}
+body:has(.about-shop-grid) .about-shop-grid{gap:clamp(28px,4vw,64px)}
+body:has(.about-shop-grid) .about-shop-grid h2{
+  font-size:var(--cj-title-md);line-height:1.4;margin-bottom:18px
+}
+body:has(.about-shop-grid) .about-shop-grid p{max-width:68ch;line-height:1.85}
+body:has(.about-shop-grid) .contact-section{
+  margin-top:48px;margin-bottom:0;padding:clamp(32px,4vw,52px) max(24px,calc((100vw - 1160px)/2)) 52px;
+  background:var(--cj-paper-deep)
+}
+body:has(.about-shop-grid) .contact-section h2{
+  font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
+  font-size:var(--cj-title-md);line-height:1.35;margin-bottom:16px
+}
+body:has(.about-shop-grid) .contact-intro{max-width:68ch}
+body:has(.about-shop-grid) .contact-form{max-width:760px;margin-top:42px;gap:18px}
+body:has(.about-shop-grid) .contact-field{gap:8px}
+body:has(.about-shop-grid) .contact-field label{color:var(--cj-green-deep);font-weight:600}
+body:has(.about-shop-grid) .contact-submit{min-height:var(--cj-button-height);padding:10px 24px}
+@media(max-width:760px){
+  .hero h1{font-size:clamp(2rem,9vw,2.7rem)}
+  .home-copy,.about-panel,.shop-panel,.contact-intro{font-size:16px;line-height:1.8}
+  .home-section{padding-block:38px}
+  .theory-main>h1,.theory-main .section-heading{font-size:clamp(1.8rem,7vw,2.2rem)}
+  .category-description{font-size:15px;line-height:1.7}
+  .home-btn,.category-link,.btn,.page-button,.quiz-btn,.quiz-result-page .btn{min-height:46px;padding:9px 17px;font-size:15px}
+  body:has(main .checklist) main{width:calc(100% - 36px);padding-block:30px 48px}
+  body:has(main .checklist)>main>h1{font-size:clamp(1.8rem,8vw,2.25rem)}
+  body:has(main .checklist)>main>h2{font-size:clamp(1.35rem,6vw,1.7rem)}
+  .quiz-intro h1{font-size:clamp(1.8rem,8vw,2.25rem)}
+  .quiz-intro>p:last-child{font-size:15px}
+  body:has(.about-shop-grid) main{padding:28px 18px 50px}
+  body:has(.about-shop-grid) .announcement-carousel{width:calc(100vw - 36px);margin-bottom:36px}
+  body:has(.about-shop-grid) .announcement-heading{font-size:clamp(1.8rem,8vw,2.25rem);margin-bottom:16px}
+  body:has(.about-shop-grid) .announcement-cover{height:clamp(200px,58vw,270px)}
+  body:has(.about-shop-grid) .announcement-body{min-height:0;padding:16px 16px 20px}
+  body:has(.about-shop-grid) .announcement-control{width:42px;height:42px;font-size:22px}
+  body:has(.about-shop-grid) .about-shop-grid{grid-template-columns:1fr;gap:26px}
+  body:has(.about-shop-grid) .about-shop-grid h2{font-size:clamp(1.45rem,6.5vw,1.8rem);margin-bottom:14px}
+  body:has(.about-shop-grid) .contact-section{margin-top:34px;padding:30px 18px 38px}
+  body:has(.about-shop-grid) .contact-form{margin-top:30px;gap:16px}
+}
+@media(max-width:460px){
+  body:has(.about-shop-grid) main{padding-inline:14px}
+  body:has(.about-shop-grid) .announcement-carousel{width:calc(100vw - 28px)}
+  body:has(.about-shop-grid) .about-shop-grid{grid-template-columns:1fr}
+  body:has(.about-shop-grid) .contact-section{padding-inline:14px}
+}
+
