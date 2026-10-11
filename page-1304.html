@@ -14,8 +14,8 @@ description: '閱讀站主對人格類型學及相關流行觀念的評論，從
 *{box-sizing:border-box}
 body{margin:0;color:var(--fg);background:#fff;font:16px/1.65 system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif}
 a{color:inherit}
-main{max-width:1120px;margin:0 auto;padding:36px 20px 68px}
-h1{font-size:clamp(28px,4vw,36px);line-height:1.3;margin:0 0 8px}
+main{width:min(1320px,calc(100% - 64px));max-width:none;margin:0 auto;padding:48px 0 72px}
+h1{font-size:clamp(32px,3.4vw,44px);line-height:1.3;margin:0 0 14px}
 .count{margin:0 0 26px;color:var(--muted);font-size:14px}
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .card{position:relative;display:block;min-width:0;overflow:hidden;aspect-ratio:4/3;background:linear-gradient(135deg,#e7ecdf,#edf0f3);border-radius:12px;text-decoration:none;box-shadow:0 2px 10px rgba(20,28,42,.06);isolation:isolate}
@@ -28,9 +28,10 @@ h1{font-size:clamp(28px,4vw,36px);line-height:1.3;margin:0 0 8px}
 .title-panel h2{margin:0;font-size:clamp(15px,1.4vw,19px);line-height:1.45;font-weight:600;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .empty{padding:26px 0;color:var(--muted)}
 @media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){.grid{grid-template-columns:1fr;gap:0}.card{aspect-ratio:auto;min-height:0;border-radius:0;box-shadow:none;background:#fff;border-bottom:1px solid var(--line)}.visual{display:none}.title-panel{position:static;min-height:0;height:auto!important;padding:15px 2px;display:block;text-align:left;color:var(--fg);background:transparent!important;backdrop-filter:none}.title-panel h2{font-size:16px;line-height:1.55;display:block;overflow:visible}main{padding-top:28px}.count{margin-bottom:12px}}
+@media(max-width:600px){.grid{grid-template-columns:1fr;gap:0}.card{aspect-ratio:auto;min-height:0;border-radius:0;box-shadow:none;background:#fff;border-bottom:1px solid var(--line)}.visual{display:none}.title-panel{position:static;min-height:0;height:auto!important;padding:15px 2px;display:block;text-align:left;color:var(--fg);background:transparent!important;backdrop-filter:none}.title-panel h2{font-size:16px;line-height:1.55;display:block;overflow:visible}main{width:calc(100% - 32px);padding:28px 0 48px}.count{margin-bottom:12px}}
 </style>
 <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/site-theme.css' | relative_url }}">
 </head>
 <body>
 {% include header.html current_category="站主銳評" %}

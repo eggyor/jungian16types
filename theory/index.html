@@ -15,9 +15,9 @@ description: '按基礎概念、類型描述、常見問題、榮格原文、系
     :root{--theory-ink:#172033;--theory-muted:#465266;--theory-green:#a5b387;--theory-line:#e5e7eb;--theory-pale:#f5f5f4}
     *{box-sizing:border-box}
     body{margin:0;color:var(--theory-ink);font:16px/1.75 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
-    .theory-main{width:min(1800px,calc(100% - 56px));margin:0 auto;padding:48px 0 72px}
-    .theory-main h1{font-size:clamp(34px,4vw,52px);line-height:1.25;font-weight:500;margin:0 0 28px}
-    .section-heading{font-size:clamp(28px,3vw,42px);line-height:1.25;font-weight:500;margin:0 0 22px}
+    .theory-main{width:min(1320px,calc(100% - 64px));margin:0 auto;padding:48px 0 72px}
+    .theory-main h1{font-size:clamp(32px,3.4vw,44px);line-height:1.25;font-weight:500;margin:0 0 28px}
+    .section-heading{font-size:clamp(26px,2.5vw,32px);line-height:1.25;font-weight:500;margin:0 0 22px}
     .category-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
     .category-card{min-width:0;min-height:750px;display:flex;flex-direction:column;background:#eee;color:#111}
     .category-cover{aspect-ratio:.78;overflow:hidden;background:#d7d7d7}
@@ -52,9 +52,10 @@ description: '按基礎概念、類型描述、常見問題、榮格原文、系
     .carousel-dots button{width:11px;height:11px;padding:0;border:0;border-radius:50%;background:#c9c9c9;cursor:pointer}
     .carousel-dots button[aria-current="true"]{background:#111}
     @media(max-width:1200px){.category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.category-card{min-height:590px}.category-description{font-size:17px}}
-    @media(max-width:900px){.theory-main{width:min(100% - 36px,720px)}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.category-card{min-height:570px}.category-cover{aspect-ratio:.9}.latest-track{grid-auto-columns:calc((100% - 18px)/2)}}
-    @media(max-width:620px){.theory-main{width:calc(100% - 30px);padding:38px 0 52px}.category-grid{grid-template-columns:1fr;gap:12px}.category-card{min-height:0}.category-cover{aspect-ratio:1.15}.category-content{padding:20px}.category-description{margin:9px 0 18px;font-size:16px}.category-link{min-height:52px;min-width:96px;font-size:17px}.latest-section{margin-top:46px}.latest-track{grid-auto-columns:86%;gap:14px}.latest-card{min-height:385px}.latest-cover{height:245px}.carousel-control{top:24%;width:48px;height:56px;font-size:30px}.carousel-control.prev{left:0}.carousel-control.next{right:0}.carousel-dots{padding-top:8px}}
+    @media(max-width:900px){.theory-main{width:calc(100% - 48px)}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.category-card{min-height:570px}.category-cover{aspect-ratio:.9}.latest-track{grid-auto-columns:calc((100% - 18px)/2)}}
+    @media(max-width:620px){.theory-main{width:calc(100% - 32px);padding:38px 0 52px}.category-grid{grid-template-columns:1fr;gap:12px}.category-card{min-height:0}.category-cover{aspect-ratio:1.15}.category-content{padding:20px}.category-description{margin:9px 0 18px;font-size:16px}.category-link{min-height:52px;min-width:96px;font-size:17px}.latest-section{margin-top:46px}.latest-track{grid-auto-columns:86%;gap:14px}.latest-card{min-height:385px}.latest-cover{height:245px}.carousel-control{top:24%;width:48px;height:56px;font-size:30px}.carousel-control.prev{left:0}.carousel-control.next{right:0}.carousel-dots{padding-top:8px}}
   </style>
+<link rel="stylesheet" href="{{ '/assets/css/site-theme.css' | relative_url }}">
 </head>
 <body>
   {% include header.html %}

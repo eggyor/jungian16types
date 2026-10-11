@@ -8,7 +8,8 @@ description: '經典榮格類型測驗結果：混合結果。查看此結果的
 <html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="{{ page.description | escape }}">
 <title>類型結果（不明） | 經典榮格 Classic Jung</title>
-<link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}"><link rel="stylesheet" href="{{ '/assets/css/quiz-results.css' | relative_url }}"></head>
+<link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}"><link rel="stylesheet" href="{{ '/assets/css/quiz-results.css' | relative_url }}"><link rel="stylesheet" href="{{ '/assets/css/site-theme.css' | relative_url }}">
+</head>
 <body>
 {% include header.html %}
 <main class="quiz-result-page"><div class="content page"><h2>類型結果</h2><div id="quiz-tie-panel" class="quiz-tie-panel" hidden></div><script>(function(){var q=new URLSearchParams(location.search),raw=q.get("type_candidates"),box=document.getElementById("quiz-tie-panel");if(!raw||!box)return;var ids={ENFJ:2889,ESFJ:2877,ENFP:2957,ENTP:2951,ESFP:2939,ESTP:2934,ENTJ:2865,ESTJ:2832,INFJ:2922,ISFJ:2917,INFP:2996,INTP:2987,ISFP:2975,ISTP:2969,INTJ:2905,ISTJ:2899};var list=raw.split(",").filter(function(t){return ids[t]});if(!list.length)return;box.hidden=false;box.innerHTML="<h3>主導功能分數接近</h3><p>你的分數顯示主導功能較接近，以下類型可作為閱讀和自我觀察的參考：</p><ul>"+list.map(function(t){return "<li><a href=\"{{ '/page-' | relative_url }}"+ids[t]+".html\">"+t+"</a></li>"}).join("")+"</ul><p>測驗結果僅供初步參考，建議配合理論文章和長期自我觀察。</p>"})();</script>

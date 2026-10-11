@@ -15,15 +15,16 @@ description: '開始經典榮格類型測驗前，了解測驗用途與作答方
 :root{--fg:#263044;--muted:#667085;--accent:#a8b686;--yellow:#ffe16c;--line:#e5e7eb}
 *{box-sizing:border-box}
 body{margin:0;color:var(--fg);background:#fff;font:17px/1.85 system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif}
-main{max-width:1120px;margin:0 auto;padding:44px 20px 72px}
-h1{font-size:clamp(32px,5vw,48px);line-height:1.4;margin:0 0 16px}
-h2{font-size:clamp(25px,3vw,34px);line-height:1.5;margin:0 0 22px}
+main{width:min(1320px,calc(100% - 64px));max-width:none;margin:0 auto;padding:48px 0 72px}
+h1{font-size:clamp(32px,3.4vw,44px);line-height:1.4;margin:0 0 16px}
+h2{font-size:clamp(26px,2.5vw,32px);line-height:1.5;margin:0 0 22px}
 p{margin:0 0 18px}.lead{font-size:20px;font-weight:600}.checklist{padding-left:1.5em}.checklist li{margin:4px 0}
 .btn{display:inline-block;margin:12px 12px 12px 0;padding:12px 28px;border-radius:4px;color:#263044;background:var(--yellow);font-size:19px;font-weight:700;text-decoration:none}.btn:hover{filter:brightness(.97)}
 .notice{margin-top:30px;padding:18px 20px;border-left:4px solid var(--accent);background:#f5f6f2;color:#596246}
-@media(max-width:600px){main{padding-top:30px}.btn{display:block;width:max-content;max-width:100%}}
+@media(max-width:600px){main{width:calc(100% - 32px);padding:30px 0 48px}.btn{display:block;width:max-content;max-width:100%}}
 </style>
 <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/site-theme.css' | relative_url }}">
 </head>
 <body id="site-top">
 {% include header.html %}
