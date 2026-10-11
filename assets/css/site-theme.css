@@ -1014,3 +1014,31 @@ body:has(.quiz-landing) .quiz-landing-hero .lead{display:inline-block;margin:0;p
     translate: 0 0;
   }
 }
+
+/* Desktop internal-link preview: a small gilded-paper annotation card. */
+.article-link-preview {
+  position: fixed;
+  z-index: 1000;
+  display: block;
+  visibility: hidden;
+  width: min(320px, calc(100vw - 24px));
+  padding: 18px 18px 16px;
+  border: 1px solid rgba(178, 145, 77, .42);
+  border-top: 3px solid #b99a58;
+  border-radius: 5px;
+  background: #fbf8ef;
+  color: #34463a;
+  box-shadow: 0 12px 30px rgba(39, 49, 39, .17), 0 2px 5px rgba(39, 49, 39, .08);
+  pointer-events: none;
+  opacity: 0;
+  translate: 0 5px;
+  transition: opacity 180ms ease, translate 180ms ease, visibility 0s linear 180ms;
+}
+.article-link-preview.is-visible { visibility: visible; pointer-events: auto; opacity: 1; translate: 0 0; transition-delay: 0s; }
+.article-link-preview__ornament { display: block; margin-bottom: 7px; color: #b99a58; font-size: 12px; line-height: 1; }
+.article-link-preview__title { display: block; color: #354d3d; font-family: "Noto Serif TC", "Source Han Serif TC", "Songti TC", serif; font-size: 16px; font-weight: 700; line-height: 1.5; }
+.article-link-preview__excerpt { margin: 7px 0 0; color: #62685e; font-size: 13px; line-height: 1.65; }
+.article-link-preview__excerpt[hidden] { display: none; }
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .article-link-preview { display: none !important; }
+}

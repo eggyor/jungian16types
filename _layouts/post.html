@@ -135,6 +135,7 @@
     </section>
   </main>
   {% include footer.html %}
+  {% if page.categories contains '理論文章' %}<script src="{{ '/assets/js/article-link-preview.js' | relative_url }}" defer></script>{% endif %}
   <script>
   (function(){
     const block=document.querySelector('.share-block');
