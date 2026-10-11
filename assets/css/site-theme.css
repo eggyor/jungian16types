@@ -1092,3 +1092,50 @@ body:has(.quiz-landing) .quiz-landing-hero .lead{display:inline-block;margin:0;p
     object-position: center;
   }
 }
+
+/* Desktop homepage refinements: keep the artwork uncropped and the final footer reachable. */
+@media (min-width: 901px) {
+  body:has(.home-main) .hero-grid {
+    grid-template-columns: minmax(0, 1.25fr) minmax(360px, 1fr);
+  }
+
+  body:has(.home-main) .hero-book {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: min(80svh, 780px);
+    object-fit: contain;
+    object-position: center;
+    background: transparent;
+  }
+
+  body:has(.home-main) .jung-photo {
+    width: 100%;
+    height: auto;
+    max-height: min(70svh, 680px);
+    object-fit: contain;
+    object-position: center;
+  }
+
+  body:has(.home-main) .home-main > section > *,
+  body:has(.home-main) .home-main > .social-about > * {
+    opacity: .68;
+    translate: 0 14px;
+    transition: opacity 580ms cubic-bezier(.22,.61,.36,1), translate 580ms cubic-bezier(.22,.61,.36,1);
+  }
+
+  body:has(.home-main) > .site-footer {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+    scroll-margin-top: 104px;
+  }
+}
+
+@media (min-width: 901px) and (prefers-reduced-motion: reduce) {
+  body:has(.home-main) .home-main > section > *,
+  body:has(.home-main) .home-main > .social-about > * {
+    opacity: 1;
+    translate: 0 0;
+    transition: none;
+  }
+}
