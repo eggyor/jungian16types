@@ -428,3 +428,68 @@ body:has(.about-shop-grid) .contact-submit{min-height:var(--cj-button-height);pa
   body:has(.about-shop-grid) .contact-section{padding-inline:14px}
 }
 
+
+
+/* Align the principal page containers to one desktop and mobile grid */
+:root{--cj-container-width:1320px}
+.home-wrap,.theory-main,
+body:has(main .grid)>main,
+body:has(main .checklist)>main,
+.quiz-page,
+body:has(.about-shop-grid) .content,
+body:has(.about-shop-grid) .announcement-carousel{
+  width:min(var(--cj-container-width),calc(100% - 64px));
+  max-width:none;
+  margin-left:auto;
+  margin-right:auto
+}
+.theory-main{padding-left:0;padding-right:0}
+body:has(main .grid)>main{padding-left:0;padding-right:0}
+body:has(main .checklist)>main{padding-left:0;padding-right:0}
+.quiz-page{padding-left:0;padding-right:0}
+body:has(.about-shop-grid) .content{width:min(var(--cj-container-width),calc(100% - 64px))}
+body:has(.about-shop-grid) .announcement-carousel{
+  left:auto;transform:none;
+  margin-top:0;margin-bottom:clamp(36px,4vw,52px)
+}
+body:has(.about-shop-grid) main{padding-left:0;padding-right:0}
+.home-wrap{width:min(var(--cj-container-width),calc(100% - 64px))}
+.hero-grid{gap:clamp(24px,3vw,44px)}
+.quiz-page{padding-top:clamp(38px,5vw,58px);padding-bottom:clamp(52px,6vw,76px)}
+.quiz-intro{margin-bottom:clamp(24px,3vw,34px)}
+.quiz-card{padding:clamp(18px,2vw,24px)}
+body:has(main .checklist)>main{padding-top:clamp(38px,5vw,58px);padding-bottom:clamp(52px,6vw,76px)}
+body:has(.about-shop-grid) .about-shop-grid{gap:clamp(32px,4vw,64px)}
+body:has(.about-shop-grid) .content{padding-bottom:12px}
+@media(max-width:760px){
+  .home-wrap,.theory-main,
+  body:has(main .grid)>main,
+  body:has(main .checklist)>main,
+  .quiz-page,
+  body:has(.about-shop-grid) .content,
+  body:has(.about-shop-grid) .announcement-carousel{
+    width:calc(100% - 36px);
+    max-width:none
+  }
+  .theory-main,body:has(main .grid)>main{padding-left:0;padding-right:0}
+  body:has(main .checklist)>main,.quiz-page{padding-left:0;padding-right:0}
+  .home-wrap{width:calc(100% - 36px)}
+  .hero-grid{gap:20px}
+  .quiz-page{padding-top:30px;padding-bottom:48px}
+  .quiz-card{padding:16px}
+  body:has(main .checklist)>main{padding-top:30px;padding-bottom:48px}
+  body:has(.about-shop-grid) main{padding-left:0;padding-right:0}
+  body:has(.about-shop-grid) .content{width:calc(100% - 36px)}
+  body:has(.about-shop-grid) .announcement-carousel{width:calc(100% - 36px);margin-bottom:34px}
+  body:has(.about-shop-grid) .about-shop-grid{gap:26px}
+}
+@media(max-width:460px){
+  .home-wrap,.theory-main,
+  body:has(main .grid)>main,
+  body:has(main .checklist)>main,
+  .quiz-page,
+  body:has(.about-shop-grid) .content,
+  body:has(.about-shop-grid) .announcement-carousel{width:calc(100% - 32px)}
+  body:has(.about-shop-grid) .content{width:calc(100% - 32px)}
+  body:has(.about-shop-grid) .announcement-carousel{width:calc(100% - 32px)}
+}
