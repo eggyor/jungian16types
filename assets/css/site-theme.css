@@ -928,3 +928,30 @@ body:has(.quiz-landing) .quiz-landing-hero .lead{display:inline-block;margin:0;p
   .quiz-landing-why,.quiz-landing-how{padding:17px 15px}
   .quiz-landing-start{width:100%;text-align:center}
 }
+/* Desktop proportions for the about page: align the shop visual to its name and compact the contact form. */
+@media(min-width:761px){
+  body:has(.about-shop-grid) .shop-panel{
+    grid-template-columns:minmax(0,1fr) 156px;
+    grid-template-rows:auto auto auto auto auto;
+    column-gap:clamp(18px,2.2vw,30px);
+    row-gap:0
+  }
+  body:has(.about-shop-grid) .shop-panel>h2{grid-column:1/-1;grid-row:1;margin-bottom:18px}
+  body:has(.about-shop-grid) .shop-panel>p:nth-of-type(1){grid-column:1;grid-row:2;margin:0 0 7px}
+  body:has(.about-shop-grid) .shop-panel>p:has(.shop-image){grid-column:2;grid-row:2/span 2;align-self:start;justify-self:end;margin:0}
+  body:has(.about-shop-grid) .shop-panel>p:nth-of-type(3){grid-column:1;grid-row:3;margin:0 0 12px;line-height:1.65}
+  body:has(.about-shop-grid) .shop-panel>p:nth-of-type(4){grid-column:1;grid-row:4;margin:0 0 5px}
+  body:has(.about-shop-grid) .shop-panel>p:nth-of-type(5){grid-column:1;grid-row:5;margin:0;line-height:1.6}
+  body:has(.about-shop-grid) .shop-panel .shop-image{width:150px;height:150px}
+  body:has(.about-shop-grid) .shop-panel .shop-instagram{grid-column:2;grid-row:5;align-self:end;justify-self:end;margin:0 12px 0 0}
+  body:has(.about-shop-grid) .contact-section{margin-top:28px!important;padding-top:22px!important;padding-bottom:26px!important}
+  body:has(.about-shop-grid) .contact-section h2{margin-bottom:9px}
+  body:has(.about-shop-grid) .contact-intro{margin-bottom:9px;font-size:14px;line-height:1.5}
+  body:has(.about-shop-grid) .contact-form{margin-top:10px;gap:7px}
+  body:has(.about-shop-grid) .contact-field{gap:3px}
+  body:has(.about-shop-grid) .contact-field label{font-size:14px;line-height:1.35}
+  body:has(.about-shop-grid) .contact-field input,
+  body:has(.about-shop-grid) .contact-field select{min-height:36px;padding:6px 10px;font-size:14px}
+  body:has(.about-shop-grid) .contact-field textarea{min-height:76px;padding:7px 10px;font-size:14px}
+  body:has(.about-shop-grid) .contact-submit{min-height:38px;padding:7px 22px;font-size:15px}
+}
