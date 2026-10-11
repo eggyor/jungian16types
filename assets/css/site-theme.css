@@ -875,99 +875,56 @@ body:has(.about-shop-grid) .contact-field textarea{min-height:132px;padding:10px
   body:has(.about-shop-grid) .contact-field select{min-height:42px}
   body:has(.about-shop-grid) .contact-field textarea{min-height:118px}
 }
-/* Quiz landing: gilded book opening, compact reading layout. */
-body:has(.quiz-landing) main.quiz-landing{
-  width:min(1180px,calc(100% - 64px));
-  max-width:none;
-  padding:clamp(28px,4vw,48px) 0 clamp(36px,4vw,54px)
-}
-.quiz-landing-hero{
-  position:relative;isolation:isolate;overflow:hidden;
-  margin:0 0 clamp(18px,2.2vw,26px);
-  padding:clamp(26px,4vw,44px) clamp(22px,4vw,48px);
-  border:1px solid var(--cj-gold-soft);border-radius:6px;
-  background:linear-gradient(135deg,#fffdf8 0%,var(--cj-paper-light) 58%,#f2ecdc 100%);
-  box-shadow:0 8px 24px rgba(43,55,45,.07),inset 0 0 0 5px rgba(255,255,255,.45)
-}
-.quiz-landing-hero:before{
-  position:absolute;z-index:-1;inset:7px;content:"";
-  border:1px solid rgba(167,131,62,.18);border-radius:3px;pointer-events:none
-}
-.quiz-landing-hero:after{
-  position:absolute;z-index:-1;top:50%;right:clamp(18px,5vw,64px);
-  width:clamp(150px,19vw,230px);aspect-ratio:1;content:"";
-  transform:translateY(-50%);border:1px solid rgba(167,131,62,.3);border-radius:50%;opacity:.48;
-  background:
-    repeating-conic-gradient(from -7deg,rgba(167,131,62,.48) 0deg .55deg,transparent .55deg 15deg),
-    radial-gradient(circle,transparent 0 24%,rgba(167,131,62,.5) 24.5% 25%,transparent 25.5% 43%,rgba(167,131,62,.5) 43.5% 44%,transparent 44.5% 67%,rgba(167,131,62,.5) 67.5% 68%,transparent 68.5%);
-  mask-image:radial-gradient(circle,#000 0 58%,transparent 74%);pointer-events:none
-}
-.quiz-landing-hero-copy{position:relative;z-index:1;max-width:78ch;padding-right:clamp(80px,18vw,220px)}
-body:has(.quiz-landing) .quiz-landing-hero h1{
-  margin:0 0 8px;color:var(--cj-green-deep);
-  font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
-  font-size:clamp(36px,4.4vw,52px);font-weight:500;line-height:1.2;letter-spacing:.055em
-}
-body:has(.quiz-landing) .quiz-landing-hero h2{
-  max-width:30ch;margin:0 0 17px;color:var(--cj-green);
-  font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
-  font-size:clamp(21px,2.3vw,28px);font-weight:500;line-height:1.5
-}
-body:has(.quiz-landing) .quiz-landing-hero .lead{
-  display:inline-block;margin:0;padding:6px 14px;border-left:2px solid var(--cj-gold);
-  background:rgba(238,232,217,.66);color:var(--cj-green-deep);font-size:16px;font-weight:600;line-height:1.5
-}
-.quiz-landing-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(16px,2vw,24px);align-items:stretch}
-.quiz-landing-why,.quiz-landing-how{
-  min-width:0;padding:clamp(20px,2.8vw,32px);
-  border:1px solid var(--cj-line);border-radius:5px
-}
-.quiz-landing-why{background:var(--cj-paper-light);box-shadow:0 4px 14px rgba(43,55,45,.045)}
-.quiz-landing-how{
-  display:flex;flex-direction:column;align-items:flex-start;
-  border-color:var(--cj-green-deep);
-  background:linear-gradient(145deg,#405d48,var(--cj-green-deep));
-  color:var(--cj-paper-light);box-shadow:0 7px 20px rgba(43,55,45,.12)
-}
-.quiz-landing-why p,.quiz-landing-how p{margin:0 0 13px;font-size:16px;line-height:1.72}
-.quiz-landing-why>p:first-child{color:var(--cj-gold);font-weight:600;letter-spacing:.04em}
-.quiz-landing-why .checklist{margin:0 0 14px;padding-left:1.45em}
-.quiz-landing-why .checklist li{margin:5px 0;padding-left:3px;line-height:1.65}
+/* Quiz landing: finely ornamented gilded book, compact open spread. */
+body:has(.quiz-landing) main.quiz-landing{width:min(1240px,calc(100% - 56px));max-width:none;padding:clamp(22px,3vw,34px) 0 clamp(26px,3vw,38px)}
+.quiz-landing-hero{position:relative;isolation:isolate;overflow:hidden;margin:0 0 16px;padding:24px clamp(24px,4vw,46px) 22px;border:1px solid var(--cj-gold);border-radius:3px;background:linear-gradient(90deg,rgba(167,131,62,.12) 1px,transparent 1px) 14px 0/1px 100% no-repeat,linear-gradient(90deg,transparent,rgba(230,215,178,.34) 48%,transparent),linear-gradient(135deg,#fffdf8 0%,var(--cj-paper-light) 55%,#eee7d5 100%);box-shadow:0 5px 17px rgba(43,55,45,.075),inset 0 0 0 4px rgba(255,255,255,.62),inset 0 0 0 5px rgba(167,131,62,.12)}
+.quiz-landing-hero:before{position:absolute;z-index:0;inset:8px;content:"";border:1px solid rgba(167,131,62,.22);pointer-events:none}
+.quiz-landing-hero:after{position:absolute;z-index:1;top:8px;right:8px;width:34px;height:34px;content:"";border-top:1px solid var(--cj-gold);border-right:1px solid var(--cj-gold);pointer-events:none}
+.quiz-landing-hero-copy{position:relative;z-index:2;max-width:76ch;padding-right:clamp(170px,24vw,285px)}
+body:has(.quiz-landing) .quiz-landing-hero h1{margin:0 0 5px;color:var(--cj-green-deep);font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;font-size:clamp(38px,4.3vw,52px);font-weight:500;line-height:1.15;letter-spacing:.1em}
+body:has(.quiz-landing) .quiz-landing-hero h2{max-width:none;margin:0 0 10px;color:var(--cj-green);font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;font-size:clamp(19px,2vw,25px);font-weight:500;line-height:1.4}
+body:has(.quiz-landing) .quiz-landing-hero .lead{display:inline-block;margin:0;padding:4px 12px;border:1px solid rgba(167,131,62,.48);border-radius:2px;background:rgba(238,232,217,.74);color:var(--cj-green-deep);font-size:14px;font-weight:600;line-height:1.4;letter-spacing:.08em}
+.quiz-landing-engraving{position:absolute;z-index:2;top:50%;right:clamp(22px,5vw,62px);width:clamp(190px,22vw,250px);height:auto;transform:translateY(-50%);color:var(--cj-gold);opacity:.88;filter:drop-shadow(0 2px 1px rgba(167,131,62,.14));pointer-events:none}
+.quiz-landing-grid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 18px minmax(0,1fr);gap:0;overflow:hidden;padding:6px;border:1px solid var(--cj-gold);border-radius:3px;background:linear-gradient(90deg,#e4d4ac,#f8f5ec 12%,#e6d9b8 49%,#b69a5a 50%,#eadfca 51%,#fcfaf5 88%,#e5d8b9);box-shadow:0 8px 20px rgba(43,55,45,.11),inset 0 0 0 2px rgba(255,255,255,.56)}
+.quiz-landing-grid:before{position:absolute;z-index:3;top:8px;bottom:8px;left:50%;width:18px;content:"";transform:translateX(-50%);background:linear-gradient(90deg,rgba(74,58,29,.05),rgba(167,131,62,.3) 42%,rgba(255,253,248,.85) 50%,rgba(167,131,62,.25) 58%,rgba(74,58,29,.06));pointer-events:none}
+.quiz-landing-why,.quiz-landing-how{position:relative;min-width:0;padding:clamp(18px,2.1vw,26px) clamp(18px,2.5vw,31px);border:0;border-radius:0;background:var(--cj-paper-light);box-shadow:none}
+.quiz-landing-why{grid-column:1;background:linear-gradient(115deg,#fcfaf4,var(--cj-paper-light) 70%,#f4efdf)}
+.quiz-landing-how{grid-column:3;background:linear-gradient(245deg,#f3efdf,var(--cj-paper-light) 35%,#fcfaf4)}
+.quiz-landing-why:before,.quiz-landing-how:before{position:absolute;top:0;left:clamp(18px,2.5vw,31px);width:62px;height:3px;content:"";background:linear-gradient(90deg,var(--cj-gold),var(--cj-gold-soft),transparent)}
+.quiz-landing-why p,.quiz-landing-how p{margin:0 0 9px;font-size:15.5px;line-height:1.62}
+.quiz-landing-why>p:first-child{margin-bottom:7px;color:var(--cj-gold);font-size:13px;font-weight:700;letter-spacing:.1em}
+.quiz-landing-why .checklist{margin:0 0 10px;padding-left:1.35em}
+.quiz-landing-why .checklist li{margin:3px 0;padding-left:2px;line-height:1.55}
 .quiz-landing-why .checklist li::marker{color:var(--cj-gold)}
-.quiz-landing-why hr{width:64px;margin:2px 0 0;border:0;border-top:1px solid var(--cj-gold-soft)}
-.quiz-landing-how p{color:var(--cj-paper-light)}
-.quiz-landing-start{
-  margin:6px 0 0!important;padding:12px 25px!important;
-  border:1px solid var(--cj-gold)!important;border-radius:3px!important;
-  background:linear-gradient(135deg,#e4cb8a,#c9a957)!important;color:#26372e!important;
-  box-shadow:0 3px 10px rgba(13,27,18,.18);font-weight:700!important
-}
-.quiz-landing-start:hover{transform:translateY(-2px);background:linear-gradient(135deg,#ecd99f,#d7bb72)!important;box-shadow:0 7px 15px rgba(13,27,18,.23)}
-.quiz-landing-disclaimer{
-  margin-top:clamp(18px,2.2vw,26px);padding:18px clamp(18px,2.8vw,30px);
-  border:1px solid var(--cj-line);border-left:3px solid var(--cj-gold);
-  border-radius:4px;background:var(--cj-paper-deep)
-}
+.quiz-landing-why hr{width:48px;margin:3px 0 0;border:0;border-top:1px solid var(--cj-gold-soft)}
+.quiz-landing-how p{color:var(--cj-ink)}
+.quiz-landing-start{margin:3px 0 0!important;padding:10px 22px!important;border:1px solid var(--cj-gold)!important;border-radius:2px!important;background:linear-gradient(145deg,#3e5c46,var(--cj-green-deep))!important;color:var(--cj-paper-light)!important;box-shadow:inset 0 0 0 2px rgba(230,215,178,.18),0 3px 8px rgba(43,55,45,.16);font-weight:600!important;letter-spacing:.1em}
+.quiz-landing-start:hover{transform:translateY(-2px);border-color:#c5a45a!important;background:linear-gradient(145deg,#536e58,var(--cj-green))!important;box-shadow:inset 0 0 0 2px rgba(230,215,178,.28),0 6px 12px rgba(43,55,45,.2)}
+.quiz-landing-disclaimer{position:relative;margin-top:14px;padding:12px 20px 13px 24px;border:1px solid rgba(167,131,62,.38);border-left:3px double var(--cj-gold);border-radius:2px;background:linear-gradient(105deg,#eee7d6,#f7f4eb 55%,#f1ecdf);box-shadow:inset 0 0 0 3px rgba(255,255,255,.42)}
 .quiz-landing-disclaimer hr{display:none}
-.quiz-landing-disclaimer p{max-width:none;margin:0 0 9px;font-size:14px;line-height:1.7;color:var(--cj-muted)}
+.quiz-landing-disclaimer p{max-width:none;margin:0 0 5px;color:var(--cj-muted);font-size:13px;line-height:1.58}
 .quiz-landing-disclaimer p:last-child{margin-bottom:0}
-.quiz-landing-disclaimer p:first-of-type{color:var(--cj-green-deep);font-size:15px}
+.quiz-landing-disclaimer p:first-of-type{color:var(--cj-green-deep);font-size:14px;letter-spacing:.08em}
 @media(max-width:760px){
-  body:has(.quiz-landing) main.quiz-landing{width:calc(100% - 36px);padding:28px 0 42px}
-  .quiz-landing-hero{padding:25px 22px;margin-bottom:16px}
-  .quiz-landing-hero:after{right:10px;width:clamp(112px,27vw,160px);opacity:.32}
-  .quiz-landing-hero-copy{padding-right:clamp(44px,15vw,105px)}
-  .quiz-landing-grid{grid-template-columns:1fr;gap:14px}
-  .quiz-landing-why,.quiz-landing-how{padding:20px}
-  .quiz-landing-how p{font-size:15px;line-height:1.7}
-  .quiz-landing-disclaimer{margin-top:14px;padding:16px 17px}
+  body:has(.quiz-landing) main.quiz-landing{width:calc(100% - 36px);padding:22px 0 32px}
+  .quiz-landing-hero{margin-bottom:12px;padding:23px 20px 19px}
+  .quiz-landing-hero-copy{max-width:58ch;padding-right:128px}
+  .quiz-landing-engraving{right:17px;width:145px;opacity:.72}
+  .quiz-landing-grid{grid-template-columns:minmax(0,1fr);padding:5px;background:linear-gradient(135deg,#e4d4ac,#fcfaf5 10%,#eadfca 99%)}
+  .quiz-landing-grid:before{top:50%;right:12px;bottom:auto;left:12px;width:auto;height:14px;transform:translateY(-50%);background:linear-gradient(180deg,rgba(74,58,29,.05),rgba(167,131,62,.26) 40%,rgba(255,253,248,.9) 50%,rgba(167,131,62,.2) 60%,rgba(74,58,29,.04))}
+  .quiz-landing-why,.quiz-landing-how{grid-column:1;padding:18px 20px}
+  .quiz-landing-why p,.quiz-landing-how p{font-size:15px;line-height:1.58}
+  .quiz-landing-why:before,.quiz-landing-how:before{left:20px;width:48px}
+  .quiz-landing-disclaimer{margin-top:11px;padding:11px 14px 12px 17px}
 }
 @media(max-width:460px){
-  body:has(.quiz-landing) main.quiz-landing{width:calc(100% - 32px);padding-top:22px}
-  .quiz-landing-hero{padding:23px 18px}
-  .quiz-landing-hero:after{top:22px;right:5px;width:102px;transform:none;opacity:.24}
-  .quiz-landing-hero-copy{padding-right:28px}
-  body:has(.quiz-landing) .quiz-landing-hero h1{font-size:clamp(34px,10vw,42px)}
-  body:has(.quiz-landing) .quiz-landing-hero h2{font-size:20px;max-width:23ch}
-  .quiz-landing-start{width:100%;justify-content:center;text-align:center}
+  body:has(.quiz-landing) main.quiz-landing{width:calc(100% - 28px);padding-top:18px}
+  .quiz-landing-hero{padding:21px 15px 17px}
+  .quiz-landing-hero:before{inset:6px}
+  .quiz-landing-hero-copy{padding-right:84px}
+  .quiz-landing-engraving{right:7px;width:100px;opacity:.62}
+  body:has(.quiz-landing) .quiz-landing-hero h1{font-size:clamp(34px,9vw,40px)}
+  body:has(.quiz-landing) .quiz-landing-hero h2{font-size:18px}
+  .quiz-landing-why,.quiz-landing-how{padding:17px 15px}
+  .quiz-landing-start{width:100%;text-align:center}
 }
