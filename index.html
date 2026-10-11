@@ -99,10 +99,10 @@ description: '以卡爾·榮格《心理類型》為基礎，認識經典榮格�
   <section class="home-wrap social-about">
     <div class="instagram-area">
       <h2><span style="font-family:Georgia,serif;font-weight:700">Instagram</span>最新文章</h2>
-      <a class="ig-profile" href="https://www.instagram.com/mbti.info.hk/" target="_blank" rel="noopener"><span class="ig-avatar" aria-hidden="true">MBTI<br>INFO.HK</span><span>mbti.info.hk</span></a>
+      <a class="ig-profile" href="https://www.instagram.com/mbti.info.hk/" target="_blank" rel="noopener"><img class="ig-avatar" src="{{ '/assets/images/instagram-profile.png' | relative_url }}" alt="" aria-hidden="true"><span>mbti.info.hk</span></a>
       {% assign ig_posts = site.data.instagram.posts %}
       {% if ig_posts and ig_posts.size > 0 %}
-      <div class="ig-grid">{% for post in ig_posts limit: 8 %}<a class="ig-card" href="{{ post.url }}" target="_blank" rel="noopener"><img src="{{ post.image }}" alt="{{ post.alt | default: 'Instagram 貼文' | escape }}" loading="lazy"></a>{% endfor %}</div>
+      <div class="ig-grid">{% for post in ig_posts limit: 8 %}<a class="ig-card" href="{{ post.url }}" target="_blank" rel="noopener"><img src="{{ post.image | relative_url }}" alt="{{ post.alt | default: 'Instagram 貼文' | truncate: 80 | escape }}" loading="lazy" onerror="this.hidden=true"></a>{% endfor %}</div>
       {% else %}
       <div class="ig-empty">Instagram 貼文區已預留。提供貼文資料或完成帳號串接後，這裡就能顯示最新內容。</div>
       {% endif %}
