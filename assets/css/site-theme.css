@@ -493,3 +493,122 @@ body:has(.about-shop-grid) .content{padding-bottom:12px}
   body:has(.about-shop-grid) .content{width:calc(100% - 32px)}
   body:has(.about-shop-grid) .announcement-carousel{width:calc(100% - 32px)}
 }
+
+/* Consistent visual finish for article, search, tag, and announcement pages */
+.article{
+  width:min(780px,calc(100% - 48px));
+  max-width:780px;
+}
+.article-head{margin-bottom:clamp(24px,3vw,34px)}
+.article h1{
+  margin:8px 0 16px;
+  font-size:clamp(2rem,3.6vw,2.75rem);
+  line-height:1.28;
+  font-weight:500;
+  letter-spacing:.02em;
+}
+.article-body{
+  color:var(--cj-ink);
+  font-size:var(--cj-body-size);
+  line-height:1.9;
+  overflow-wrap:anywhere;
+}
+.article-body p,.article-body li{line-height:1.9}
+.article-body h2,.article-body h3{
+  color:var(--cj-green-deep);
+  font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
+  font-weight:500;
+  letter-spacing:.015em;
+}
+.article-body h2{font-size:clamp(1.45rem,2.5vw,1.9rem);margin-top:2em}
+.article-body h3{font-size:clamp(1.2rem,2vw,1.5rem);margin-top:1.7em}
+.article-body a{color:var(--cj-green-deep);text-decoration-color:var(--cj-gold);text-underline-offset:.18em}
+.article-body blockquote{border-left-width:3px;border-radius:0 3px 3px 0}
+.article-tags{max-width:780px}
+.share-block{max-width:780px}
+
+.search-main{width:100%;min-height:55vh;padding:clamp(40px,6vw,68px) 24px 76px}
+.search-wrap{width:min(900px,100%)}
+.search-heading{
+  font-size:clamp(2rem,3.6vw,2.75rem);
+  line-height:1.3;
+  font-weight:500;
+  letter-spacing:.02em;
+}
+.search-intro{max-width:68ch;color:var(--cj-muted);line-height:1.8}
+.search-form{gap:12px;margin-bottom:30px}
+.search-field,.search-button{min-height:48px;border-radius:3px}
+.search-button{padding-inline:22px;font-size:16px;font-weight:600}
+.search-result{padding:18px 20px;border-radius:4px;transition:background-color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+.search-result-title{font-size:18px;font-weight:600;line-height:1.5}
+.search-result-excerpt{color:var(--cj-muted);font-size:15px;line-height:1.75}
+.search-empty{border-radius:4px;text-align:left}
+
+.tag-main,.tags-page{width:min(900px,calc(100% - 48px));margin-inline:auto;padding-block:clamp(38px,5vw,64px)}
+.tag-main h1,.tags-page h1,.tag-main h2,.tags-page h2{
+  color:var(--cj-green-deep);
+  font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
+  font-weight:500;
+  line-height:1.35;
+}
+.tag-main a,.tags-page a{color:var(--cj-green-deep);text-decoration-color:var(--cj-gold);text-underline-offset:.18em}
+.tag-list li{border-color:var(--cj-line)}
+
+.announcement-window{border:1px solid var(--cj-line);border-radius:5px;background:var(--cj-paper-deep)}
+.announcement-card{border-radius:5px;color:var(--cj-ink)}
+.announcement-body{background:var(--cj-paper-light);color:var(--cj-ink)}
+.announcement-label{color:var(--cj-gold);text-decoration:none;letter-spacing:.04em}
+.announcement-title{color:var(--cj-green-deep);font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;font-weight:500}
+.announcement-read{border:1px solid var(--cj-green);border-radius:3px;background:var(--cj-green);color:#fff;transition:background-color .2s ease,transform .2s ease}
+.announcement-read:hover{background:var(--cj-green-deep);transform:translateY(-1px)}
+.announcement-control{border:1px solid var(--cj-line);border-radius:3px;background:var(--cj-paper-light);color:var(--cj-green-deep);transition:background-color .2s ease,border-color .2s ease,color .2s ease}
+.announcement-control:hover{border-color:var(--cj-gold);background:var(--cj-green);color:#fff}
+.announcement-dots button{background:var(--cj-gold-soft)}
+.announcement-dots button[aria-current="true"]{background:var(--cj-green)}
+.announcement-empty{border:1px solid var(--cj-line);border-radius:4px;background:var(--cj-paper-light);color:var(--cj-muted)}
+
+@media(max-width:760px){
+  .article{width:calc(100% - 36px)}
+  .article-head{margin-bottom:24px}
+  .article h1{font-size:clamp(1.8rem,7vw,2.25rem)}
+  .article-body{font-size:16px;line-height:1.85}
+  .article-body p,.article-body li{line-height:1.85}
+  .search-main{padding:34px 18px 52px}
+  .search-form{gap:8px}
+  .search-button{padding-inline:16px}
+  .tag-main,.tags-page{width:calc(100% - 36px);padding-block:32px 48px}
+  .announcement-window,.announcement-card{border-radius:5px}
+  .announcement-body{min-height:0}
+}
+@media(max-width:460px){
+  .article{width:calc(100% - 32px)}
+  .search-main{padding-inline:16px}
+  .tag-main,.tags-page{width:calc(100% - 32px)}
+}
+
+/* Tag index and generated tag pages use their original, class-free main wrapper. */
+body:has(.tag-list) main,body:has(.post-list) main{
+  width:min(900px,calc(100% - 48px));
+  max-width:none;
+  margin:0 auto;
+  padding:clamp(38px,5vw,64px) 0
+}
+body:has(.tag-list) main>h1,body:has(.post-list) main>h1{
+  color:var(--cj-green-deep);
+  font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
+  font-size:clamp(2rem,3.6vw,2.75rem);
+  font-weight:500;
+  line-height:1.3;
+  letter-spacing:.02em
+}
+body:has(.tag-list) .intro,body:has(.post-list) .intro{max-width:68ch;color:var(--cj-muted);line-height:1.8}
+.tag-list li,.post-list li{border-color:var(--cj-line)}
+.tag-list a,.post-list a{color:var(--cj-green-deep);text-decoration-color:var(--cj-gold);text-underline-offset:.18em}
+.tag-list a:hover,.post-list a:hover{color:var(--cj-green)}
+body:has(.post-list) .empty{border:1px solid var(--cj-line);border-radius:4px;background:var(--cj-paper-light);color:var(--cj-muted)}
+@media(max-width:760px){
+  body:has(.tag-list) main,body:has(.post-list) main{width:calc(100% - 36px);padding-block:32px 48px}
+}
+@media(max-width:460px){
+  body:has(.tag-list) main,body:has(.post-list) main{width:calc(100% - 32px)}
+}
