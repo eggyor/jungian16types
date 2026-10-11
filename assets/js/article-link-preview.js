@@ -14,6 +14,8 @@
   const titleNode = popup.querySelector('.article-link-preview__title');
   const excerptNode = popup.querySelector('.article-link-preview__excerpt');
   const cache = new Map();
+  const scriptPath = new URL(document.currentScript.src).pathname;
+  const basePath = scriptPath.replace(/\/assets\/js\/article-link-preview\.js$/, '').replace(/\/$/, '');
   let activeLink = null;
   let showTimer = 0;
   let hideTimer = 0;
@@ -26,13 +28,21 @@
 
   function loadPreview(link) {
     const target = new URL(link.href, window.location.href);
-    if (target.origin !== window.location.origin || (target.pathname === location.pathname && target.hash)) return null;
-    const key = `${target.pathname}${target.search}`;
+    if (target.origin !== window.location.origin) return null;
+
+    let lookupPath = target.pathname;
+    if (basePath && lookupPath !== basePath && !lookupPath.startsWith(`${basePath}/`)) {
+      lookupPath = `${basePath}${lookupPath}`;
+    }
+    const lookupUrl = new URL(`${lookupPath}${target.search}`, target.origin);
+    if (lookupUrl.pathname === location.pathname && target.hash) return null;
+    const key = `${lookupUrl.pathname}${lookupUrl.search}`;
+
     if (!cache.has(key)) {
-      cache.set(key, fetch(target.href, {credentials: 'same-origin'})
+      cache.set(key, fetch(lookupUrl.href, {credentials: 'same-origin'})
         .then(response => response.ok ? response.text() : '')
         .then(markup => {
-          if (!markup) return {title: link.textContent.trim(), excerpt: ''};
+          if (!markup) return {title: shorten(link.textContent, 70), excerpt: ''};
           const doc = new DOMParser().parseFromString(markup, 'text/html');
           const title = doc.querySelector('.article-head h1, main h1, h1')?.textContent || doc.title || link.textContent;
           const description = doc.querySelector('meta[name="description"]')?.content
@@ -67,8 +77,6 @@
   }
 
   function scheduleShow(link) {
-    window.clearTimeout(showTimer);
-    window.clearTimeout(hideTimer);
     hidePopup();
     activeLink = link;
     const previewPromise = loadPreview(link);
@@ -79,8 +87,8 @@
       titleNode.textContent = preview.title;
       excerptNode.textContent = preview.excerpt;
       excerptNode.hidden = !preview.excerpt;
-      link.setAttribute('aria-describedby', 'article-link-preview');
       popup.id = 'article-link-preview';
+      link.setAttribute('aria-describedby', popup.id);
       popup.classList.add('is-visible');
       popup.setAttribute('aria-hidden', 'false');
       placePopup(link);
@@ -89,10 +97,7 @@
 
   function scheduleHide() {
     window.clearTimeout(showTimer);
-    hideTimer = window.setTimeout(() => {
-      activeLink = null;
-      hidePopup();
-    }, 140);
+    hideTimer = window.setTimeout(hidePopup, 140);
   }
 
   articleBody.querySelectorAll('a[href]').forEach(link => {

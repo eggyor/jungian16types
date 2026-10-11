@@ -958,6 +958,7 @@ body:has(.quiz-landing) .quiz-landing-hero .lead{display:inline-block;margin:0;p
 
 /* Desktop homepage: five full-screen scroll-snap sections. Mobile/tablet keeps natural scrolling. */
 @media (min-width: 901px) {
+  body:has(.home-main) .home-main { overflow: clip; }
   html:has(.home-main) {
     scroll-snap-type: y mandatory;
     scroll-padding-top: 104px;
@@ -1039,6 +1040,9 @@ body:has(.quiz-landing) .quiz-landing-hero .lead{display:inline-block;margin:0;p
 .article-link-preview__title { display: block; color: #354d3d; font-family: "Noto Serif TC", "Source Han Serif TC", "Songti TC", serif; font-size: 16px; font-weight: 700; line-height: 1.5; }
 .article-link-preview__excerpt { margin: 7px 0 0; color: #62685e; font-size: 13px; line-height: 1.65; }
 .article-link-preview__excerpt[hidden] { display: none; }
-@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+@media (max-width: 900px) {
   .article-link-preview { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .article-link-preview { transition: none; translate: 0 0; }
 }
