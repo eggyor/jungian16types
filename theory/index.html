@@ -4,13 +4,182 @@ permalink: /theory/
 description: '按基礎概念、類型描述、常見問題、榮格原文、系統對比及站主銳評瀏覽經典榮格心理類型學文章。'
 ---
 <!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{{ page.description | escape }}"><title>{{ page.title }}｜{{ site.title }}</title><link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
-<style>body{font:17px/1.8 system-ui,"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#202536;margin:0}main{max-width:1000px;margin:auto;padding:40px 22px}h1{font-size:2.5rem}.group{margin:42px 0}.entry{padding:15px 0;border-bottom:1px solid #e7e9ee}.date{color:#667085;font-size:.9rem}a{color:inherit}</style></head>
-<body>{% include header.html %}<main><p><a href="{{ '/' | relative_url }}">回到主頁</a></p><h1>理論文章</h1>
-{% assign subcategories = "基礎概念101|類型描述|常見問題|榮格原文|系統對比|站主銳評" | split: "|" %}
-{% for group in subcategories %}<section class="group"><h2>{{ group }}</h2>
-{% assign found = 0 %}
-{% for post in site.posts %}{% if post.categories contains "理論文章" and post.subcategory == group %}<article class="entry"><a href="{{ post.url | relative_url }}"><strong>{{ post.title | escape }}</strong></a><div class="date">{{ post.date | date: "%Y年%-m月%-d日" }}</div></article>{% assign found = found | plus: 1 %}{% endif %}{% endfor %}
-{% if found == 0 %}<p>此分類目前沒有文章。</p>{% endif %}</section>{% endfor %}
-</main>{% include footer.html %}</body></html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description | escape }}">
+  <title>{{ page.title }}｜{{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
+  <style>
+    :root{--theory-ink:#172033;--theory-muted:#465266;--theory-green:#a5b387;--theory-line:#e5e7eb;--theory-pale:#f5f5f4}
+    *{box-sizing:border-box}
+    body{margin:0;color:var(--theory-ink);font:16px/1.75 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+    .theory-main{width:min(1800px,calc(100% - 56px));margin:0 auto;padding:48px 0 72px}
+    .theory-main h1{font-size:clamp(34px,4vw,52px);line-height:1.25;font-weight:500;margin:0 0 28px}
+    .section-heading{font-size:clamp(28px,3vw,42px);line-height:1.25;font-weight:500;margin:0 0 22px}
+    .category-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+    .category-card{min-width:0;min-height:750px;display:flex;flex-direction:column;background:#eee;color:#111}
+    .category-cover{aspect-ratio:.78;overflow:hidden;background:#d7d7d7}
+    .category-cover img{display:block;width:100%;height:100%;object-fit:cover}
+    .category-content{flex:1;display:flex;flex-direction:column;align-items:flex-start;padding:24px 22px 26px}
+    .category-name{font-size:20px;font-weight:500;line-height:1.4}
+    .category-description{flex:1;margin:12px 0 24px;color:#5d6570;font-size:18px;line-height:1.7}
+    .category-link{display:inline-flex;min-width:105px;min-height:60px;align-items:center;justify-content:center;padding:12px 22px;background:#000;color:#fff;font-size:19px;font-weight:600;text-decoration:underline;text-underline-offset:3px;transition:background .18s ease}
+    .category-link:hover{background:#303030}
+    .category-link:focus-visible{outline:3px solid #65764a;outline-offset:3px}
+    .latest-section{margin-top:64px}
+    .latest-heading{margin-bottom:22px}
+    .latest-carousel{position:relative}
+    .latest-track{display:grid;grid-auto-columns:calc((100% - 36px)/3);grid-auto-flow:column;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:6px 2px 14px;overscroll-behavior-inline:contain}
+    .latest-track::-webkit-scrollbar{display:none}
+    .latest-card{min-width:0;min-height:430px;display:flex;flex-direction:column;overflow:hidden;border-radius:20px;background:#e9e9e9;color:#111;text-decoration:none;scroll-snap-align:start;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+    .latest-cover{position:relative;height:clamp(220px,25vw,360px);overflow:hidden;background:#d7d7d7}
+    .latest-cover img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+    .latest-card:hover .latest-cover img{transform:scale(1.035)}
+    .latest-cover:after{content:"";position:absolute;inset:auto 0 0;height:36%;background:linear-gradient(transparent,rgba(12,16,22,.74))}
+    .latest-cover-title{position:absolute;z-index:1;bottom:0;left:0;right:0;padding:12px 16px;color:#fff;font-size:18px;font-weight:700;line-height:1.4}
+    .latest-meta{display:flex;flex:1;flex-direction:column;align-items:center;padding:16px 18px 22px;text-align:center}
+    .latest-category{font-size:14px;color:#5e6a7d;text-decoration:underline;text-underline-offset:3px}
+    .latest-meta h3{margin:7px 0 8px;font-size:19px;line-height:1.45}
+    .latest-excerpt{margin:0 0 12px;color:#465266;font-size:14px;line-height:1.65}
+    .latest-date{margin-top:auto;color:#687386;font-size:13px}
+    .carousel-control{position:absolute;z-index:2;top:31%;width:56px;height:66px;border:0;background:#fff;color:#111;font-size:36px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+    .carousel-control:hover{background:#f7f7f7}
+    .carousel-control:focus-visible,.carousel-dots button:focus-visible{outline:3px solid #65764a;outline-offset:3px}
+    .carousel-control.prev{left:0}.carousel-control.next{right:0}
+    .carousel-dots{display:flex;justify-content:center;gap:12px;padding:10px}
+    .carousel-dots button{width:11px;height:11px;padding:0;border:0;border-radius:50%;background:#c9c9c9;cursor:pointer}
+    .carousel-dots button[aria-current="true"]{background:#111}
+    @media(max-width:1200px){.category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.category-card{min-height:590px}.category-description{font-size:17px}}
+    @media(max-width:900px){.theory-main{width:min(100% - 36px,720px)}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.category-card{min-height:570px}.category-cover{aspect-ratio:.9}.latest-track{grid-auto-columns:calc((100% - 18px)/2)}}
+    @media(max-width:620px){.theory-main{width:calc(100% - 30px);padding:38px 0 52px}.category-grid{grid-template-columns:1fr;gap:12px}.category-card{min-height:0}.category-cover{aspect-ratio:1.15}.category-content{padding:20px}.category-description{margin:9px 0 18px;font-size:16px}.category-link{min-height:52px;min-width:96px;font-size:17px}.latest-section{margin-top:46px}.latest-track{grid-auto-columns:86%;gap:14px}.latest-card{min-height:385px}.latest-cover{height:245px}.carousel-control{top:24%;width:48px;height:56px;font-size:30px}.carousel-control.prev{left:0}.carousel-control.next{right:0}.carousel-dots{padding-top:8px}}
+  </style>
+</head>
+<body>
+  {% include header.html %}
+  <main class="theory-main">
+    <h1>理論文章</h1>
+
+    <section aria-labelledby="category-heading">
+      <h2 class="section-heading" id="category-heading">文章分類</h2>
+      <div class="category-grid">
+        <article class="category-card">
+          <div class="category-cover"><img src="{{ '/assets/images/img/theory-cover-1.png' | relative_url }}" alt="" loading="lazy"></div>
+          <div class="category-content">
+            <span class="category-name">基礎概念101</span>
+            <span class="category-description">關於榮格心理學、經典榮格、類型與功能的定義，一切入門所需。</span>
+            <a class="category-link" href="{{ '/page-1259.html' | relative_url }}">前往</a>
+          </div>
+        </article>
+        <article class="category-card">
+          <div class="category-cover"><img src="{{ '/assets/images/img/theory-cover-2.png' | relative_url }}" alt="" loading="lazy"></div>
+          <div class="category-content">
+            <span class="category-name">類型描述</span>
+            <span class="category-description">八種經典榮格主導類型的描述。</span>
+            <a class="category-link" href="{{ '/page-1271.html' | relative_url }}">前往</a>
+          </div>
+        </article>
+        <article class="category-card">
+          <div class="category-cover"><img src="{{ '/assets/images/img/theory-cover-3.png' | relative_url }}" alt="" loading="lazy"></div>
+          <div class="category-content">
+            <span class="category-name">常見問題</span>
+            <span class="category-description">各種關於榮格類型學和經典榮格的常見問題，以及常見誤解的闢謠。</span>
+            <a class="category-link" href="{{ '/page-1286.html' | relative_url }}">前往</a>
+          </div>
+        </article>
+        <article class="category-card">
+          <div class="category-cover"><img src="{{ '/assets/images/img/theory-cover-4.png' | relative_url }}" alt="" loading="lazy"></div>
+          <div class="category-content">
+            <span class="category-name">榮格原文</span>
+            <span class="category-description">榮格《心理類型》原文節錄，以及書中包含的詞條定義。</span>
+            <a class="category-link" href="{{ '/page-1292.html' | relative_url }}">前往</a>
+          </div>
+        </article>
+        <article class="category-card">
+          <div class="category-cover"><img src="{{ '/assets/images/img/theory-cover-5.png' | relative_url }}" alt="" loading="lazy"></div>
+          <div class="category-content">
+            <span class="category-name">系統對比</span>
+            <span class="category-description">與其他人格類型學系統如 MBTI、榮格八維、16p、九型人格、社會人格學等的比較。</span>
+            <a class="category-link" href="{{ '/page-1298.html' | relative_url }}">前往</a>
+          </div>
+        </article>
+        <article class="category-card">
+          <div class="category-cover"><img src="{{ '/assets/images/img/theory-cover-6.png' | relative_url }}" alt="" loading="lazy"></div>
+          <div class="category-content">
+            <span class="category-name">站主銳評</span>
+            <span class="category-description">站主本人對於各種現象主觀到不行的銳評，透過榮格心理學看世界。</span>
+            <a class="category-link" href="{{ '/page-1304.html' | relative_url }}">前往</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="latest-section" aria-labelledby="latest-heading">
+      <h2 class="section-heading latest-heading" id="latest-heading">最新文章</h2>
+      <div class="latest-carousel" data-theory-carousel>
+        <button class="carousel-control prev" type="button" aria-label="上一頁文章" data-theory-prev>‹</button>
+        <div class="latest-track" data-theory-track>
+          {% assign shown_articles = 0 %}
+          {% for post in site.posts %}
+            {% if post.categories contains '理論文章' and shown_articles < 8 %}
+              <a class="latest-card" href="{{ post.url | relative_url }}">
+                <div class="latest-cover">
+                  {% if post.cover %}<img src="{{ post.cover | relative_url }}" alt="{{ post.cover_alt | default: post.title | escape }}" loading="lazy">{% endif %}
+                  <span class="latest-cover-title">{{ post.title | escape }}</span>
+                </div>
+                <div class="latest-meta">
+                  <span class="latest-category">{{ post.subcategory | default: '理論文章' | escape }}</span>
+                  <h3>{{ post.title | escape }}</h3>
+                  <p class="latest-excerpt">{{ post.excerpt | default: post.content | strip_html | normalize_whitespace | truncate: 100 | escape }}</p>
+                  <time class="latest-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+                </div>
+              </a>
+              {% assign shown_articles = shown_articles | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+        </div>
+        <button class="carousel-control next" type="button" aria-label="下一頁文章" data-theory-next>›</button>
+        <div class="carousel-dots" data-theory-dots aria-label="文章頁數"></div>
+      </div>
+    </section>
+  </main>
+  {% include footer.html %}
+  <script>
+    (() => {
+      const root = document.querySelector('[data-theory-carousel]');
+      if (!root) return;
+      const track = root.querySelector('[data-theory-track]');
+      const cards = [...track.querySelectorAll('.latest-card')];
+      const dots = root.querySelector('[data-theory-dots]');
+      if (!cards.length) return;
+      const gap = () => parseFloat(getComputedStyle(track).columnGap) || 0;
+      const cardStep = () => cards[0].getBoundingClientRect().width + gap();
+      const perPage = () => Math.max(1, Math.round(track.clientWidth / cardStep()));
+      const pageCount = () => Math.max(1, Math.ceil(cards.length / perPage()));
+      const currentPage = () => Math.min(pageCount() - 1, Math.round(track.scrollLeft / (perPage() * cardStep())));
+      function goTo(page) {
+        const target = Math.max(0, Math.min(pageCount() - 1, page));
+        track.scrollTo({left: target * perPage() * cardStep(), behavior: 'smooth'});
+      }
+      function drawDots() {
+        const page = currentPage();
+        dots.replaceChildren();
+        for (let i = 0; i < pageCount(); i++) {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.setAttribute('aria-label', `第 ${i + 1} 頁文章`);
+          button.setAttribute('aria-current', i === page ? 'true' : 'false');
+          button.addEventListener('click', () => goTo(i));
+          dots.append(button);
+        }
+      }
+      root.querySelector('[data-theory-prev]').addEventListener('click', () => goTo(currentPage() - 1));
+      root.querySelector('[data-theory-next]').addEventListener('click', () => goTo(currentPage() + 1));
+      track.addEventListener('scroll', () => requestAnimationFrame(drawDots), {passive:true});
+      window.addEventListener('resize', drawDots);
+      drawDots();
+    })();
+  </script>
+</body>
+</html>

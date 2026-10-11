@@ -1,0 +1,112 @@
+---
+layout: null
+title: 網站搜尋
+permalink: /search/
+description: 搜尋經典榮格網站的文章與頁面內容。
+---
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>網站搜尋｜經典榮格 Classic Jung</title>
+  <meta name="description" content="搜尋經典榮格網站的文章與頁面內容。">
+  <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
+  <style>
+    :root{--search-ink:#202536;--search-muted:#667085;--search-line:#e7e9ee;--search-green:#65764a;--search-soft:#f7f8f5}
+    *{box-sizing:border-box}
+    body{margin:0;color:var(--search-ink);background:#fff;font:17px/1.75 system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif}
+    .search-main{min-height:55vh;padding:clamp(42px,7vw,84px) 20px 90px}
+    .search-wrap{width:min(900px,100%);margin:0 auto}
+    .search-heading{margin:0;color:#202536;font-size:clamp(34px,5vw,54px);font-weight:600;line-height:1.25;letter-spacing:.01em}
+    .search-intro{margin:12px 0 30px;color:var(--search-muted)}
+    .search-form{display:flex;gap:10px;margin-bottom:34px}
+    .search-field{flex:1;min-width:0;min-height:54px;padding:11px 16px;border:1px solid #d9dde4;border-radius:12px;color:var(--search-ink);background:#fff;font:inherit;outline:none;transition:border-color .18s ease,box-shadow .18s ease}
+    .search-field:focus{border-color:#a8b686;box-shadow:0 0 0 4px rgba(168,182,134,.18)}
+    .search-button{flex:none;min-height:54px;padding:10px 23px;border:0;border-radius:12px;background:#263044;color:#fff;font:inherit;font-weight:700;cursor:pointer;transition:background .18s ease,transform .18s ease}
+    .search-button:hover{background:#65764a;transform:translateY(-1px)}
+    .search-status{margin:0 0 16px;color:var(--search-muted);font-size:15px}
+    .search-results{display:grid;gap:12px}
+    .search-result{display:block;padding:18px 20px;border:1px solid var(--search-line);border-radius:14px;color:inherit;text-decoration:none;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+    .search-result:hover,.search-result:focus-visible{border-color:#a8b686;box-shadow:0 8px 22px rgba(32,37,54,.07);outline:0;transform:translateY(-1px)}
+    .search-result-title{margin:0;font-size:19px;line-height:1.45}
+    .search-result-type{display:inline-block;margin:0 0 7px;padding:2px 9px;border-radius:999px;background:var(--search-soft);color:var(--search-green);font-size:12px}
+    .search-result-excerpt{margin:8px 0 0;color:#596273;font-size:15px;line-height:1.7}
+    .search-empty{padding:24px;border:1px dashed #d9dde4;border-radius:14px;background:#fafaf9;color:var(--search-muted);text-align:center}
+    @media(max-width:520px){.search-main{padding-top:36px}.search-form{gap:8px}.search-field{padding-inline:12px}.search-button{padding-inline:16px}.search-result{padding:16px}}
+  </style>
+</head>
+<body>
+  {% include header.html %}
+  <main class="search-main">
+    <section class="search-wrap" aria-labelledby="search-heading">
+      <h1 class="search-heading" id="search-heading">搜尋網站內容</h1>
+      <p class="search-intro">搜尋文章標題與內文，選擇結果即可前往相關頁面。</p>
+      <form class="search-form" role="search" data-search-results-form data-search-index="{{ '/search.json' | relative_url }}">
+        <label class="site-search-label" for="search-page-query">搜尋關鍵字</label>
+        <input class="search-field" id="search-page-query" name="q" type="search" placeholder="輸入關鍵字" autocomplete="off">
+        <button class="search-button" type="submit">搜尋</button>
+      </form>
+      <p class="search-status" data-search-status role="status" aria-live="polite">輸入關鍵字以搜尋網站內容。</p>
+      <div class="search-results" data-search-results aria-live="polite"></div>
+    </section>
+  </main>
+  {% include footer.html %}
+  <script>
+  (function(){
+    const form=document.querySelector('[data-search-results-form]');
+    if(!form)return;
+    const input=form.querySelector('[name="q"]');
+    const status=document.querySelector('[data-search-status]');
+    const results=document.querySelector('[data-search-results]');
+    const indexUrl=form.dataset.searchIndex;
+    const params=new URLSearchParams(window.location.search);
+    const initialQuery=params.get('q')||'';
+    input.value=initialQuery;
+    function normalize(value){return String(value||'').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g,' ');}
+    function excerpt(item,terms){
+      const text=String(item.content||'').replace(/\s+/g,' ').trim();
+      const normalized=normalize(text);let position=-1;
+      terms.forEach(function(term){const found=normalized.indexOf(term);if(found>=0&&(position<0||found<position))position=found;});
+      if(position<0)return text.slice(0,190)+(text.length>190?'…':'');
+      const start=Math.max(0,position-60),end=Math.min(text.length,position+140);
+      return (start>0?'…':'')+text.slice(start,end)+(end<text.length?'…':'');
+    }
+    function render(items,terms,query){
+      results.replaceChildren();
+      if(!query){status.textContent='輸入關鍵字以搜尋網站內容。';return;}
+      status.textContent='找到 '+items.length+' 個相關結果';
+      if(!items.length){const empty=document.createElement('p');empty.className='search-empty';empty.textContent='找不到符合「'+query+'」的文章或頁面，試試其他關鍵字。';results.append(empty);return;}
+      items.forEach(function(item){
+        const link=document.createElement('a');link.className='search-result';link.href=item.url;
+        const type=document.createElement('span');type.className='search-result-type';type.textContent=item.type||'網站頁面';
+        const title=document.createElement('h2');title.className='search-result-title';title.textContent=item.title||'未命名頁面';
+        link.append(type,title);
+        const text=excerpt(item,terms);
+        if(text){const description=document.createElement('p');description.className='search-result-excerpt';description.textContent=text;link.append(description);}
+        results.append(link);
+      });
+    }
+    let indexPromise;
+    form.addEventListener('submit',function(event){event.preventDefault();const query=input.value.trim();const url=new URL(window.location.href);if(query)url.searchParams.set('q',query);else url.searchParams.delete('q');window.history.replaceState({},'',url);search(query);});
+    function search(rawQuery){
+      const query=normalize(rawQuery),terms=query.split(' ').filter(Boolean);
+      if(!query){render([],terms,'');return;}
+      status.textContent='正在搜尋…';
+      if(!indexPromise)indexPromise=fetch(indexUrl).then(function(response){if(!response.ok)throw new Error('Search index unavailable');return response.json();}).then(function(items){return items.map(function(item){return Object.assign({},item,{_searchTitle:normalize(item.title),_searchContent:normalize(item.content)});});});
+      indexPromise.then(function(items){
+        const matches=items.map(function(item){
+          const title=item._searchTitle,content=item._searchContent;
+          const score=terms.reduce(function(total,term){return total+(title.includes(term)?10:0)+(content.includes(term)?1:0);},0)+(title.startsWith(query)?20:0);
+          return {item:item,score:score};
+        }).filter(function(entry){return terms.every(function(term){return entry.item._searchTitle.includes(term)||entry.item._searchContent.includes(term);});})
+          .sort(function(a,b){return b.score-a.score;}).map(function(entry){return entry.item;});
+        render(matches,terms,query);
+      }).catch(function(){status.textContent='目前無法載入搜尋資料，請稍後再試。';results.replaceChildren();});
+    }
+    input.addEventListener('input',function(){search(input.value);const url=new URL(window.location.href);if(input.value.trim())url.searchParams.set('q',input.value.trim());else url.searchParams.delete('q');window.history.replaceState({},'',url);});
+    if(initialQuery)search(initialQuery);
+  })();
+  </script>
+</body>
+</html>
