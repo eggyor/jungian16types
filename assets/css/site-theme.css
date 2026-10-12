@@ -960,6 +960,7 @@ body:has(.quiz-landing) .quiz-landing-hero .lead{display:inline-block;margin:0;p
 /* Desktop homepage: five full-screen scroll-snap sections. Mobile/tablet keeps natural scrolling. */
 @media (min-width: 901px) {
   body:has(.home-main) .home-main { overflow: clip; }
+  html:has(.home-main).home-scroll-free { scroll-snap-type: none !important; scroll-behavior: auto !important; }
   html:has(.home-main) {
     scroll-snap-type: y mandatory;
     scroll-padding-top: 104px;
@@ -1005,9 +1006,9 @@ body:has(.quiz-landing) .quiz-landing-hero .lead{display:inline-block;margin:0;p
 @media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
   body:has(.home-main) .home-main > section > *,
   body:has(.home-main) .home-main > .social-about > * {
-    opacity: .84;
-    translate: 0 8px;
-    transition: opacity 320ms ease, translate 320ms ease;
+    opacity: .72;
+    translate: 0 12px;
+    transition: opacity 480ms cubic-bezier(.22,.61,.36,1), translate 480ms cubic-bezier(.22,.61,.36,1);
   }
 
   body:has(.home-main) .home-main > section.is-screen-active > *,

@@ -161,7 +161,18 @@ description: '以卡爾·榮格《心理類型》為基礎，認識經典榮格�
 (() => {
   const desktop = window.matchMedia('(min-width: 901px) and (prefers-reduced-motion: no-preference)');
   const sections = [...document.querySelectorAll('.home-main > section')];
+  const html = document.documentElement;
   if (!desktop.matches || !sections.length || !('IntersectionObserver' in window)) return;
+
+  const headerHeight = () => document.querySelector('.site-header')?.getBoundingClientRect().height || 104;
+  const targetTop = section => Math.max(0, section.getBoundingClientRect().top + window.scrollY - headerHeight());
+  const nearestIndex = () => {
+    const offset = headerHeight();
+    return sections.reduce((best, section, index) => {
+      const distance = Math.abs(section.getBoundingClientRect().top - offset);
+      return distance < best.distance ? {index, distance} : best;
+    }, {index: 0, distance: Infinity}).index;
+  };
 
   const updateActiveSection = () => {
     const center = window.innerHeight / 2;
@@ -176,6 +187,101 @@ description: '以卡爾·榮格《心理類型》為基礎，認識經典榮格�
   sections.forEach(section => observer.observe(section));
   updateActiveSection();
   window.addEventListener('resize', updateActiveSection, {passive: true});
+
+  const wheelThreshold = 55;
+  const wheelSensitivity = 0.7;
+  const transitionDuration = 840;
+  const quietPeriod = 190;
+  let accumulatedDelta = 0;
+  let lastDirection = 0;
+  let inputLocked = false;
+  let animationFinished = true;
+  let footerScrollMode = false;
+  let unlockTimer;
+
+  function releaseAfterQuiet(){
+    clearTimeout(unlockTimer);
+    unlockTimer = setTimeout(() => {
+      if (animationFinished) {
+        inputLocked = false;
+        accumulatedDelta = 0;
+        lastDirection = 0;
+      }
+    }, quietPeriod);
+  }
+
+  function moveToSection(index){
+    const section = sections[index];
+    if (!section) return;
+    const startY = window.scrollY;
+    const endY = targetTop(section);
+    if (Math.abs(endY - startY) < 2) return;
+
+    inputLocked = true;
+    animationFinished = false;
+    accumulatedDelta = 0;
+    html.classList.add('home-scroll-free');
+    html.style.scrollBehavior = 'auto';
+
+    const startTime = performance.now();
+    const easeInOut = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    function frame(now){
+      const progress = Math.min(1, (now - startTime) / transitionDuration);
+      window.scrollTo(0, startY + (endY - startY) * easeInOut(progress));
+      if (progress < 1) {
+        requestAnimationFrame(frame);
+        return;
+      }
+      window.scrollTo(0, endY);
+      html.style.removeProperty('scroll-behavior');
+      html.classList.remove('home-scroll-free');
+      setTimeout(() => {
+        animationFinished = true;
+        releaseAfterQuiet();
+      }, 60);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('wheel', event => {
+    if (event.ctrlKey || event.metaKey || !event.deltaY) return;
+    const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
+    const rawDelta = event.deltaY * unit;
+    const currentIndex = nearestIndex();
+
+    if (footerScrollMode) {
+      const lastTop = targetTop(sections[sections.length - 1]);
+      if (rawDelta < 0 && window.scrollY <= lastTop + 34) {
+        footerScrollMode = false;
+        html.classList.remove('home-scroll-free');
+      } else {
+        return;
+      }
+    }
+
+    if (currentIndex === sections.length - 1 && rawDelta > 0) {
+      footerScrollMode = true;
+      html.classList.add('home-scroll-free');
+      accumulatedDelta = 0;
+      return;
+    }
+    if (currentIndex === 0 && rawDelta < 0 && window.scrollY <= 3) return;
+
+    event.preventDefault();
+    if (inputLocked) {
+      accumulatedDelta = 0;
+      if (animationFinished) releaseAfterQuiet();
+      return;
+    }
+
+    const direction = Math.sign(rawDelta);
+    if (direction !== lastDirection) accumulatedDelta = 0;
+    lastDirection = direction;
+    accumulatedDelta += rawDelta * wheelSensitivity;
+    if (Math.abs(accumulatedDelta) < wheelThreshold) return;
+
+    moveToSection(Math.max(0, Math.min(sections.length - 1, currentIndex + direction)));
+  }, {passive: false});
 })();
 </script>
 </body>
