@@ -165,7 +165,7 @@ body:has(main .grid) .title-panel{background:rgba(38,55,46,.78);border-top:1px s
 body:has(main .grid) .card:hover .title-panel,body:has(main .grid) .card:focus-visible .title-panel{background:rgba(38,55,46,.9)}
 
 /* Long-form articles, search, tags and informational pages */
-.page-wrap{padding:clamp(24px,3vw,38px) 0 76px}
+.page-wrap{padding:clamp(14px,2vw,24px) 0 76px}
 .article{max-width:780px}
 .article h1,.search-heading,.quiz-intro h1,.quiz-result-page h2{color:var(--cj-green-deep);font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif}
 .article-body{color:#34463a;line-height:1.9}
@@ -247,7 +247,7 @@ body:has(main .grid) .card:hover .title-panel,body:has(main .grid) .card:focus-v
   body:has(main .grid) main{width:calc(100% - 32px);padding-block:30px 50px}
   body:has(main .grid) .grid{gap:10px}
   body:has(main .grid) .card{border-radius:4px}
-  .page-wrap{padding:22px 0 52px}
+  .page-wrap{padding:14px 0 52px}
   .article{width:90%}
   .article-body{font-size:16px;line-height:1.85}
   .quiz-page{width:calc(100% - 28px);padding-block:30px 48px}
@@ -488,7 +488,7 @@ body:has(.about-shop-grid) .content{padding-bottom:12px}
 }
 .article-head{margin-bottom:clamp(14px,1.7vw,20px)}
 .article h1{
-  margin:8px 0 16px;
+  margin:0 0 16px;
   font-size:clamp(2rem,3.6vw,2.75rem);
   line-height:1.28;
   font-weight:500;
