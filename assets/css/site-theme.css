@@ -165,7 +165,7 @@ body:has(main .grid) .title-panel{background:rgba(38,55,46,.78);border-top:1px s
 body:has(main .grid) .card:hover .title-panel,body:has(main .grid) .card:focus-visible .title-panel{background:rgba(38,55,46,.9)}
 
 /* Long-form articles, search, tags and informational pages */
-.page-wrap{padding:clamp(34px,5vw,58px) 0 76px}
+.page-wrap{padding:clamp(24px,3vw,38px) 0 76px}
 .article{max-width:780px}
 .article h1,.search-heading,.quiz-intro h1,.quiz-result-page h2{color:var(--cj-green-deep);font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif}
 .article-body{color:#34463a;line-height:1.9}
@@ -247,7 +247,7 @@ body:has(main .grid) .card:hover .title-panel,body:has(main .grid) .card:focus-v
   body:has(main .grid) main{width:calc(100% - 32px);padding-block:30px 50px}
   body:has(main .grid) .grid{gap:10px}
   body:has(main .grid) .card{border-radius:4px}
-  .page-wrap{padding:32px 0 52px}
+  .page-wrap{padding:22px 0 52px}
   .article{width:90%}
   .article-body{font-size:16px;line-height:1.85}
   .quiz-page{width:calc(100% - 28px);padding-block:30px 48px}
@@ -486,7 +486,7 @@ body:has(.about-shop-grid) .content{padding-bottom:12px}
   width:min(780px,calc(100% - 48px));
   max-width:780px;
 }
-.article-head{margin-bottom:clamp(24px,3vw,34px)}
+.article-head{margin-bottom:clamp(14px,1.7vw,20px)}
 .article h1{
   margin:8px 0 16px;
   font-size:clamp(2rem,3.6vw,2.75rem);
@@ -494,6 +494,8 @@ body:has(.about-shop-grid) .content{padding-bottom:12px}
   font-weight:500;
   letter-spacing:.02em;
 }
+.article .cover{margin:4px 0 12px}
+.cover + .article-body > :first-child{margin-top:.5em}
 .article-body{
   color:var(--cj-ink);
   font-size:var(--cj-body-size);
@@ -554,7 +556,8 @@ body:has(.about-shop-grid) .content{padding-bottom:12px}
 @media(max-width:760px){
   .article{width:90%;margin-left:auto;margin-right:auto}
   .article-tags,.share-block,.recommendations{width:90%;margin-left:auto;margin-right:auto}
-  .article-head{margin-bottom:24px}
+  .article-head{margin-bottom:12px}
+  .article .cover{margin:2px 0 10px}
   .article h1{font-size:clamp(1.8rem,7vw,2.25rem)}
   .article-body{font-size:16px;line-height:1.85}
   .article-body p,.article-body li{line-height:1.85}
