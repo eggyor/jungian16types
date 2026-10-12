@@ -25,7 +25,7 @@ h1{font-size:clamp(32px,3.4vw,44px);line-height:1.4;margin:0 0 16px}h2{font-size
 @media(max-width:460px){main.quiz-compass-page{width:calc(100% - 20px);margin:10px auto!important}.quiz-compass-page:before{inset:6px}.quiz-compass-kicker{margin:24px 21px 10px}.quiz-compass-page h1{margin:0 21px;font-size:44px}.quiz-compass-subtitle{margin:9px 21px 12px;font-size:18px}.quiz-compass-ready{margin:0 21px 4px}.quiz-compass-section:first-child{margin:14px 21px 0}.quiz-compass-section:nth-child(2){margin:12px 21px 0;padding-top:11px}.quiz-compass-right p,.quiz-compass-list li{font-size:14px;line-height:1.65;text-wrap:pretty;line-break:strict}.quiz-compass-keep{white-space:nowrap}.quiz-compass-page .quiz-compass-start{width:min(100% - 30px,300px);min-width:0;min-height:58px;margin:15px 0 18px}.quiz-compass-disclaimer{margin:0 15px 16px;padding-top:10px}.quiz-compass-disclaimer p{font-size:12px}.quiz-compass-visual{right:-34px;width:200px}}
 @media(prefers-reduced-motion:reduce){.quiz-compass-start{transition:none}}</style>
 <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/site-theme.css' | relative_url }}">
+{% include site-theme-links.html %}
 </head>
 <body id="site-top">
 {% include header.html %}

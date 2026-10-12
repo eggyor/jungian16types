@@ -49,7 +49,8 @@ button,a,[role="button"]{ -webkit-tap-highlight-color:rgba(77,104,84,.16) }
   color:var(--cj-gold-soft)!important;box-shadow:0 5px 18px rgba(25,38,29,.22);
   transition:transform .2s ease,background-color .2s ease,color .2s ease
 }
-.back-to-top:hover{transform:translateY(-2px);background:var(--cj-green)!important;color:#fff!important}@media(max-width:760px){
+.back-to-top:hover{transform:translateY(-2px);background:var(--cj-green)!important;color:#fff!important}
+@media(max-width:760px){
   .site-footer{margin-top:36px!important;padding:12px 0 20px!important}
   .footer-inner{padding:12px 18px!important;gap:14px!important}
   .footer-logo{width:56px!important;height:56px!important}
@@ -107,6 +108,7 @@ button,a,[role="button"]{ -webkit-tap-highlight-color:rgba(77,104,84,.16) }
   font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
   letter-spacing:.025em;
 }
+.ig-button.follow{background:var(--cj-green);color:var(--cj-paper-light)}
 .home-btn,.ig-button{
   border:1px solid var(--cj-green);
   border-radius:3px;
