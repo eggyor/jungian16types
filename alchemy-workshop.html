@@ -1,0 +1,839 @@
+---
+layout: null
+title: 鍊金工房
+permalink: /alchemy-workshop.html
+description: 把心理功能投入煉金容器，觀察意識與無意識如何互相映照。
+---
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>鍊金工房｜經典榮格</title>
+<meta name="description" content="把 I、E、N、S、T、F 投入人格煉金容器，觀察意識與無意識如何互相映照，煉成經典榮格的人格類型。">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/site-theme.css' | relative_url }}">
+<style>
+/* ▼ 色票：取自官網截圖（米白底、墨綠按鈕、金棕邊框），可依實際值微調 */
+@property --glow{syntax:'<color>';inherits:true;initial-value:#b9b39f}
+:root{
+  color-scheme:light;
+  --bg1:var(--cj-paper-deep,#eee8d9); --bg2:var(--cj-paper,#f7f4eb); --paper:var(--cj-paper-light,#fcfaf5); --paper2:var(--cj-paper-light,#fcfaf5);
+  --ink:var(--cj-ink,#26372e); --ink2:var(--cj-muted,#657064); --ink3:#8c8f84;
+  --line:var(--cj-line,#ddd7c8); --line2:var(--cj-line,#ddd7c8);
+  --green:var(--cj-green,#4d6854); --green-d:var(--cj-green-deep,#354d3d); --sage:#a1b484;
+  --bronze:var(--cj-gold,#a7833e); --bronze2:var(--cj-gold-soft,#e6d7b2);
+  --deep:#2a3555; --deep2:#161c31;                   /* 無意識面的液體：深靛藍 */
+  --axA:#9a7a2c; --axB:#b05a3c; --axC:#3d6a52;      /* 態度／非理性(NS)／理性(TF) */
+  --axA2:#e6c677; --axB2:#f0a483; --axC2:#8ed0a8;   /* 無意識面（深底）用的亮色 */
+  --g1:var(--cj-gold,#a7833e); --g2:var(--cj-green,#4d6854); --g3:#a8604a;        /* 文章分組色：內外傾／主導類型／功能軸 */
+  --glow:#b9b39f;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+}
+body[data-stage="1"]{--glow:#8a9bbd}   /* 黑化→白化→赤化：靛藍灰 → 金 → 赤陶 */
+body[data-stage="2"]{--glow:#c8aa63}
+body[data-stage="3"]{--glow:#b5624a}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{
+  font-family:var(--sans);color:var(--ink);line-height:1.7;min-height:100vh;overflow-x:clip;
+  background:radial-gradient(900px 520px at 80% 0%,rgba(255,255,255,.7),transparent 70%),linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 46%,#edf0e4 100%);
+  background-attachment:fixed;transition:--glow .8s ease;
+}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+
+/* ── Layout ───────────────────────────── */
+.workshop{max-width:1320px;margin:0 auto;padding:36px 24px 70px;display:grid;grid-template-columns:minmax(0,1fr) 20%;gap:28px;align-items:start}
+.stage-col{min-width:0}
+.titlebar{display:flex;align-items:center;gap:14px;position:relative}
+h1{font-weight:300;font-size:clamp(30px,4.4vw,44px);letter-spacing:.14em;color:var(--ink);line-height:1.3}
+.lede{color:var(--ink2);margin:8px 0 24px;max-width:46em}
+
+/* 規則問號 */
+.help{position:relative;display:inline-flex}
+.help>button{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--bronze);color:var(--bronze);font-size:14px;font-weight:500;line-height:1;display:grid;place-items:center;transition:.2s;background:#fffdf8}
+.help>button:hover,.help.open>button{background:var(--bronze);color:#fff}
+.rules{
+  position:absolute;left:-6px;top:calc(100% + 12px);width:min(400px,86vw);z-index:40;
+  background:#fffdf8;border:1px solid var(--bronze2);border-radius:3px;
+  padding:16px 18px 14px;box-shadow:0 18px 44px rgba(50,60,40,.2);
+  opacity:0;visibility:hidden;transform:translateY(-6px);transition:.22s;pointer-events:none;font-size:14px
+}
+.rules::before{content:"";position:absolute;left:var(--arrow,14px);top:-7px;width:12px;height:12px;background:#fffdf8;border-left:1px solid var(--bronze2);border-top:1px solid var(--bronze2);transform:rotate(45deg)}
+.rules h2{font-size:15px;font-weight:500;color:var(--green);margin-bottom:8px;letter-spacing:.2em;display:flex;align-items:center;gap:10px}
+.rules h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.rules ol{padding-left:1.25em;display:grid;gap:5px;color:var(--ink2)}
+.rules b{color:var(--ink);font-weight:500}
+.rules .ex{margin-top:10px;padding-top:9px;border-top:1px dashed var(--line);color:var(--ink3);font-size:12.5px;display:grid;gap:3px}
+@media (hover:hover){.help:hover .rules{opacity:1;visibility:visible;transform:none}}
+.help.open .rules{opacity:1;visibility:visible;transform:none}
+
+/* ── Lab card（金棕雙線邊框） ─────────── */
+.lab{--px:24px;--py:22px;position:relative;overflow:hidden;padding:var(--py) var(--px) 0;
+  background:linear-gradient(180deg,#fbf9f2,#f6f1e3);border:1px solid var(--bronze2);border-radius:3px;box-shadow:0 8px 30px rgba(80,80,50,.08)}
+.lab::before{content:"";position:absolute;inset:7px;border:1px solid rgba(201,178,122,.5);pointer-events:none;border-radius:2px}
+.lab>*{position:relative;z-index:1}
+
+.steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:2px 4px 4px}
+.step{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:2px;border:1px solid transparent;color:var(--ink3);transition:.4s}
+.step i{flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid currentColor;display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:500}
+.step b{display:block;font-size:14.5px;font-weight:500;line-height:1.3}
+.step small{display:block;font-size:11px;opacity:.85;letter-spacing:.08em}
+.step.active{color:var(--green);border-color:var(--bronze2);background:rgba(168,136,63,.08)}
+.step.active i{animation:pulse 1.8s ease-in-out infinite}
+.step.done{color:var(--ink)}
+.step.done i{background:var(--green);border-color:var(--green);color:#fff}
+.nextline{text-align:center;color:var(--ink2);font-size:14px;min-height:1.7em;margin:6px 0 2px}
+.nextline b{color:var(--green);font-weight:500}
+
+/* ── Vessel ───────────────────────────── */
+.vessel-wrap{padding:6px 0 0}
+.vessel{position:relative;width:min(100%,440px);aspect-ratio:400/440;margin:0 auto;container-type:inline-size;user-select:none;-webkit-user-select:none}
+/* 注意：容器本身不鎖定觸控，手機上從瓶子附近也能上下捲動頁面 */
+.vessel::before{content:"";position:absolute;inset:12% 8% 4%;border-radius:50%;background:radial-gradient(closest-side,var(--glow),transparent 72%);opacity:.26;filter:blur(26px);transition:opacity .8s;pointer-events:none}
+body[data-stage="3"] .vessel::before{opacity:.4}
+.vessel svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.vessel .glass{transition:filter .3s}
+.vessel.over .glass{filter:drop-shadow(0 0 14px var(--bronze2)) drop-shadow(0 0 3px var(--bronze))}
+.vessel.over .drophint{opacity:1}
+.drophint{position:absolute;inset:-2% 3% 0;border:2px dashed rgba(68,89,76,.6);border-radius:50%;opacity:0;transition:.2s;pointer-events:none;animation:spin 14s linear infinite}
+.vessel.shake{animation:shake .42s}
+.ring{transform-box:view-box;transform-origin:200px 255px;animation:spin 120s linear infinite}
+.wave{animation:wave 4s linear infinite}
+.lbl{font-size:12px;letter-spacing:.3em;fill:#6b6a5a;font-family:var(--sans)}
+.lbl.u{fill:#cfd6e8}
+.lbl2{font-size:7.5px;letter-spacing:.2em;fill:#9a9886}
+.lbl2.u{fill:#8e9ac0}
+.emptyhint{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;color:var(--ink2);font-size:13px;letter-spacing:.14em;pointer-events:none;transition:.4s}
+.emptyhint small{display:block;color:var(--ink3);letter-spacing:.05em;margin-top:2px}
+.vessel:not(.empty) .emptyhint{opacity:0}
+
+.row{position:absolute;left:0;right:0;display:flex;justify-content:center;gap:3%;transform:translateY(-50%);pointer-events:none}
+.row.top{top:39%}
+.row.bot{top:76.5%}
+.chip{
+  width:17%;aspect-ratio:1;border-radius:50%;display:grid;place-content:center;text-align:center;position:relative;
+  font-family:var(--serif);border:1.5px solid var(--c);color:var(--c);
+  background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--c) 20%,#fff),color-mix(in srgb,var(--c) 7%,#fffdf7) 78%);
+  box-shadow:0 4px 14px color-mix(in srgb,var(--c) 28%,transparent);
+}
+.chip b{font-size:8.6cqw;line-height:1;font-weight:700}
+.chip i{font-style:normal;font-size:2.7cqw;letter-spacing:.14em;margin-top:.5cqw;opacity:.9;font-family:var(--sans)}
+.ax-A{--c:var(--axA);--c2:var(--axA2)} .ax-B{--c:var(--axB);--c2:var(--axB2)} .ax-C{--c:var(--axC);--c2:var(--axC2)}
+.chip.shadow{
+  --c:var(--c2);border-style:dashed;--op:.78;opacity:var(--op);
+  background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--c) 26%,#2b3555),color-mix(in srgb,var(--c) 8%,#1b2238) 78%);
+  box-shadow:0 0 16px color-mix(in srgb,var(--c) 22%,transparent)
+}
+.chip.shadow::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid var(--c);opacity:.3;animation:breathe 3.2s ease-in-out infinite}
+.chip.enter{animation:sink .75s cubic-bezier(.2,.85,.3,1.15) both}
+.chip.shadow.enter{animation:surface 1.1s .35s cubic-bezier(.2,.8,.3,1) both}
+.chip.leave{animation:fade .26s ease-in forwards}
+
+.ripple{position:absolute;left:50%;top:58%;width:10%;aspect-ratio:1;border-radius:50%;border:2px solid var(--bronze);transform:translate(-50%,-50%) scale(.2);opacity:.9;animation:ripple .9s ease-out forwards;pointer-events:none}
+.spark{position:absolute;left:50%;top:58%;width:6px;height:6px;border-radius:50%;background:var(--bronze2);box-shadow:0 0 8px var(--bronze);animation:spark 1.3s ease-out forwards;pointer-events:none}
+
+/* ── Readout ──────────────────────────── */
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.pane{border:1px solid var(--line);border-radius:2px;padding:12px 16px}
+.pane h4{font-size:11.5px;letter-spacing:.28em;font-weight:500;margin-bottom:2px}
+.pane .code{font-weight:300;font-size:32px;letter-spacing:.14em;line-height:1.25;transition:.4s}
+.pane p{font-size:13.5px;min-height:2.7em}
+.pane.cs{background:#fffdf8}
+.pane.cs h4{color:var(--ink3)} .pane.cs .code{color:var(--green)} .pane.cs p{color:var(--ink2)} .pane.cs p em{font-style:normal;color:var(--ink);font-weight:500}
+.pane.un{background:linear-gradient(180deg,var(--deep),var(--deep2));border-color:#1a2238}
+.pane.un h4{color:#8e9ac0} .pane.un .code{color:#ebe8dc} .pane.un p{color:#b9c1d8} .pane.un p em{font-style:normal;color:#f4f1e4;font-weight:500}
+.controls{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;padding-bottom:16px}
+.status{font-size:13.5px;color:var(--ink2);min-height:1.6em;transition:.25s;flex:1}
+.status.warn{color:#b0482f}
+.undo{display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:2px;border:1px solid var(--green);background:#fffdf8;color:var(--green);font-size:14.5px;transition:.2s;flex:none}
+.undo:hover:not(:disabled){background:var(--green);color:#fff}
+.undo:disabled{opacity:.4;cursor:not-allowed}
+.note{margin:0 calc(var(--px)*-1);padding:11px var(--px);background:#eee7d2;border-top:1px solid #ddd2b3;font-size:12.5px;color:#7b7a68;line-height:1.7}
+.note b{color:#6e6a52;font-weight:500;margin-right:6px}
+
+/* ── Articles（橫向輪播） ─────────────── */
+.articles{margin-top:30px}
+.arthead{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.arthead h2{font-weight:400;font-size:20px;letter-spacing:.14em;display:flex;align-items:center;gap:10px}
+.arthead h2::before{content:"";width:24px;height:1px;background:var(--bronze)}
+.legend{display:flex;gap:6px;flex-wrap:wrap;font-size:12.5px;color:var(--ink3);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.legend em{font-style:normal;color:var(--bronze2)}
+.ctl{margin-left:auto;display:flex;align-items:center;gap:8px}
+.count{font-size:12.5px;color:var(--ink3);letter-spacing:.06em;margin-right:4px}
+.arthint{color:var(--ink3);font-size:14px;border:1px dashed var(--bronze2);border-radius:3px;padding:18px;text-align:center;background:rgba(255,253,248,.5)}
+.car{position:relative}
+.track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 2px 14px;margin:0 -2px;overscroll-behavior-x:contain}
+.track::-webkit-scrollbar{display:none}
+.cbtn{width:34px;height:34px;border-radius:50%;background:#fffdf8;border:1px solid var(--bronze2);color:var(--green);font-size:19px;line-height:1;display:grid;place-items:center;transition:.2s}
+.cbtn:hover:not(:disabled){background:var(--green);color:#fff;border-color:var(--green)}
+.cbtn:disabled{opacity:.32;cursor:default}
+.cbtn[hidden]{display:none}
+.card{
+  flex:0 0 calc((100% - 28px)/3);scroll-snap-align:start;
+  display:flex;flex-direction:column;gap:8px;padding:15px 16px 14px;border-radius:2px;text-decoration:none;
+  background:var(--paper2);border:1px solid var(--line);border-top:3px solid var(--g);
+  transition:transform .25s,border-color .25s,box-shadow .25s
+}
+.card.fresh{animation:rise .7s calc(var(--i)*110ms + .1s) cubic-bezier(.2,.8,.3,1) both}
+.card:hover{transform:translateY(-3px);border-color:var(--bronze2);border-top-color:var(--g);box-shadow:0 12px 28px rgba(60,70,40,.14)}
+.card.g1{--g:var(--g1)} .card.g2{--g:var(--g2)} .card.g3{--g:var(--g3)}
+.card .top{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.card .badge{order:1;font-size:11px;padding:1px 9px;border-radius:2px;background:var(--g);color:#fff;letter-spacing:.08em;white-space:nowrap}
+.card .tag{order:2;font-size:11px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap}
+.card h3{order:3;flex:1 0 100%}
+.card h3{font-weight:500;font-size:16px;line-height:1.5;color:var(--ink)}
+.card p{font-size:13.5px;color:var(--ink2);flex:1}
+.card .go{font-size:13px;color:var(--green);margin-top:2px}
+
+/* ── Toolbar ──────────────────────────── */
+.toolbar{
+  min-width:236px;position:sticky;top:92px;max-height:calc(100vh - 108px);overflow:auto;
+  background:var(--paper2);border:1px solid var(--line);border-radius:3px;padding:16px 14px 6px;box-shadow:0 8px 24px rgba(80,80,50,.07)
+}
+.toolbar>h2{font-weight:400;font-size:16px;letter-spacing:.3em;text-align:center;color:var(--green);margin-bottom:2px}
+.toolbar>.sub{font-size:12px;color:var(--ink3);text-align:center;margin-bottom:12px}
+.capstrip{display:none}
+.cat{margin-bottom:16px}
+.cat>h3{font-weight:500;font-size:14px;letter-spacing:.34em;color:var(--green);padding-bottom:6px;margin-bottom:10px;border-bottom:1px solid var(--bronze2);text-align:center}
+.subs{display:grid;gap:14px}
+.sub>h4{font-weight:400;font-size:12px;letter-spacing:.2em;color:var(--ink3);margin-bottom:8px;display:flex;align-items:center;gap:8px;justify-content:center}
+.sub>h4::before,.sub>h4::after{content:"";flex:1;height:1px;background:var(--line2)}
+.sub>h4.sp{display:none}
+.tpair{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:relative}
+.tpair::after{content:"⇄";position:absolute;left:50%;top:22px;transform:translate(-50%,-50%);font-size:13px;color:var(--ink3);pointer-events:none}
+.titem{display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px}
+.token{
+  width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:25px;font-weight:700;
+  color:var(--c);border:1.5px solid var(--c);touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+  background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--c) 18%,#fff),#fffdf8 78%);
+  box-shadow:0 3px 10px color-mix(in srgb,var(--c) 20%,transparent);transition:transform .2s,box-shadow .2s,opacity .3s,filter .3s;cursor:grab
+}
+.token:hover:not(.off){transform:translateY(-3px) scale(1.06);box-shadow:0 8px 18px color-mix(in srgb,var(--c) 38%,transparent)}
+.token:active:not(.off){cursor:grabbing}
+.token:focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
+.token.off{opacity:.38;filter:grayscale(.75);cursor:not-allowed;box-shadow:none}
+.token.nope{animation:shake .4s}
+.titem strong{font-size:13.5px;font-weight:500;line-height:1.3;color:var(--ink)}
+.titem strong small{display:block;font-size:10px;color:var(--ink3);letter-spacing:.06em;font-weight:400}
+.titem p{font-size:12px;color:var(--ink2);line-height:1.55}
+.titem .used{font-size:10.5px;color:var(--bronze);min-height:1.3em;letter-spacing:.1em}
+.ghost{
+  position:fixed;left:0;top:0;width:64px;height:64px;border-radius:50%;z-index:999;pointer-events:none;display:grid;place-items:center;
+  font-family:var(--serif);font-size:28px;font-weight:700;color:var(--c);border:1.5px solid var(--c);
+  background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--c) 22%,#fff),#fffdf8 80%);
+  box-shadow:0 12px 28px rgba(40,50,30,.3);will-change:transform
+}
+
+/* ── Keyframes ────────────────────────── */
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes wave{to{transform:translateX(-50px)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(168,136,63,.5)}50%{box-shadow:0 0 0 7px rgba(168,136,63,0)}}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.3}50%{transform:scale(1.08);opacity:.06}}
+@keyframes sink{0%{transform:translateY(-180%) scale(1.25);opacity:0}55%{transform:translateY(6%) scale(.96);opacity:1}100%{transform:none;opacity:1}}
+@keyframes surface{0%{transform:translateY(90%) scale(.5);opacity:0;filter:blur(10px)}100%{transform:none;opacity:var(--op);filter:blur(0)}}
+@keyframes fade{to{opacity:0;transform:scale(.7)}}
+@keyframes ripple{to{transform:translate(-50%,-50%) scale(9);opacity:0}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes spark{to{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}}
+
+/* ── Responsive ───────────────────────── */
+@media (max-width:1100px){
+  .search{display:none}
+  .card{flex-basis:calc((100% - 14px)/2)}
+}
+@media (max-width:860px){
+  .hd{padding:8px 16px;gap:12px}
+  .logo{width:52px;height:52px}
+  .burger{display:block}
+  .nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;background:#fcfbf7;padding:6px 14px 14px;border-bottom:1px solid var(--line2);gap:0;box-shadow:0 12px 20px rgba(50,60,40,.1)}
+  .nav.show{display:flex}
+  .nav>a,.dd>a{padding:12px 10px;border-bottom:1px solid var(--line2)}
+  .nav a.on::after{left:10px;right:auto;width:28px;bottom:6px}
+  .dd>a::after,.dd .menu{display:none}
+  .workshop{grid-template-columns:1fr;padding:22px 16px 250px;gap:0}
+  .lab{--px:12px;--py:14px}
+  .lab::before{inset:5px}
+  .steps{gap:4px;margin:0}
+  .step{flex-direction:column;text-align:center;gap:4px;padding:7px 4px}
+  .step small{display:none}
+  .step b{font-size:12.5px}
+  .readout{gap:8px}
+  .pane{padding:10px 12px}
+  .pane .code{font-size:25px}
+  .pane p{font-size:12.5px}
+  .controls{flex-direction:column-reverse;align-items:stretch;gap:8px}
+  .status{text-align:center}
+  .undo{justify-content:center}
+  .card{flex-basis:84%}
+  .rules{left:0;right:0;width:auto}
+  .help{position:static}
+  .help .rules{top:calc(100% + 12px)}
+  .totop{display:none}
+  .foot .in{padding-right:0}
+  .foot .soc{margin-left:0}
+
+  /* 工具欄 → 底部 dock */
+  .toolbar{
+    position:fixed;left:0;right:0;bottom:0;top:auto;min-width:0;max-height:none;z-index:80;overflow:visible;
+    border-radius:14px 14px 0 0;border-width:1px 0 0;border-top-color:var(--bronze2);padding:8px 10px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(252,250,244,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 -8px 30px rgba(50,60,40,.18)
+  }
+  .toolbar>h2,.toolbar>.sub{display:none}
+  .capstrip{display:block;font-size:12.5px;color:var(--ink2);text-align:center;padding:2px 6px 7px;min-height:3.3em;line-height:1.5}
+  .capstrip b{color:var(--green);font-weight:500}
+  .tgroups{display:grid;grid-template-columns:1fr 2fr;gap:6px}
+  .cat{margin:0;padding:5px 3px 6px;border:1px solid var(--line);border-radius:3px;background:#fffdf8}
+  .cat>h3{font-size:11px;letter-spacing:.24em;margin-bottom:4px;padding-bottom:3px}
+  .subs{grid-template-columns:1fr 1fr;gap:2px}
+  .sub>h4{font-size:10px;letter-spacing:.04em;margin-bottom:4px}
+  .sub>h4::before,.sub>h4::after{display:none}
+  .sub>h4.sp{display:block;visibility:hidden}
+  .tpair{gap:6px}
+  .tpair::after{display:none}
+  .token{width:44px;height:44px;font-size:20px}
+  .titem{gap:3px}
+  .titem strong{font-size:11.5px}
+  .titem strong small,.titem p{display:none}
+  .titem .used{font-size:9.5px;letter-spacing:0;min-height:1.2em}
+}
+@media (max-width:420px){
+  .token{width:40px;height:40px;font-size:18px}
+}
+/* ── 電腦版：整個工作區剛好一屏（瓶子 70%、文章垂直清單、右側 1/5 工具欄） ── */
+@media (min-width:1101px){
+  :root{--hh:150px}                                   /* 配合共用頁首高度 */
+  .hd{max-width:1440px}
+  .workshop{max-width:1440px;height:calc(100vh - var(--hh));min-height:668px;padding:16px 24px 18px;
+    grid-template-columns:minmax(0,1fr) minmax(236px,20%);gap:0 28px;align-items:stretch}
+  .stage-col{display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,46%);grid-template-rows:auto minmax(0,1fr);gap:12px 24px;min-height:0}
+  .head{grid-column:1/-1;grid-row:1;display:flex;align-items:center;gap:22px}
+  .articles{grid-column:1;grid-row:2}      /* 左：文章 */
+  .lab{grid-column:2;grid-row:2}           /* 中：瓶子（右側為元素工具欄） */
+  h1{font-size:32px;white-space:nowrap}
+  .lede{margin:0;font-size:13.5px;line-height:1.5;max-width:none;flex:1;color:var(--ink2)}
+
+  .lab{--px:20px;--py:14px;display:flex;flex-direction:column;min-height:0}
+  .steps{margin:0 2px}
+  .step{padding:5px 10px}
+  .step small{display:none}
+  .step i{width:24px;height:24px;font-size:12px}
+  .step b{font-size:13.5px}
+  .nextline{margin:4px 0 0;font-size:13px;min-height:1.5em}
+  .vessel-wrap{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:0}
+  .vessel{width:clamp(220px,calc((100vh - var(--hh))*.375),340px);margin:0}   /* 原 440px 的 70% */
+  .readout{margin-top:6px;gap:10px}
+  .pane{padding:8px 14px}
+  .pane h4{font-size:11px}
+  .pane .code{font-size:26px}
+  .pane p{font-size:12.5px;min-height:2.6em;line-height:1.55}
+  .controls{margin-top:8px;padding-bottom:10px}
+  .undo{padding:6px 18px;font-size:14px}
+  .note{padding:7px var(--px);font-size:12px}
+
+  /* 理論文章：垂直清單，一次全部看完（超出時才在清單內捲動） */
+  .articles{margin:0;min-height:0;display:flex;flex-direction:column;background:rgba(255,253,248,.6);border:1px solid var(--line);border-radius:3px;padding:14px 14px 10px}
+  .arthead{margin-bottom:8px;gap:4px 12px}
+  .arthead h2{font-size:18px}
+  .count{margin-right:0}
+  .car{flex:1;min-height:0}
+  .track{flex-direction:column;overflow-x:hidden;overflow-y:auto;scroll-snap-type:none;height:100%;padding:0 4px 4px 0;margin:0;gap:7px;scrollbar-width:thin}
+  .card{flex:0 0 auto;width:100%;gap:3px;padding:9px 12px;border-top:1px solid var(--line);border-left:3px solid var(--g)}
+  .card:hover{transform:translateX(3px);border-color:var(--bronze2);border-left-color:var(--g)}
+  .card .top{flex-wrap:nowrap;gap:10px}
+  .card h3{order:2;flex:1 1 auto;min-width:0;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .card .tag{order:3}
+  .card p{flex:none;font-size:12.5px;line-height:1.5;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden}
+  .card .go{display:none}
+  .articles .arthint{flex:1;display:grid;place-items:center}
+
+  /* 工具欄：固定在右側 1/5，與工作區等高 */
+  .toolbar{position:static;height:100%;max-height:none;overflow:auto;padding:12px 12px 2px}
+  .toolbar>h2{font-size:15px}
+  .toolbar>.sub{display:none}
+  .cat{margin-bottom:10px}
+  .cat>h3{font-size:13px;padding-bottom:4px;margin-bottom:8px}
+  .subs{gap:8px}
+  .sub>h4{margin-bottom:6px}
+  .token{width:50px;height:50px;font-size:22px}
+  .tpair::after{top:20px}
+  .titem{gap:3px}
+  .titem p{font-size:11.5px;line-height:1.5}
+  .titem .used{min-height:1.15em}
+}
+@media (min-width:1101px) and (max-height:820px){
+  .card p{-webkit-line-clamp:1;line-clamp:1}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body data-stage="0">
+{% include header.html %}
+
+
+
+<main class="workshop">
+  <section class="stage-col">
+    <div class="head">
+    <div class="titlebar">
+      <h1>鍊金工房</h1>
+      <span class="help" id="help">
+        <button type="button" aria-label="加入規則說明" aria-describedby="rules">?</button>
+        <div class="rules" id="rules" role="tooltip">
+          <h2>加入規則</h2>
+          <ol>
+            <li><b>第一階段：</b>先加入 <b>I</b> 或 <b>E</b>（態度）。在此之前，N、S、T、F 無法加入。</li>
+            <li><b>第二階段：</b>加入 N、S、T、F 其中之一，成為<b>主導功能</b>。</li>
+            <li><b>第三階段：</b>從<b>另一條</b>對立軸再加入一個，成為<b>輔助功能</b>。</li>
+            <li>三條對立軸 <b>I/E、N/S、T/F</b> 各只能加入一個，另一極會自動沉入無意識面。</li>
+            <li>元素預設放入<b>意識面</b>。可拖曳，也可直接點擊加入；按「復原」退回上一步。</li>
+          </ol>
+          <div class="ex">
+            <span>輔助功能須與主導功能性質不同：主導為 N／S（非理性）時，輔助只能是 T／F（理性），反之亦然。</span>
+            <span>功能疊依經典榮格 IIEE／EEII 排序：主導與輔助同屬一種態度，無意識面的弱勢、次弱勢功能則屬於相反的態度。</span>
+          </div>
+        </div>
+      </span>
+    </div>
+    <p class="lede">把心理功能的元素投入煉金容器：上方是意識面，下方是被壓抑的無意識面。每投入一種元素，對立的一極便會在深處浮現。</p>
+    </div>
+
+    <div class="lab">
+      <ol class="steps" id="steps">
+        <li class="step"><i>1</i><span><b>內傾／外傾</b><small>態度</small></span></li>
+        <li class="step"><i>2</i><span><b>主導功能</b><small>類型・弱勢功能</small></span></li>
+        <li class="step"><i>3</i><span><b>輔助功能</b><small>類型・次弱勢功能</small></span></li>
+      </ol>
+      <p class="nextline" id="next"></p>
+
+      <div class="vessel-wrap">
+        <div class="vessel empty" id="vessel">
+          <svg viewBox="0 0 400 440" aria-hidden="true">
+            <defs>
+              <clipPath id="flask"><path d="M178 30H222V91.5A165 165 0 1 1 178 91.5Z"/></clipPath>
+              <linearGradient id="gTop" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" style="stop-color:var(--glow);stop-opacity:.03"/>
+                <stop offset="1" style="stop-color:var(--glow);stop-opacity:.32"/>
+              </linearGradient>
+              <linearGradient id="gBot" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#2d3858"/>
+                <stop offset="1" stop-color="#141a2e"/>
+              </linearGradient>
+              <radialGradient id="gDeep" cx=".5" cy=".9" r=".62">
+                <stop offset="0" style="stop-color:var(--glow);stop-opacity:.5"/>
+                <stop offset="1" style="stop-color:var(--glow);stop-opacity:0"/>
+              </radialGradient>
+            </defs>
+
+            <g class="ring" fill="none" stroke="#a8883f" opacity=".5">
+              <circle cx="200" cy="255" r="186" stroke-width=".8" stroke-dasharray="2 7"/>
+              <circle cx="200" cy="255" r="193" stroke-width=".5"/>
+              <g id="ticks" stroke-width="1"></g>
+            </g>
+
+            <g class="glass">
+              <g clip-path="url(#flask)">
+                <rect x="0" y="0" width="400" height="255" fill="#fffdf6"/>
+                <rect x="0" y="0" width="400" height="255" fill="url(#gTop)"/>
+                <rect x="0" y="255" width="400" height="200" fill="url(#gBot)"/>
+                <rect x="0" y="255" width="400" height="200" fill="url(#gDeep)"/>
+                <g class="wave"><path id="wavePath" d="" fill="none" stroke="#c9b27a" stroke-width="1.6" opacity=".95"/></g>
+              </g>
+              <path d="M178 30H222V91.5A165 165 0 1 1 178 91.5Z" fill="none" stroke="#a8883f" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M168 24H232" stroke="#a8883f" stroke-width="4" stroke-linecap="round"/>
+              <path d="M100 196A122 122 0 0 1 150 140" fill="none" stroke="#c9b27a" stroke-opacity=".55" stroke-width="3" stroke-linecap="round"/>
+            </g>
+
+            <text class="lbl lbl2" x="58" y="228">CONSCIOUS</text>
+            <text class="lbl" x="58" y="245">意識面</text>
+            <text class="lbl u" x="58" y="279">無意識面</text>
+            <text class="lbl lbl2 u" x="58" y="293">UNCONSCIOUS</text>
+          </svg>
+          <div class="drophint"></div>
+          <div class="emptyhint">將元素拖曳至此<small>或點擊右側元素加入</small></div>
+          <div class="row top" id="rowTop"></div>
+          <div class="row bot" id="rowBot"></div>
+        </div>
+      </div>
+
+      <div class="readout">
+        <div class="pane cs"><h4>意識面</h4><div class="code" id="cCode">—</div><p id="cDesc"></p></div>
+        <div class="pane un"><h4>無意識面</h4><div class="code" id="uCode">—</div><p id="uDesc"></p></div>
+      </div>
+      <div class="controls">
+        <div class="status" id="status" aria-live="polite"></div>
+        <button class="undo" id="undo" type="button" disabled>↶ 復原</button>
+      </div>
+      <div class="note"><b>聲明：</b>本工具僅輔助理解理論，並非人格測驗，組合結果不代表你的類型。</div>
+    </div>
+
+    <section class="articles" id="articles" aria-live="polite"></section>
+  </section>
+
+  <aside class="toolbar" id="toolbar" aria-label="元素工具欄">
+    <h2>元素</h2>
+    <p class="sub">拖曳至容器，或點擊加入</p>
+    <div class="capstrip" id="capstrip"></div>
+    <div class="tgroups" id="tgroups"></div>
+  </aside>
+</main>
+{% include footer.html %}
+
+
+<script>
+/* ───────── 資料 ───────── */
+const POST_LOOKUP = {};
+{% assign alchemy_post_ids = "1471,1487,1537,1545,1551,1557,1638,1657,1669,1681,1693,1705,1717,1729,1941,3290,3298,3769,3787,3794,3825" | split: "," %}
+{% for post in site.posts %}
+{% assign alchemy_post_id = post.path | split: "post-" | last | remove: ".md" %}
+{% if alchemy_post_ids contains alchemy_post_id %}
+POST_LOOKUP[{{ alchemy_post_id | jsonify }}] = {title:{{ post.title | jsonify }},excerpt:{{ post.excerpt | strip_html | normalize_whitespace | truncate: 145 | jsonify }},href:{{ post.url | relative_url | jsonify }}};
+{% endif %}
+{% endfor %}
+const AX={A:'內傾／外傾',B:'直覺／感覺',C:'邏輯／情感'};
+const EL={
+  I:{zh:'內傾',en:'Introversion',axis:'A',opp:'E',cap:'力比多向內，以主體內在為準。'},
+  E:{zh:'外傾',en:'Extraversion',axis:'A',opp:'I',cap:'力比多向外，以客體外境為準。'},
+  N:{zh:'直覺',en:'Intuition',axis:'B',opp:'S',cap:'領會可能性與潛在脈絡，憑預感把握整體。'},
+  S:{zh:'感覺',en:'Sensation',axis:'B',opp:'N',cap:'覺察具體事實與細節，如實把握當下現實。'},
+  T:{zh:'邏輯',en:'Thinking',axis:'C',opp:'F',cap:'以概念與推理處理經驗，講求對錯與條理。'},
+  F:{zh:'情感',en:'Feeling',axis:'C',opp:'T',cap:'以價值與好惡衡量經驗，看重可貴與否。'}
+};
+/* 工具欄：兩大分類「態度」「功能」，功能再分理性（TF）與非理性（NS） */
+const CATS=[
+  {name:'態度',subs:[{name:null,els:['I','E']}]},
+  {name:'功能',subs:[{name:'理性功能',els:['T','F']},{name:'非理性功能',els:['N','S']}]}
+];
+const TYPE_POST={ET:1638,EF:1657,ES:1669,EN:1681,IT:1693,IF:1705,IS:1717,IN:1729};
+const AXES=[
+  {id:3794,t:'從社會語言學看Ti-Fe軸',a:'Ti',b:'Fe',sum:'內傾邏輯（Ti）與外傾情感（Fe）構成一對功能軸。'},
+  {id:3825,t:'從人權與法治看Fi-Te軸',a:'Fi',b:'Te',sum:'內傾情感（Fi）與外傾邏輯（Te）構成一對功能軸。'},
+  {id:3787,t:'從李小龍Be Water看Ni-Se軸',a:'Ni',b:'Se',sum:'內傾直覺（Ni）與外傾感覺（Se）構成一對功能軸。'},
+  {id:3769,t:'從量子物理學看Si-Ne軸',a:'Si',b:'Ne',sum:'內傾感覺（Si）與外傾直覺（Ne）構成一對功能軸。'}
+];
+const GRP_NAME={IJ:'內傾理性主導（Ti／Fi）',IP:'內傾非理性主導（Ni／Si）',EJ:'外傾理性主導（Te／Fe）',EP:'外傾非理性主導（Ne／Se）'};
+const GROUPS=['一｜態度文章','二｜主導與弱勢','三｜輔助與次弱勢'];   // 依使用者指定優先順序顯示
+
+/* ───────── 狀態 ───────── */
+let hist=[];           // 依序加入的元素，最多 3 個
+let busy=false;
+let prevHrefs=[];
+const $=s=>document.querySelector(s);
+const vessel=$('#vessel'),rowTop=$('#rowTop'),rowBot=$('#rowBot'),statusEl=$('#status'),undoBtn=$('#undo');
+
+const fn=(att,f)=>f+(att==='I'?'i':'e');
+const axisOf=f=>AXES.find(x=>x.a===f||x.b===f);
+
+/* 經典榮格功能疊：IIEE／EEII
+   主導與輔助同屬一種態度（例：Fi、Ni），
+   無意識面的弱勢、次弱勢則是相反的態度（例：Te、Se）。 */
+function derive(){
+  const [a,d,x]=hist, s={len:hist.length};
+  if(a){s.att=a;s.attOpp=EL[a].opp}
+  if(d){
+    s.dom=d; s.domFn=fn(a,d); s.inf=fn(EL[a].opp,EL[d].opp);
+    s.code2=a+d; s.code2o=EL[a].opp+EL[d].opp;
+    s.grp=a+(EL[d].axis==='C'?'J':'P');
+    s.typeName=EL[a].zh+EL[d].zh;
+  }
+  if(x){
+    s.aux=x; s.auxFn=fn(a,x); s.sec=fn(EL[a].opp,EL[x].opp);
+    s.code3=a+d+x; s.code3o=EL[a].opp+EL[d].opp+EL[x].opp;
+  }
+  return s;
+}
+
+function check(el){
+  const n=hist.length, ax=EL[el].axis;
+  if(n>=3) return {ok:false,reason:'三個階段已完成。按「復原」可退回上一步重新調配。'};
+  if(hist.some(h=>EL[h].axis===ax)) return {ok:false,reason:`「${AX[ax]}」這條對立軸已經加入，不能重複。`};
+  if(n===0 && ax!=='A') return {ok:false,reason:'須先加入 I 或 E，之後才能加入 N、S、T、F。'};
+  return {ok:true};
+}
+
+/* ───────── 渲染 ───────── */
+function chip(el,i,pos,isNew){
+  const e=EL[el];
+  return `<div class="chip ax-${e.axis} ${pos==='bot'?'shadow':''} ${isNew?'enter':''}" data-idx="${i}"><b>${el}</b><i>${e.zh}</i></div>`;
+}
+function renderVessel(newIdx){
+  rowTop.innerHTML=hist.map((el,i)=>chip(el,i,'top',i===newIdx)).join('');
+  rowBot.innerHTML=hist.map((el,i)=>chip(EL[el].opp,i,'bot',i===newIdx)).join('');
+  vessel.classList.toggle('empty',hist.length===0);
+}
+
+function renderTokens(){
+  document.querySelectorAll('.token').forEach(t=>{
+    const el=t.dataset.el, r=check(el);
+    t.classList.toggle('off',!r.ok);
+    t.setAttribute('aria-disabled',String(!r.ok));
+    t.title=r.ok?'':r.reason;
+    const used=t.closest('.titem').querySelector('.used');
+    used.textContent=hist.includes(el)?'● 意識':(hist.some(h=>EL[h].opp===el)?'○ 無意識':'');
+  });
+}
+
+function renderSteps(){
+  const n=hist.length;
+  document.querySelectorAll('.step').forEach((li,i)=>{
+    li.classList.toggle('done',i<n);
+    li.classList.toggle('active',i===n);
+    li.querySelector('i').textContent=i<n?'✓':String(i+1);
+  });
+  const s=derive();
+  let msg;
+  if(n===0) msg='下一步：投入 <b>I</b> 或 <b>E</b>，決定意識的態度。';
+  else if(n===1) msg='下一步：從 <b>N／S／T／F</b> 中投入一個，成為主導功能。';
+  else if(n===2){
+    const rest=EL[hist[1]].axis==='B'?'T／F':'N／S';
+    msg=`下一步：從另一條軸（<b>${rest}</b>）投入一個，成為輔助功能。`;
+  } else msg=`煉成完畢：<b>${s.code3}</b>。可按「復原」重新調配。`;
+  $('#next').innerHTML=msg;
+}
+
+function renderReadout(){
+  const s=derive();
+  let c={code:'—',d:'尚未投入元素'}, u={code:'—',d:'等待浮現'};
+  if(s.len===1){
+    c={code:s.att,d:`<em>${EL[s.att].zh}態度</em>`};
+    u={code:s.attOpp,d:`<em>${EL[s.attOpp].zh}態度</em>・被壓抑`};
+  }else if(s.len===2){
+    c={code:s.code2,d:`<em>${s.typeName}主導（${s.domFn}）</em><br>${s.grp}・${GRP_NAME[s.grp]}`};
+    u={code:s.code2o,d:`<em>弱勢功能 ${s.inf}</em><br>${EL[s.attOpp].zh}${EL[EL[s.dom].opp].zh}・被壓抑`};
+  }else if(s.len===3){
+    c={code:s.code3,d:`<em>${s.domFn} 主導，${s.auxFn} 輔助</em><br>${s.grp}・${GRP_NAME[s.grp]}`};
+    u={code:s.code3o,d:`<em>弱勢 ${s.inf}，次弱勢 ${s.sec}</em><br>與意識面逐一對立`};
+  }
+  $('#cCode').textContent=c.code; $('#cDesc').innerHTML=c.d;
+  $('#uCode').textContent=u.code; $('#uDesc').innerHTML=u.d;
+}
+
+/* 文章：態度 → 類型、主導／弱勢與對軸 → 輔助／次弱勢與對軸，逐階段累積。 */
+const FUNCTION_POST={T:1537,F:1545,S:1551,N:1557};
+function articleEntry(id,g,tag){const post=POST_LOOKUP[String(id)];if(!post)return null;return {g,tag,t:post.title,p:post.excerpt,href:post.href}}
+function articleList(s){
+  if(!s.len)return null;const list=[];
+  list.push(articleEntry(s.att==='I'?1487:1471,0,`${EL[s.att].zh}態度`));
+  if(s.len>=2){
+    list.push(articleEntry(TYPE_POST[s.code2],1,`${EL[s.att].zh}${EL[s.dom].zh}主導類型`));
+    list.push(articleEntry(FUNCTION_POST[s.dom],1,`${EL[s.att].zh}${EL[s.dom].zh}主導功能 ${s.domFn}`));
+    list.push(articleEntry(1941,1,`${EL[EL[s.att].opp].zh}${EL[EL[s.dom].opp].zh}弱勢功能 ${s.inf}`));
+    const a1=axisOf(s.domFn);if(a1)list.push(articleEntry(a1.id,1,`${s.domFn}–${s.inf} 主導／弱勢對軸`));
+  }
+  if(s.len>=3){
+    list.push(articleEntry(3290,2,`${EL[s.att].zh}${EL[s.aux].zh}輔助功能 ${s.auxFn}`));
+    list.push(articleEntry(3298,2,`${EL[EL[s.att].opp].zh}${EL[EL[s.aux].opp].zh}次弱勢功能 ${s.sec}`));
+    const a2=axisOf(s.auxFn);if(a2)list.push(articleEntry(a2.id,2,`${s.auxFn}–${s.sec} 輔助／次弱勢對軸`));
+  }
+  return list.filter(Boolean);
+}
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]))}
+function renderArticles(){
+  const box=$('#articles'), list=articleList(derive());
+  if(!list){box.innerHTML='<div class="arthint">投入第一個元素後，相關的理論文章會在容器下方浮現。</div>';prevHrefs=[];return}
+  let fi=0;
+  const cards=list.map(c=>{
+    const fresh=!prevHrefs.includes(c.href);
+    return `<a class="card g${c.g+1} ${fresh?'fresh':''}" style="--i:${fresh?fi++:0}" href="${c.href}" target="_blank" rel="noopener"><div class="top"><span class="badge">${GROUPS[c.g]}</span><span class="tag">${escapeHtml(c.tag)}</span><h3>${escapeHtml(c.t)}</h3></div><p>${escapeHtml(c.p)}</p><span class="go">閱讀全文 →</span></a>`;
+  }).join('');
+  const present=[...new Set(list.map(c=>c.g))];
+  const legend=present.map(g=>`<span style="--c:var(--g${g+1})"><i></i>${GROUPS[g]}</span>`).join('<em>›</em>');
+  box.innerHTML=`<div class="arthead"><h2>延伸閱讀</h2><div class="legend">${legend}</div>
+    <div class="ctl"><span class="count" id="count"></span><button class="cbtn prev" type="button" aria-label="上一組文章">‹</button><button class="cbtn next" type="button" aria-label="下一組文章">›</button></div></div>
+    <div class="car"><div class="track" id="track">${cards}</div></div>`;
+  prevHrefs=list.map(c=>c.href);
+  setupCarousel();
+}
+
+function setupCarousel(){
+  const track=$('#track'); if(!track) return;
+  const prev=$('.cbtn.prev'), next=$('.cbtn.next'), count=$('#count');
+  const upd=()=>{
+    const over=track.scrollWidth>track.clientWidth+4;
+    prev.hidden=next.hidden=!over;   // 內容放得下時不顯示箭頭
+    prev.disabled=track.scrollLeft<4;
+    next.disabled=track.scrollLeft+track.clientWidth>=track.scrollWidth-4;
+    const cards=[...track.children], tr=track.getBoundingClientRect();
+    let first=cards.findIndex(c=>c.getBoundingClientRect().right>tr.left+12);
+    let last=-1; cards.forEach((c,i)=>{if(c.getBoundingClientRect().left<tr.right-12) last=i});
+    count.textContent=over?`${first+1}–${last+1} / ${cards.length}`:`${cards.length} 篇`;
+  };
+  const go=dir=>track.scrollBy({left:dir*track.clientWidth*0.92,behavior:'smooth'});
+  prev.addEventListener('click',()=>go(-1));
+  next.addEventListener('click',()=>go(1));
+  track.addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});
+  requestAnimationFrame(upd);
+}
+addEventListener('resize',()=>{const t=$('#track');if(t) t.dispatchEvent(new Event('scroll'))});
+
+function render(newIdx=-1){
+  document.body.dataset.stage=hist.length;
+  renderVessel(newIdx); renderTokens(); renderSteps(); renderReadout(); renderArticles();
+  undoBtn.disabled=hist.length===0;
+}
+
+/* ───────── 訊息與特效 ───────── */
+let stTimer;
+function say(msg,warn=false){
+  statusEl.textContent=msg; statusEl.classList.toggle('warn',warn);
+  clearTimeout(stTimer);
+  if(warn) stTimer=setTimeout(()=>{statusEl.classList.remove('warn');statusEl.textContent=''},3200);
+}
+function ripple(){
+  const r=document.createElement('span'); r.className='ripple';
+  vessel.appendChild(r); r.addEventListener('animationend',()=>r.remove());
+}
+function burst(){
+  for(let i=0;i<18;i++){
+    const s=document.createElement('span'); s.className='spark';
+    const ang=Math.random()*Math.PI*2, d=90+Math.random()*130;
+    s.style.setProperty('--x',Math.cos(ang)*d+'px'); s.style.setProperty('--y',Math.sin(ang)*d+'px');
+    s.style.animationDelay=(Math.random()*.25)+'s';
+    vessel.appendChild(s); s.addEventListener('animationend',()=>s.remove());
+  }
+}
+function reject(reason,tokenEl){
+  vessel.classList.remove('shake'); void vessel.offsetWidth; vessel.classList.add('shake');
+  setTimeout(()=>vessel.classList.remove('shake'),450);
+  if(tokenEl){tokenEl.classList.remove('nope');void tokenEl.offsetWidth;tokenEl.classList.add('nope');setTimeout(()=>tokenEl.classList.remove('nope'),420)}
+  say(reason,true);
+}
+
+/* ───────── 加入 / 復原 ───────── */
+function add(el){
+  if(busy) return;
+  const r=check(el);
+  if(!r.ok){reject(r.reason);return}
+  busy=true; hist.push(el);
+  render(hist.length-1); ripple();
+  const s=derive();
+  if(s.len===1) say(`已投入 ${el}（${EL[el].zh}）；${EL[el].opp} 沉入無意識面。`);
+  else if(s.len===2) say(`主導功能 ${s.domFn}：${s.code2} 在意識面成形，${s.code2o} 於無意識面浮現。`);
+  else {say(`煉成：意識面 ${s.code3}，無意識面 ${s.code3o}。`);burst()}
+  setTimeout(()=>busy=false,520);
+}
+function undo(){
+  if(busy||!hist.length) return;
+  busy=true;
+  const idx=hist.length-1;
+  vessel.querySelectorAll(`.chip[data-idx="${idx}"]`).forEach(c=>c.classList.add('leave'));
+  setTimeout(()=>{hist.pop();render();say('已復原上一步。');busy=false},270);
+}
+undoBtn.addEventListener('click',undo);
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();undo()}
+  if(e.key==='Escape') closeHelp();
+});
+
+/* ───────── 工具欄 ───────── */
+$('#tgroups').innerHTML=CATS.map(c=>`
+  <div class="cat"><h3>${c.name}</h3><div class="subs">`+c.subs.map(sub=>`
+    <div class="sub"><h4 ${sub.name?'':'class="sp"'}>${sub.name||'・'}</h4><div class="tpair">`+sub.els.map(k=>{const e=EL[k];return `
+      <div class="titem">
+        <button class="token ax-${e.axis}" type="button" data-el="${k}" aria-label="${e.zh} ${k}：${e.cap}">${k}</button>
+        <strong>${e.zh}<small>${e.en}</small></strong>
+        <p>${e.cap}</p>
+        <span class="used"></span>
+      </div>`}).join('')+`</div></div>`).join('')+`</div></div>`).join('');
+
+const capstrip=$('#capstrip');
+const defaultCap='拖曳元素到容器，或直接點擊加入。';
+function showCap(el){const e=EL[el];capstrip.innerHTML=`<b>${el} ${e.zh}</b>：${e.cap}`}
+capstrip.textContent=defaultCap;
+
+/* 拖曳（Pointer Events：滑鼠與觸控共用；只有元素本身會攔截觸控，容器與頁面仍可正常捲動） */
+let drag=null;
+function overVessel(x,y){
+  const r=vessel.getBoundingClientRect(), m=14;
+  return x>=r.left-m&&x<=r.right+m&&y>=r.top-m&&y<=r.bottom+m;
+}
+document.querySelectorAll('.token').forEach(t=>{
+  const el=t.dataset.el;
+  t.addEventListener('pointerenter',()=>showCap(el));
+  t.addEventListener('focus',()=>showCap(el));
+  t.addEventListener('pointerdown',e=>{
+    if(e.pointerType==='mouse'&&e.button!==0) return;
+    showCap(el);
+    const r=check(el);
+    if(!r.ok){e.preventDefault();reject(r.reason,t);return}
+    e.preventDefault();
+    drag={el,id:e.pointerId,sx:e.clientX,sy:e.clientY,moved:false,ghost:null,touch:e.pointerType!=='mouse'};
+    try{t.setPointerCapture(e.pointerId)}catch(_){}
+  });
+  t.addEventListener('pointermove',e=>{
+    if(!drag||e.pointerId!==drag.id) return;
+    if(!drag.moved&&Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)>6){
+      drag.moved=true;
+      const g=document.createElement('div');
+      g.className='ghost ax-'+EL[el].axis; g.textContent=el;
+      document.body.appendChild(g); drag.ghost=g; t.style.opacity='.4';
+    }
+    if(drag.moved){
+      const oy=drag.touch?-52:0;
+      drag.ghost.style.transform=`translate(${e.clientX-32}px,${e.clientY-32+oy}px) scale(1.08)`;
+      vessel.classList.toggle('over',overVessel(e.clientX,e.clientY+oy));
+    }
+  });
+  const end=(e,commit)=>{
+    if(!drag||e.pointerId!==drag.id) return;
+    const d=drag; drag=null;
+    t.style.opacity='';
+    if(d.ghost) d.ghost.remove();
+    vessel.classList.remove('over');
+    if(!commit) return;
+    if(!d.moved) add(d.el);                                   // 點擊
+    else if(overVessel(e.clientX,e.clientY+(d.touch?-52:0))) add(d.el);   // 拖入
+    else say('放開位置不在容器內，請再試一次。',true);
+  };
+  t.addEventListener('pointerup',e=>end(e,true));
+  t.addEventListener('pointercancel',e=>end(e,false));
+  t.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();const r=check(el);r.ok?add(el):reject(r.reason,t)}
+  });
+});
+
+/* ───────── 問號說明、導覽選單、回到頂部 ───────── */
+const help=$('#help'), helpBtn=help.querySelector('button');
+function closeHelp(){help.classList.remove('open')}
+helpBtn.addEventListener('click',e=>{
+  if(matchMedia('(hover:hover)').matches) return;   // 桌面：只靠 hover
+  help.classList.toggle('open'); e.stopPropagation();
+});
+helpBtn.addEventListener('keydown',e=>{
+  if(e.key==='Enter'||e.key===' '){e.preventDefault();help.classList.toggle('open')}
+});
+helpBtn.addEventListener('blur',closeHelp);
+function placeArrow(){   // 手機版：讓氣泡小箭頭對準問號
+  const tb=document.querySelector('.titlebar').getBoundingClientRect(), hb=helpBtn.getBoundingClientRect();
+  $('#rules').style.setProperty('--arrow',(hb.left-tb.left+hb.width/2-6)+'px');
+}
+addEventListener('resize',placeArrow);
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(placeArrow);
+placeArrow();
+document.addEventListener('click',e=>{if(!help.contains(e.target)) closeHelp()});
+
+/* ───────── 初始化：容器裝飾 ───────── */
+(function(){
+  let d='M-100 255'; for(let i=0;i<24;i++) d+=(i%2?' t25 0':' q12.5 -7 25 0'); // 水面波紋
+  $('#wavePath').setAttribute('d',d);
+  let t=''; for(let i=0;i<36;i++){const a=i*10*Math.PI/180,r1=186,r2=i%3===0?198:192;
+    t+=`<line x1="${200+Math.cos(a)*r1}" y1="${255+Math.sin(a)*r1}" x2="${200+Math.cos(a)*r2}" y2="${255+Math.sin(a)*r2}"/>`}
+  $('#ticks').innerHTML=t;
+})();
+render();
+</script>
+</body>
+</html>
