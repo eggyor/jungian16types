@@ -1018,6 +1018,22 @@ body:has(.quiz-landing) .quiz-landing-hero .lead{display:inline-block;margin:0;p
   }
 }
 
+/* About page: gentle reveal as major content sections enter the viewport. */
+@media (prefers-reduced-motion: no-preference) {
+  body.about-reveal-ready .about-reveal {
+    opacity: 0;
+    translate: 0 18px;
+    transition: opacity 560ms cubic-bezier(.22,.61,.36,1), translate 560ms cubic-bezier(.22,.61,.36,1);
+  }
+  body.about-reveal-ready .about-reveal.is-visible {
+    opacity: 1;
+    translate: 0 0;
+  }
+  body.about-reveal-ready .about-shop-grid > .shop-panel {
+    transition-delay: 90ms;
+  }
+}
+
 /* Desktop internal-link preview: a small gilded-paper annotation card. */
 .article-link-preview {
   position: fixed;
