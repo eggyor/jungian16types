@@ -21,10 +21,11 @@ description: '入門認識經典榮格心理類型學的基本概念，整理內
   {% assign article_count = 0 %}
   {% for post in sorted_posts %}{% if post.categories contains "理論文章" and post.subcategory == "基礎概念101" %}{% assign article_count = article_count | plus: 1 %}{% endif %}{% endfor %}
   <p class="count">共 {{ article_count }} 篇文章</p>
+  {% assign first_card_image = true %}
   {% if article_count > 0 %}<div class="grid">
     {% for post in sorted_posts %}{% if post.categories contains "理論文章" and post.subcategory == "基礎概念101" %}
       <a class="card" href="{{ post.url | relative_url }}">
-        <div class="visual">{% if post.cover %}<img src="{{ post.cover | relative_url | escape }}" alt="{{ post.cover_alt | default: post.title | escape }}" loading="lazy">{% else %}<div class="placeholder" aria-hidden="true"></div>{% endif %}</div>
+        <div class="visual">{% if post.cover %}{% assign card_cover = post.cover_thumb | default: post.cover %}{% if first_card_image %}<img src="{{ card_cover | relative_url | escape }}" alt="{{ post.cover_alt | default: post.title | escape }}" loading="eager" fetchpriority="high" decoding="async">{% assign first_card_image = false %}{% else %}<img src="{{ card_cover | relative_url | escape }}" alt="{{ post.cover_alt | default: post.title | escape }}" loading="lazy" decoding="async">{% endif %}{% else %}<div class="placeholder" aria-hidden="true"></div>{% endif %}</div>
         <div class="title-panel"><h2>{{ post.title | escape }}</h2></div>
       </a>
     {% endif %}{% endfor %}
