@@ -51,19 +51,35 @@ const functions=['Te','Fe','Ne','Se','Ti','Fi','Ni','Si'];
 const app=document.getElementById('quiz-app');
 const siteRoot=new URL(document.currentScript.src).pathname.replace(/assets\/js\/quiz\.js$/,'');
 let stage=1,branch='',firstAnswers=Array(questionSets.ie.length).fill(0),secondQuestions=[],secondAnswers=[];
+let quizStarted=false,quizFinished=false,confirmedLeave=false;
+const leaveWarning='離開後，這次測驗的作答進度不會保留，必須重新填寫。確定要離開嗎？';
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function fmt(n){return n>0?'+'+n:String(n);}
 function activeAnswers(){return stage===1?firstAnswers:secondAnswers;}
 function makeCard(pair,index,value){const label=stage===1?'第一部分第'+(index+1)+'題':'第二部分第'+(index+1)+'題';return '<article class="quiz-card"><div class="quiz-card-head"><p class="quiz-question">哪一邊更能描述你？</p><output class="quiz-value" aria-live="polite">'+fmt(value)+'</output></div><div class="quiz-answer-row"><p class="quiz-side left">'+esc(pair[0])+'</p><div class="quiz-range-area"><div class="quiz-range-wrap"><input class="quiz-range" type="range" min="-4" max="4" step="1" value="'+value+'" data-index="'+index+'" aria-label="'+label+'：由較認同左側調整至較認同右側"></div><div class="quiz-scale" aria-hidden="true"><span>−4</span><span class="zero">0</span><span>+4</span></div></div><p class="quiz-side right">'+esc(pair[1])+'</p></div></article>';}
 function render(){const pairs=stage===1?questionSets.ie:secondQuestions;const answers=activeAnswers();const title=stage===1?'第一部分｜內傾與外傾':'第二部分｜'+(branch==='E'?'外傾分支':branch==='I'?'內傾分支':'內外傾混合分支');const hint=stage===1?'左側偏內傾（I），右側偏外傾（E）。八題合計後會決定下一部分。':'請逐題選擇較符合自己的描述。左側計負分，右側計正分；預設 0 可保留為中間值。';app.innerHTML='<div class="quiz-progress"><strong>第 '+stage+' 部分，共 2 部分</strong><span>'+pairs.length+' 題</span></div><div class="progress-track" aria-hidden="true"><div class="progress-fill" style="width:'+(stage===1?'50':'100')+'%"></div></div><h2 class="quiz-group-title">'+title+'</h2><p class="quiz-instruction">'+hint+'</p><form id="quiz-form" novalidate>'+pairs.map((p,i)=>makeCard(p,i,answers[i])).join('')+'<div class="quiz-actions">'+(stage===2?'<button class="quiz-btn secondary" type="button" id="back-button">返回第一部分</button>':'<span></span>')+'<button class="quiz-btn" type="submit">'+(stage===1?'繼續作答':'查看測驗結果')+'</button></div></form><p class="quiz-message">本測驗提供自我探索參考，結果不應視為最終類型判斷。</p>';
-app.querySelectorAll('.quiz-range').forEach(input=>input.addEventListener('input',()=>{const i=Number(input.dataset.index);answers[i]=Number(input.value);input.closest('.quiz-card').querySelector('output').textContent=fmt(answers[i]);}));
+app.querySelectorAll('.quiz-range').forEach(input=>input.addEventListener('input',()=>{const i=Number(input.dataset.index);answers[i]=Number(input.value);quizStarted=true;input.closest('.quiz-card').querySelector('output').textContent=fmt(answers[i]);}));
 const back=app.querySelector('#back-button');if(back)back.addEventListener('click',()=>{stage=1;render();window.scrollTo({top:0,behavior:'smooth'});});
-app.querySelector('#quiz-form').addEventListener('submit',ev=>{ev.preventDefault();if(stage===1){const total=firstAnswers.reduce((a,b)=>a+b,0);branch=total>4?'E':total< -4?'I':'M';secondQuestions=branch==='E'?[...questionSets.ETF,...questionSets.ENS]:branch==='I'?[...questionSets.ITF,...questionSets.INS]:[...questionSets.ETF.slice(0,3),...questionSets.ENS.slice(0,3),...questionSets.ITF.slice(0,3),...questionSets.INS.slice(0,3)];secondAnswers=Array(secondQuestions.length).fill(0);stage=2;render();window.scrollTo({top:0,behavior:'smooth'});}else finish();});}
+app.querySelector('#quiz-form').addEventListener('submit',ev=>{ev.preventDefault();if(stage===1){quizStarted=true;const total=firstAnswers.reduce((a,b)=>a+b,0);branch=total>4?'E':total< -4?'I':'M';secondQuestions=branch==='E'?[...questionSets.ETF,...questionSets.ENS]:branch==='I'?[...questionSets.ITF,...questionSets.INS]:[...questionSets.ETF.slice(0,3),...questionSets.ENS.slice(0,3),...questionSets.ITF.slice(0,3),...questionSets.INS.slice(0,3)];secondAnswers=Array(secondQuestions.length).fill(0);stage=2;render();window.scrollTo({top:0,behavior:'smooth'});}else finish();});}
 function positive(n){return Math.max(0,n);}
 function getScores(){const totals={ETF:0,ENS:0,ITF:0,INS:0};let groups;if(branch==='E')groups=Array(6).fill('ETF').concat(Array(6).fill('ENS'));else if(branch==='I')groups=Array(6).fill('ITF').concat(Array(6).fill('INS'));else groups=['ETF','ETF','ETF','ENS','ENS','ENS','ITF','ITF','ITF','INS','INS','INS'];secondAnswers.forEach((n,i)=>{totals[groups[i]]+=n;});return {totals,scores:{Te:positive(-totals.ETF),Fe:positive(totals.ETF),Se:positive(-totals.ENS),Ne:positive(totals.ENS),Ti:positive(-totals.ITF),Fi:positive(totals.ITF),Si:positive(-totals.INS),Ni:positive(totals.INS)}};}
 function deriveType(dom,aux){const perceptive=['Se','Si','Ne','Ni'],judging=['Te','Ti','Fe','Fi'];const p=perceptive.includes(dom)?dom:aux;const j=judging.includes(dom)?dom:aux;return (['Te','Fe','Ne','Se'].includes(dom)?'E':'I')+(['Se','Si'].includes(p)?'S':'N')+(['Te','Ti'].includes(j)?'T':'F')+(judging.includes(dom)?'J':'P');}
-function finish(){const data=getScores(),scores=data.scores;const max=Math.max(...functions.map(f=>scores[f]));const domTies=functions.filter(f=>scores[f]===max);const dom=domTies[0];if(domTies.length>1){const candidates=[];domTies.forEach(d=>{const pool=auxiliary[d];const best=Math.max(...pool.map(a=>scores[a]));pool.filter(a=>scores[a]===best).forEach(a=>candidates.push(deriveType(d,a)));});const q=new URLSearchParams({type_candidates:[...new Set(candidates)].join(',')});location.href=siteRoot+'page-3008.html?'+q.toString();return;}
-const pool=auxiliary[dom],best=Math.max(...pool.map(a=>scores[a])),auxTies=pool.filter(a=>scores[a]===best);if(auxTies.length>1){const q=new URLSearchParams({aux_tie:'1',aux_ties:auxTies.join(','),jung_dom:dom});location.href=siteRoot+'page-'+domOnlyPages[dom]+'.html?'+q.toString();return;}
-const aux=auxTies[0],type=deriveType(dom,aux),page=typePages[type];if(!page){app.innerHTML='<p class="quiz-message error">無法對應結果頁，請稍後再試。</p>';return;}location.href=siteRoot+'page-'+page+'.html';}
+function goToResult(url){quizFinished=true;location.href=url;}
+function finish(){const data=getScores(),scores=data.scores;const max=Math.max(...functions.map(f=>scores[f]));const domTies=functions.filter(f=>scores[f]===max);const dom=domTies[0];if(domTies.length>1){const candidates=[];domTies.forEach(d=>{const pool=auxiliary[d];const best=Math.max(...pool.map(a=>scores[a]));pool.filter(a=>scores[a]===best).forEach(a=>candidates.push(deriveType(d,a)));});const q=new URLSearchParams({type_candidates:[...new Set(candidates)].join(',')});goToResult(siteRoot+'page-3008.html?'+q.toString());return;}
+const pool=auxiliary[dom],best=Math.max(...pool.map(a=>scores[a])),auxTies=pool.filter(a=>scores[a]===best);if(auxTies.length>1){const q=new URLSearchParams({aux_tie:'1',aux_ties:auxTies.join(','),jung_dom:dom});goToResult(siteRoot+'page-'+domOnlyPages[dom]+'.html?'+q.toString());return;}
+const aux=auxTies[0],type=deriveType(dom,aux),page=typePages[type];if(!page){app.innerHTML='<p class="quiz-message error">無法對應結果頁，請稍後再試。</p>';return;}goToResult(siteRoot+'page-'+page+'.html');}
+document.addEventListener('click',function(event){
+ const link=event.target.closest('a[href]');
+ if(!link||!quizStarted||quizFinished||link.hasAttribute('download')||link.target==='_blank')return;
+ const destination=new URL(link.href,location.href);
+ if(destination.href===location.href)return;
+ if(!window.confirm(leaveWarning)){event.preventDefault();event.stopImmediatePropagation();return;}
+ confirmedLeave=true;
+},true);
+window.addEventListener('beforeunload',function(event){
+ if(!quizStarted||quizFinished||confirmedLeave)return;
+ event.preventDefault();
+ event.returnValue=leaveWarning;
+});
 render();
 })();
