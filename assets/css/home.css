@@ -106,8 +106,8 @@ a{color:inherit}
 .home-main .home-panel-kicker{margin:0 0 7px;color:var(--cj-gold,#a7833e);font:600 11px/1.5 system-ui,sans-serif;letter-spacing:.19em}
 .home-main .home-paper-panel h2{margin:0 0 18px;padding:0 0 13px;border-bottom:1px solid var(--cj-line,#ded8c9);color:var(--cj-green-deep,#405b49);font-size:clamp(27px,2.5vw,36px);font-weight:500;line-height:1.35}
 .home-main .home-paper-panel p{line-height:1.72}
-.home-main .site-about h3{margin:17px 0 3px;color:var(--cj-green,#405b49);font-size:16px;font-weight:600}
-.home-main .site-about>p{margin-bottom:11px}
+.home-main .site-about h3{margin:17px 0 3px;color:var(--cj-green,#405b49);font-size:17px;font-weight:600}
+.home-main .site-about>p{margin-bottom:11px;font-size:17px;line-height:1.72}
 .home-main .home-paper-panel .feature-actions{margin-top:24px}
 .home-main .site-about .support-row{margin-top:23px}
 @media(max-width:900px){.home-main .home-paper-panel{padding:25px 24px}.home-main .home-paper-panel h2{font-size:clamp(27px,4vw,34px)}}
