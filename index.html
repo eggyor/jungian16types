@@ -64,12 +64,14 @@ description: '以卡爾·榮格《心理類型》為基礎，認識經典榮格�
             {% assign shown = 0 %}
             {% for post in site.posts %}
               {% if post.categories contains '理論文章' and shown < 9 %}
-                <a class="article-card" href="{{ post.url | relative_url }}">
-                  <div class="article-cover">
-                    {% if post.cover %}<img src="{{ post.cover | relative_url }}" alt="{{ post.cover_alt | default: post.title | escape }}" loading="lazy">{% endif %}
-                    <span class="article-cover-title">{{ post.title | escape }}</span>
+                <a class="article-card article-card--text" href="{{ post.url | relative_url }}">
+                  <div class="article-meta">
+                    <span class="article-category">{% if post.categories.size > 1 %}{{ post.categories[1] | escape }}{% else %}理論文章{% endif %}</span>
+                    <h3 class="article-title">{{ post.title | escape }}</h3>
+                    <time class="article-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y年%-m月%-d日" }}</time>
+                    <p class="article-excerpt">{{ post.excerpt | default: post.content | strip_html | normalize_whitespace | truncate: 110 | escape }}</p>
+                    <span class="article-card-more" aria-hidden="true">閱讀文章 <span>›</span></span>
                   </div>
-                  <div class="article-meta"><span class="article-category">{% if post.categories.size > 1 %}{{ post.categories[1] | escape }}{% else %}理論文章{% endif %}</span><h3 class="article-title">{{ post.title | escape }}</h3><p class="article-excerpt">{{ post.excerpt | default: post.content | strip_html | normalize_whitespace | truncate: 100 | escape }}</p><time class="article-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time></div>
                 </a>
                 {% assign shown = shown | plus: 1 %}
               {% endif %}

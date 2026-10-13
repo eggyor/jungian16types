@@ -79,3 +79,25 @@ a{color:inherit}
 @media(max-width:620px){.home-wrap{width:calc(100% - 32px)}.home-section{padding:42px 0}.hero{padding:16px 0 36px}.hero-grid{grid-template-columns:1fr}.hero-copy{padding:22px 20px}.hero h1{font-size:42px;margin-bottom:18px}.hero-book{max-height:520px;width:min(100%,390px);margin:0 auto;object-fit:cover}.home-buttons{gap:12px;margin-top:20px}.home-btn{font-size:16px;min-height:50px;padding:10px 18px}.home-note{font-size:13px}.about-jung{grid-template-columns:1fr;gap:24px}.jung-photo{height:auto;max-height:500px;object-fit:cover}.about-text h2{font-size:34px}.about-text hr{margin:30px 0 24px}.feature-grid{gap:24px}.feature-copy h2{font-size:34px}.feature-actions{justify-content:flex-start}.latest{padding-top:2px}.latest-head{align-items:start;gap:12px;flex-direction:column}.carousel-track{grid-auto-columns:86%;gap:14px}.article-card{min-height:385px}.article-cover{height:245px}.type-section{padding:40px 0}.type-section h2{margin-bottom:26px}.type-grid{gap:12px}.social-about{grid-template-columns:1fr;gap:46px;padding:42px 0}.social-about h2{font-size:36px;margin-bottom:20px}.ig-avatar{width:58px;height:58px}.ig-grid{gap:7px}.ig-empty{min-height:160px}.support-row{justify-content:flex-start;gap:16px;margin-top:30px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 
+
+/* Text-only cards for the homepage latest-article carousel. */
+.latest .article-card--text{min-height:clamp(300px,25vw,360px);border:1px solid var(--cj-line,#ded8c9);border-radius:7px;background:linear-gradient(145deg,#fffdf8 0%,var(--cj-paper-light,#fbf9f3) 100%);color:var(--cj-ink,#263044);box-shadow:0 7px 22px rgba(43,55,45,.055);transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.latest .article-card--text:hover,.latest .article-card--text:focus-visible{transform:translateY(-3px);border-color:var(--cj-gold,#a7833e);box-shadow:0 12px 28px rgba(43,55,45,.09)}
+.latest .article-card--text .article-meta{align-items:flex-start;text-align:left;padding:24px clamp(19px,2vw,28px) 22px}
+.latest .article-card--text .article-category{margin:0 0 13px;color:var(--cj-gold,#a7833e);font-size:13px;letter-spacing:.08em;text-decoration:none}
+.latest .article-card--text .article-title{margin:0 0 6px;color:var(--cj-green-deep,#405b49);font-size:clamp(20px,1.55vw,25px);font-weight:600;line-height:1.5}
+.latest .article-card--text .article-date{order:initial;margin:0;padding:0;color:var(--cj-muted,#7c8178);font-size:14px}
+.latest .article-card--text .article-excerpt{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:4;margin:15px 0 16px;color:var(--cj-muted,#667085);font-size:15px;line-height:1.8}
+.latest .article-card-more{display:flex;align-items:center;gap:7px;margin-top:auto;color:var(--cj-green,#405b49);font-size:14px;font-weight:600;letter-spacing:.04em}
+.latest .article-card-more span{font-size:22px;line-height:1;transition:transform .2s ease}
+.latest .article-card--text:hover .article-card-more span{transform:translateX(3px)}
+.latest .carousel-control{top:50%;transform:translateY(-50%);border:1px solid var(--cj-line,#ded8c9);border-radius:50%;background:var(--cj-paper-light,#fbf9f3);color:var(--cj-green,#405b49);font-family:Georgia,serif;font-size:32px;line-height:1;box-shadow:0 4px 14px rgba(43,55,45,.1);transition:background-color .2s ease,color .2s ease,transform .2s ease}
+.latest .carousel-control:hover{transform:translateY(calc(-50% - 2px));border-color:var(--cj-gold,#a7833e);background:var(--cj-green,#405b49);color:#fff}
+.latest .carousel-control.prev{left:-18px}.latest .carousel-control.next{right:-18px}
+.latest .carousel-dots{gap:10px;padding-top:13px}
+.latest .carousel-dots button{width:10px;height:10px;background:var(--cj-gold-light,#e4d6b2);transition:transform .2s ease,background-color .2s ease}
+.latest .carousel-dots button[aria-current=true]{background:var(--cj-green,#405b49)}
+.latest .carousel-dots button:hover{transform:scale(1.2)}
+@media(max-width:900px){.latest .carousel-control.prev{left:5px}.latest .carousel-control.next{right:5px}}
+@media(max-width:620px){.latest .article-card--text{min-height:310px}.latest .article-card--text .article-meta{padding:20px 20px 19px}.latest .article-card--text .article-excerpt{-webkit-line-clamp:4;font-size:14px}.latest .carousel-control.prev{left:6px}.latest .carousel-control.next{right:6px}}
+@media(prefers-reduced-motion:reduce){.latest .article-card--text,.latest .article-card-more span,.latest .carousel-control,.latest .carousel-dots button{transition:none}}
