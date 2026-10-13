@@ -379,6 +379,16 @@ body[data-stage="3"] .vessel::before{opacity:.4}
   html{scroll-behavior:auto}
 }
 </style>
+<style>
+/* Desktop column order: elements, vessel, articles. Keep all component behavior intact. */
+@media (min-width:1101px){
+  .workshop{grid-template-columns:minmax(236px,20%) minmax(0,1fr)!important}
+  .workshop>.toolbar{grid-column:1;grid-row:1}
+  .workshop>.stage-col{grid-column:2;grid-row:1;grid-template-columns:minmax(420px,46%) minmax(0,1fr)}
+  .workshop .stage-col>.lab{grid-column:1;grid-row:2}
+  .workshop .stage-col>.articles{grid-column:2;grid-row:2}
+}
+</style>
 </head>
 <body data-stage="0">
 {% include header.html %}
