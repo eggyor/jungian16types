@@ -275,3 +275,28 @@ html[data-theme="night"] body:has(.about-shop-grid) .about-layout-refined .shop-
   color:#fff0bd!important;
   border-color:#e2bd63!important;
 }
+/* Night-mode fixes for the tag index and article sharing controls. */
+html[data-theme="night"] body:has(.tag-list) h1 {
+  color: #e7c96f !important;
+}
+
+html[data-theme="night"] .share-block .share-button {
+  background: linear-gradient(135deg, #26476f, #315c88) !important;
+  color: #f2d98d !important;
+  border-color: #8b7240 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .28) !important;
+}
+
+html[data-theme="night"] .share-block .share-button svg {
+  color: #f2d98d !important;
+}
+
+html[data-theme="night"] .share-block .share-button:hover {
+  background: linear-gradient(135deg, #315a89, #3b6a9e) !important;
+  color: #fff0bd !important;
+  border-color: #e2bd63 !important;
+}
+
+html[data-theme="night"] .share-block .share-button:hover svg {
+  color: #fff0bd !important;
+}
