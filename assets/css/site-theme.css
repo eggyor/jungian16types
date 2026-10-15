@@ -1200,3 +1200,6 @@ body:has(.quiz-landing) .quiz-landing-hero .lead{display:inline-block;margin:0;p
   .header-logo { width: 46px; height: 46px; }
   .main-nav { top: 62px; }
 }
+
+.special-thanks-link{color:var(--cj-green);text-decoration-color:var(--cj-gold);text-underline-offset:.18em}
+html[data-theme="night"] .special-thanks-link{color:#8bb7f0!important}
