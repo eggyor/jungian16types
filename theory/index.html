@@ -6,189 +6,2928 @@ description: '按基礎概念、類型描述、常見問題、榮格原文、系
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{{ page.description | escape }}">
-  <title>{{ page.title }}｜{{ site.title }}</title>
-  <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
-  <style>
-    :root{--theory-ink:#172033;--theory-muted:#465266;--theory-green:#a5b387;--theory-line:#e5e7eb;--theory-pale:#f5f5f4}
-    *{box-sizing:border-box}
-    body{margin:0;color:var(--theory-ink);font:16px/1.75 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
-    .theory-main{width:min(1320px,calc(100% - 64px));margin:0 auto;padding:48px 0 72px}
-    .theory-main h1{font-size:clamp(32px,3.4vw,44px);line-height:1.25;font-weight:500;margin:0 0 28px}
-    .section-heading{font-size:clamp(26px,2.5vw,32px);line-height:1.25;font-weight:500;margin:0 0 22px}
-    .category-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
-    .category-card{min-width:0;min-height:750px;display:flex;flex-direction:column;background:#eee;color:#111}
-    .category-cover{aspect-ratio:.78;overflow:hidden;background:#d7d7d7}
-    .category-cover img{display:block;width:100%;height:100%;object-fit:cover}
-    .category-content{flex:1;display:flex;flex-direction:column;align-items:flex-start;padding:24px 22px 26px}
-    .category-name{font-size:20px;font-weight:500;line-height:1.4}
-    .category-description{flex:1;margin:12px 0 24px;color:#5d6570;font-size:18px;line-height:1.7}
-    .category-link{display:inline-flex;min-width:105px;min-height:60px;align-items:center;justify-content:center;padding:12px 22px;background:#000;color:#fff;font-size:19px;font-weight:600;text-decoration:underline;text-underline-offset:3px;transition:background .18s ease}
-    .category-link:hover{background:#303030}
-    .category-link:focus-visible{outline:3px solid #65764a;outline-offset:3px}
-    .latest-section{margin-top:64px}
-    .latest-heading{margin-bottom:22px}
-    .latest-carousel{position:relative}
-    .latest-track{display:grid;grid-auto-columns:calc((100% - 36px)/3);grid-auto-flow:column;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:6px 2px 14px;overscroll-behavior-inline:contain}
-    .latest-track::-webkit-scrollbar{display:none}
-    .latest-card{min-width:0;min-height:430px;display:flex;flex-direction:column;overflow:hidden;border-radius:20px;background:#e9e9e9;color:#111;text-decoration:none;scroll-snap-align:start;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-    .latest-cover{position:relative;height:clamp(220px,25vw,360px);overflow:hidden;background:#d7d7d7}
-    .latest-cover img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
-    .latest-card:hover .latest-cover img{transform:scale(1.035)}
-    .latest-cover:after{content:"";position:absolute;inset:auto 0 0;height:36%;background:linear-gradient(transparent,rgba(12,16,22,.74))}
-    .latest-cover-title{position:absolute;z-index:1;bottom:0;left:0;right:0;padding:12px 16px;color:#fff;font-size:18px;font-weight:700;line-height:1.4}
-    .latest-meta{display:flex;flex:1;flex-direction:column;align-items:center;padding:16px 18px 22px;text-align:center}
-    .latest-category{font-size:14px;color:#5e6a7d;text-decoration:underline;text-underline-offset:3px}
-    .latest-meta h3{margin:7px 0 8px;font-size:19px;line-height:1.45}
-    .latest-excerpt{margin:0 0 12px;color:#465266;font-size:14px;line-height:1.65}
-    .latest-date{margin-top:auto;color:#687386;font-size:13px}
-    .carousel-control{position:absolute;z-index:2;top:31%;width:56px;height:66px;border:0;background:#fff;color:#111;font-size:36px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-    .carousel-control:hover{background:#f7f7f7}
-    .carousel-control:focus-visible,.carousel-dots button:focus-visible{outline:3px solid #65764a;outline-offset:3px}
-    .carousel-control.prev{left:0}.carousel-control.next{right:0}
-    .carousel-dots{display:flex;justify-content:center;gap:12px;padding:10px}
-    .carousel-dots button{width:11px;height:11px;padding:0;border:0;border-radius:50%;background:#c9c9c9;cursor:pointer}
-    .carousel-dots button[aria-current="true"]{background:#111}
-    @media(max-width:1200px){.category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.category-card{min-height:590px}.category-description{font-size:17px}}
-    @media(max-width:900px){.theory-main{width:calc(100% - 48px)}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.category-card{min-height:570px}.category-cover{aspect-ratio:.9}.latest-track{grid-auto-columns:calc((100% - 18px)/2)}}
-    @media(max-width:620px){.theory-main{width:calc(100% - 32px);padding:38px 0 52px}.category-grid{grid-template-columns:1fr;gap:12px}.category-card{min-height:0}.category-cover{aspect-ratio:1.15}.category-content{padding:20px}.category-description{margin:9px 0 18px;font-size:16px}.category-link{min-height:52px;min-width:96px;font-size:17px}.latest-section{margin-top:46px}.latest-track{grid-auto-columns:86%;gap:14px}.latest-card{min-height:385px}.latest-cover{height:245px}.carousel-control{top:24%;width:48px;height:56px;font-size:30px}.carousel-control.prev{left:0}.carousel-control.next{right:0}.carousel-dots{padding-top:8px}}
-    @media(max-width:620px){
-      .theory-main .category-cover{display:none}
-      .theory-main .category-card{min-height:0}
-      .theory-main .category-content{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;gap:6px 14px;padding:16px;align-items:center}
-      .theory-main .category-name{grid-column:1/-1;font-size:17px}
-      .theory-main .category-description{grid-column:1;grid-row:2;min-width:0;margin:0;font-size:14px;line-height:1.65}
-      .theory-main .category-link{grid-column:2;grid-row:2;align-self:center;min-width:72px;min-height:42px;padding:8px 13px;font-size:15px}
-    }  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>理論文章｜{{ site.title }}</title>
+<link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
 {% include site-theme-links.html %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F4EC; --card:#FBFAF6; --line:#DED7C8; --line2:#CFC4AA; --line3:#E8E1D3;
+  --navy:#30483B; --beige:#EEE8D9; --tan:#987746; --text:#454A43; --muted:#777568; --gold:#C9AA70;
+  --serif:"Noto Serif TC","Songti TC","PMingLiU","Source Han Serif TC",serif;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Source Han Sans TC",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;
+  background-image:radial-gradient(#D9D1BE 1px,transparent 1px);background-size:22px 22px}
+button,input{font-family:inherit}
+a{color:inherit}
+[hidden]{display:none !important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+
+/* top bar */
+.top{background:var(--navy);color:var(--card)}
+.top .wrap{min-height:56px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 24px}
+.brand{font-family:var(--serif);font-size:18px;letter-spacing:.06em}
+.topnav{display:flex;flex-wrap:wrap;align-items:center}
+.topnav span{padding:16px 14px;font-size:14px;opacity:.78;border-bottom:3px solid transparent}
+.topnav span.on{opacity:1;font-weight:700;border-bottom-color:var(--gold)}
+
+/* sub header */
+.subbar{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--line);box-shadow:0 1px 4px rgba(23,48,79,.06)}
+.tabs{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}
+.tab{flex:0 0 auto;min-height:48px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:transparent;
+  color:var(--muted);font-family:var(--serif);font-size:15px;white-space:nowrap;cursor:pointer;transition:color .2s ease}
+.tab:hover{color:var(--navy)}
+.tab[aria-selected="true"]{color:var(--navy);font-weight:600;border-bottom-color:var(--navy)}
+.tab.sep{border-right:1px solid var(--line2)}
+.tab:focus-visible,.btn:focus-visible,.chip:focus-visible,.row:focus-visible,.feat:focus-visible,input:focus-visible,.primary:focus-visible,.ghost:focus-visible,.xbtn:focus-visible,.disc:focus-visible{outline:3px solid #2B6CB0;outline-offset:2px}
+
+/* stage & panels */
+main.wrap{padding-top:22px;padding-bottom:36px}
+.stage{position:relative;overflow:hidden}
+.stage.ready{transition:height .35s ease}
+.panel{position:absolute;top:0;left:0;right:0;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px);
+  transition:opacity .35s ease,transform .35s ease,visibility 0s .35s}
+.panel.active{opacity:1;visibility:visible;pointer-events:auto;transform:none;
+  transition:opacity .35s ease .05s,transform .35s ease .05s,visibility 0s}
+.phead{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px}
+.phead h1{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(28px,4.4vw,38px);letter-spacing:.04em;color:var(--navy)}
+.phead .en{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--muted)}
+.lead{margin:4px 0 0;font-size:14px;color:#55524A}
+.banner{margin:12px 0 14px;height:140px;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 16px;
+  background:repeating-linear-gradient(135deg,#21406A 0 14px,#1B3558 14px 28px);color:#E8E1D0;font-size:14px;letter-spacing:.08em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;box-shadow:0 1px 3px rgba(23,48,79,.06)}
+
+/* dictionary groups */
+.groups{display:flex;flex-direction:column;gap:8px}
+.grp{display:flex;flex-wrap:wrap;gap:8px}
+.glabel{flex:1 1 172px;max-width:172px;background:var(--beige);border:1px solid var(--line);border-radius:6px;padding:10px 12px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center}
+.glabel b{font-family:var(--serif);font-weight:600;font-size:16px;line-height:1.4;color:var(--navy);text-wrap:balance}
+.gbody{flex:999 1 420px;min-width:0;background:#fff;border:1px solid var(--line3);border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.gbody > .intro{margin:0;font-size:13.5px;line-height:1.5;color:#55524A}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{min-height:36px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:4px 14px;border:1px solid var(--navy);border-radius:4px;
+  background:var(--bg);color:var(--navy);font-size:14px;font-weight:700;text-align:center;line-height:1.35;cursor:pointer;transition:background .15s ease,color .15s ease}
+.btn:hover{background:var(--navy);color:var(--card)}
+.bt{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0}
+.btn.multi{padding:5px 10px}
+.btn.multi .b1{font-size:15px}
+.btn.multi .b2{font-size:13px;font-weight:500}
+.btn.multi .b2:last-child{font-size:12px;font-weight:400;opacity:.85}
+.sub + .sub{margin-top:2px}
+.sub h3{margin:0 0 6px;padding-left:10px;border-left:3px solid var(--tan);font-family:var(--serif);font-size:16px;font-weight:600;line-height:1.5;color:var(--navy)}
+
+/* matrix (inside a dictionary row) */
+.matrix{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));gap:6px}
+.matrix.lab{grid-template-columns:120px repeat(var(--n,2),minmax(0,1fr))}
+.mh{background:var(--navy);color:var(--card);border-radius:4px;padding:6px 10px;text-align:center;font-weight:700;font-size:13.5px;line-height:1.35;display:flex;align-items:center;justify-content:center}
+.mh.blank{background:none;padding:0}
+.ml{background:var(--beige);border:1px solid var(--line);border-radius:6px;padding:6px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center}
+.ml b{font-family:var(--serif);font-size:15px;line-height:1.35;color:var(--navy)}
+.ml small{font-size:12px;color:#5E5440;line-height:1.35}
+.mc{background:var(--card);border:1px solid var(--line3);border-radius:6px;padding:6px;display:flex;flex-direction:row;flex-wrap:wrap;align-items:stretch;gap:6px}
+.mc .btn{flex:1 1 112px;min-width:0;background:#fff}
+.mc .btn:hover{background:var(--navy)}
+.mcap{display:none;font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--navy);padding-left:10px;border-left:3px solid var(--tan)}
+
+/* function-stack table (collapsible) */
+.disc{align-self:flex-start;min-height:36px;display:inline-flex;align-items:center;gap:10px;padding:0 18px;border:1px solid var(--navy);border-radius:4px;
+  background:var(--bg);color:var(--navy);font-size:14px;font-weight:700;cursor:pointer;transition:background .15s ease,color .15s ease}
+.disc:hover{background:var(--navy);color:var(--card)}
+.disc .chev{width:10px;height:10px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);transition:transform .25s ease}
+.disc[aria-expanded="true"] .chev{transform:rotate(-135deg) translate(-2px,-2px)}
+.collapse{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.collapse.open{grid-template-rows:1fr}
+.cin{min-height:0;overflow:hidden;visibility:hidden;transition:visibility 0s .35s}
+.collapse.open .cin{visibility:visible;transition:visibility 0s}
+.tscroll{overflow-x:auto;border:1px solid var(--line3);border-radius:6px}
+table.stack{width:100%;min-width:440px;border-collapse:collapse;background:#fff;font-size:13.5px;line-height:1.35}
+.stack th,.stack td{padding:5px 10px;text-align:center;border-bottom:1px solid var(--line3)}
+.stack thead th{background:var(--navy);color:var(--card);font-size:13px;font-weight:700}
+.stack thead th.un{background:#3A5576}
+.stack thead tr:first-child th + th{border-left:1px solid rgba(250,248,242,.3)}
+.stack tr.gh td{background:var(--beige);color:var(--navy);font-family:var(--serif);font-weight:600;text-align:left}
+.stack tbody th{font-weight:700;color:var(--navy);text-align:left;white-space:nowrap}
+.stack td.dom{font-weight:700;color:var(--navy)}
+.stack td.sep{border-left:2px solid var(--line2)}
+.stack tbody tr:last-child th,.stack tbody tr:last-child td{border-bottom:0}
+
+/* lists */
+.note{margin:0 0 10px;padding:7px 12px;border:1px dashed var(--navy);border-radius:6px;background:#fff;font-size:13.5px;color:var(--navy)}
+.feat{display:flex;flex-direction:column;gap:4px;padding:12px 16px;margin-bottom:10px;border-radius:8px;background:var(--navy);color:var(--card);text-decoration:none}
+.feat:hover{background:#1E3C61}
+.feat[hidden]{display:none}
+.feat .flag{font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--gold)}
+.feat .ft{font-family:var(--serif);font-size:20px;line-height:1.35}
+.feat .fe{font-size:14px;line-height:1.55;opacity:.92}
+.feat .fd{font-size:12px;opacity:.78}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.toolbar input{flex:1 1 260px;min-height:38px;padding:0 14px;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--text);font-size:14px}
+.count{font-size:13px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px}
+.chip{min-height:30px;padding:0 12px;border:1px solid var(--line2);border-radius:999px;background:#fff;color:var(--navy);font-size:13px;font-weight:500;cursor:pointer}
+.chip:hover{border-color:var(--navy)}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--card)}
+.rows{display:flex;flex-direction:column}
+.row{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:6px 16px;padding:10px 8px;border-bottom:1px dashed var(--line);border-radius:4px;
+  text-decoration:none;color:inherit}
+.row:hover{background:var(--bg)}
+.rmain{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:2px}
+.rtitle{font-size:16px;font-weight:700;color:var(--navy);line-height:1.4}
+.rex{margin:0;font-size:13.5px;line-height:1.55;color:#55524A}
+.rdate{font-size:12px;color:var(--muted)}
+.rtags{display:flex;flex-wrap:wrap;gap:6px;max-width:240px;justify-content:flex-end}
+.tag{padding:1px 9px;border-radius:999px;background:var(--beige);color:#5E5440;font-size:12px}
+.empty{padding:36px 10px;text-align:center;color:var(--muted);font-size:14px}
+.more{display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:10px}
+.more[hidden]{display:none}
+.shown{font-size:12px;color:var(--muted)}
+
+/* load-more animation & end message */
+@keyframes rowIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.row.enter,.endmsg.enter{animation:rowIn .45s ease both;animation-delay:calc(var(--i,0) * 60ms)}
+.endmsg{display:flex;align-items:center;gap:14px;margin:6px 0 0;font-size:13px;color:var(--muted)}
+.endmsg::before,.endmsg::after{content:"";flex:1;height:1px;background:var(--line)}
+.endmsg[hidden]{display:none}
+
+.demo-note{margin:18px 0 0;text-align:center;font-size:12px;color:var(--muted)}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;visibility:hidden;
+  transition:opacity .25s ease,visibility 0s .25s}
+.modal.open{opacity:1;visibility:visible;transition:opacity .25s ease,visibility 0s}
+.backdrop{position:absolute;inset:0;background:rgba(23,48,79,.5)}
+.dlg{position:relative;width:640px;max-width:100%;max-height:calc(100vh - 32px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:8px;
+  padding:18px 30px 20px;box-shadow:0 12px 40px rgba(23,48,79,.28);display:flex;flex-direction:column;gap:10px;transform:translateY(10px);transition:transform .25s ease}
+.modal.open .dlg{transform:none}
+.dtop{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.dchip{padding:4px 12px;border-radius:4px;background:var(--beige);color:var(--text);font-size:14px;line-height:1.5}
+.xbtn{flex:0 0 auto;width:44px;height:44px;border:0;background:transparent;color:var(--text);font-size:28px;line-height:1;cursor:pointer}
+.dlg h2{margin:0;font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.35;color:var(--navy)}
+.dsub{margin:-4px 0 0;font-family:var(--serif);font-style:italic;color:var(--tan);font-size:15px}
+.dmeta{display:flex;flex-wrap:wrap;gap:6px}
+.meta{padding:1px 10px;border:1px solid var(--line2);border-radius:999px;background:#fff;color:var(--navy);font-size:13px}
+.prev{border-left:4px solid var(--tan);padding-left:12px;display:flex;flex-direction:column;gap:4px}
+.pvbody{display:flex;flex-direction:column;gap:3px}
+.pvbody p{margin:0;font-size:14.5px;line-height:1.65;white-space:pre-line}
+.pvbody p.li{padding-left:1.3em;text-indent:-1.3em}
+.dact{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px;padding-top:4px}
+.ghost{min-height:40px;padding:0 20px;border:1px solid var(--line2);border-radius:4px;background:transparent;color:var(--text);font-size:14px;cursor:pointer}
+.primary{min-height:40px;display:inline-flex;align-items:center;padding:0 24px;border:0;border-radius:4px;background:var(--navy);color:var(--card);font-size:14px;font-weight:700;text-decoration:none;cursor:pointer}
+.primary:hover{background:#1E3C61}
+
+/* ---------- 手機版 ---------- */
+@media (max-width:760px){
+  .wrap{padding:0 16px}
+  .top .wrap{min-height:48px}
+  .brand{font-size:16px}
+  .topnav span{padding:12px 6px;font-size:13px}
+  .topnav span:not(.on){display:none}
+  .subbar .wrap{position:relative}
+  .subbar .wrap::after{content:"";position:absolute;right:0;top:0;bottom:0;width:32px;background:linear-gradient(90deg,rgba(250,248,242,0),var(--card));pointer-events:none}
+  .tab{padding:0 16px;font-size:14px}
+  main.wrap{padding-top:14px;padding-bottom:32px}
+  .phead h1{font-size:28px}
+  .phead .en{font-size:14px}
+  .lead{font-size:14px}
+  .banner{height:80px;margin:10px 0 12px;font-size:12px}
+  .card{padding:8px}
+  /* 辭典表格：標籤格變橫條，按鈕變整列 */
+  .grp{flex-direction:column;gap:6px}
+  .glabel{max-width:none;flex:none;align-items:flex-start;text-align:left;padding:7px 12px;gap:2px}
+  .glabel b{font-size:15px}
+  .glabel b br{display:none}
+  .gbody{flex:none;padding:8px;gap:6px}
+  .btns{flex-direction:column;gap:6px}
+  .btn{position:relative;justify-content:center;padding-left:30px;padding-right:30px}
+  .btn::after{content:"›";position:absolute;right:14px;top:50%;transform:translateY(-52%);font-size:20px;line-height:1;opacity:.6}
+  .btns .btn,.mc .btn{width:100%;min-height:44px;padding-top:6px;padding-bottom:6px}
+  .btn.multi{padding-top:6px;padding-bottom:6px}
+  /* 矩陣：上下堆疊 */
+  .matrix,.matrix.lab{grid-template-columns:minmax(0,1fr);gap:6px}
+  .mh{display:none}
+  .ml{align-items:flex-start;text-align:left;padding:7px 12px;gap:1px}
+  .ml b{font-size:15px}
+  .mc{padding:8px;gap:6px;flex-direction:column;flex-wrap:nowrap}
+  .mc .btn{flex:none}
+  .mcap{display:block}
+  /* 功能疊表 */
+  .disc{align-self:stretch;justify-content:center}
+  .tscroll{overflow-x:visible}
+  table.stack{min-width:0;font-size:13px;line-height:1.25}
+  .stack th,.stack td{padding:3px 2px}
+  .stack thead th{font-size:12px;padding:4px 2px}
+  .stack tbody th{padding-left:8px}
+  .stack tr.gh td{padding:3px 8px;font-size:12.5px}
+  /* 列表 */
+  .toolbar input{flex-basis:100%;font-size:16px}
+  .chips{flex-wrap:nowrap;overflow-x:auto;margin:8px -8px 2px;padding:2px 8px 4px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;min-height:38px}
+  .row{padding:10px 4px}
+  .rtitle{font-size:15.5px}
+  .rtags{max-width:none;justify-content:flex-start}
+  .feat{padding:12px}
+  .feat .ft{font-size:18px}
+  .note{font-size:13px}
+  /* 彈窗：改為底部抽屜 */
+  .modal{align-items:flex-end;padding:0}
+  .dlg{width:100%;max-height:88vh;border-radius:16px 16px 0 0;border-bottom:0;padding:14px 18px calc(16px + env(safe-area-inset-bottom));gap:8px;transform:translateY(40px)}
+  .dlg::before{content:"";align-self:center;width:40px;height:4px;border-radius:2px;background:var(--line2);margin-bottom:-2px}
+  .dlg h2{font-size:22px}
+  .dact .ghost,.dact .primary{flex:1 1 0;justify-content:center}
+  .dact{flex-direction:row-reverse}
+}
+@media (prefers-reduced-motion:reduce){
+  .panel,.panel.active,.stage.ready,.modal,.modal.open,.dlg,.tab,.btn,.collapse,.cin,.disc .chev{transition:none !important;transform:none}
+  .row.enter,.endmsg.enter{animation:none !important}
+}
+</style>
 </head>
 <body>
-  {% include header.html %}
-  <main class="theory-main">
-    <h1>理論文章</h1>
+{% include header.html %}
 
-    <section aria-labelledby="category-heading">
-      <h2 class="section-heading" id="category-heading">文章分類</h2>
-      <div class="category-grid">
-        <article class="category-card">
-          <div class="category-cover"><img src="{{ '/assets/images/img/theory-cover-1.png' | relative_url }}" alt="" loading="lazy"></div>
-          <div class="category-content">
-            <span class="category-name">基礎概念101</span>
-            <span class="category-description">關於榮格心理學、經典榮格、類型與功能的定義，一切入門所需。</span>
-            <a class="category-link" href="{{ '/page-1259.html' | relative_url }}">前往</a>
-          </div>
-        </article>
-        <article class="category-card">
-          <div class="category-cover"><img src="{{ '/assets/images/img/theory-cover-2.png' | relative_url }}" alt="" loading="lazy"></div>
-          <div class="category-content">
-            <span class="category-name">類型描述</span>
-            <span class="category-description">八種經典榮格主導類型的描述。</span>
-            <a class="category-link" href="{{ '/page-1271.html' | relative_url }}">前往</a>
-          </div>
-        </article>
-        <article class="category-card">
-          <div class="category-cover"><img src="{{ '/assets/images/img/theory-cover-3.png' | relative_url }}" alt="" loading="lazy"></div>
-          <div class="category-content">
-            <span class="category-name">常見問題</span>
-            <span class="category-description">各種關於榮格類型學和經典榮格的常見問題，以及常見誤解的闢謠。</span>
-            <a class="category-link" href="{{ '/page-1286.html' | relative_url }}">前往</a>
-          </div>
-        </article>
-        <article class="category-card">
-          <div class="category-cover"><img src="{{ '/assets/images/img/theory-cover-4.png' | relative_url }}" alt="" loading="lazy"></div>
-          <div class="category-content">
-            <span class="category-name">榮格原文</span>
-            <span class="category-description">榮格《心理類型》原文節錄，以及書中包含的詞條定義。</span>
-            <a class="category-link" href="{{ '/page-1292.html' | relative_url }}">前往</a>
-          </div>
-        </article>
-        <article class="category-card">
-          <div class="category-cover"><img src="{{ '/assets/images/img/theory-cover-5.png' | relative_url }}" alt="" loading="lazy"></div>
-          <div class="category-content">
-            <span class="category-name">系統對比</span>
-            <span class="category-description">與其他人格類型學系統如 MBTI、榮格八維、16p、九型人格、社會人格學等的比較。</span>
-            <a class="category-link" href="{{ '/page-1298.html' | relative_url }}">前往</a>
-          </div>
-        </article>
-        <article class="category-card">
-          <div class="category-cover"><img src="{{ '/assets/images/img/theory-cover-6.png' | relative_url }}" alt="" loading="lazy"></div>
-          <div class="category-content">
-            <span class="category-name">站主銳評</span>
-            <span class="category-description">站主本人對於各種現象主觀到不行的銳評，透過榮格心理學看世界。</span>
-            <a class="category-link" href="{{ '/page-1304.html' | relative_url }}">前往</a>
-          </div>
-        </article>
-      </div>
-    </section>
+<div class="subbar" aria-label="理論文章子頁導覽">
+  <div class="wrap">
+    <div class="tabs" id="tabs" role="tablist" aria-label="理論文章分類"></div>
+  </div>
+</div>
 
-    <section class="latest-section" aria-labelledby="latest-heading">
-      <h2 class="section-heading latest-heading" id="latest-heading">最新文章</h2>
-      <div class="latest-carousel" data-theory-carousel>
-        <button class="carousel-control prev" type="button" aria-label="上一頁文章" data-theory-prev>‹</button>
-        <div class="latest-track" data-theory-track>
-          {% assign shown_articles = 0 %}
-          {% for post in site.posts %}
-            {% if post.categories contains '理論文章' and shown_articles < 8 %}
-              <a class="latest-card" href="{{ post.url | relative_url }}">
-                <div class="latest-cover">
-                  {% if post.cover %}<img src="{{ post.cover | relative_url }}" alt="{{ post.cover_alt | default: post.title | escape }}" loading="lazy">{% endif %}
-                  <span class="latest-cover-title">{{ post.title | escape }}</span>
-                </div>
-                <div class="latest-meta">
-                  <span class="latest-category">{{ post.subcategory | default: '理論文章' | escape }}</span>
-                  <h3>{{ post.title | escape }}</h3>
-                  <p class="latest-excerpt">{{ post.excerpt | default: post.content | strip_html | normalize_whitespace | truncate: 100 | escape }}</p>
-                  <time class="latest-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
-                </div>
-              </a>
-              {% assign shown_articles = shown_articles | plus: 1 %}
-            {% endif %}
-          {% endfor %}
-        </div>
-        <button class="carousel-control next" type="button" aria-label="下一頁文章" data-theory-next>›</button>
-        <div class="carousel-dots" data-theory-dots aria-label="文章頁數"></div>
-      </div>
-    </section>
-  </main>
-  {% include footer.html %}
-  <script>
-    (() => {
-      const root = document.querySelector('[data-theory-carousel]');
-      if (!root) return;
-      const track = root.querySelector('[data-theory-track]');
-      const cards = [...track.querySelectorAll('.latest-card')];
-      const dots = root.querySelector('[data-theory-dots]');
-      if (!cards.length) return;
-      const gap = () => parseFloat(getComputedStyle(track).columnGap) || 0;
-      const cardStep = () => cards[0].getBoundingClientRect().width + gap();
-      const perPage = () => Math.max(1, Math.round(track.clientWidth / cardStep()));
-      const pageCount = () => Math.max(1, Math.ceil(cards.length / perPage()));
-      const currentPage = () => Math.min(pageCount() - 1, Math.round(track.scrollLeft / (perPage() * cardStep())));
-      function goTo(page) {
-        const target = Math.max(0, Math.min(pageCount() - 1, page));
-        track.scrollTo({left: target * perPage() * cardStep(), behavior: 'smooth'});
-      }
-      function drawDots() {
-        const page = currentPage();
-        dots.replaceChildren();
-        for (let i = 0; i < pageCount(); i++) {
-          const button = document.createElement('button');
-          button.type = 'button';
-          button.setAttribute('aria-label', `第 ${i + 1} 頁文章`);
-          button.setAttribute('aria-current', i === page ? 'true' : 'false');
-          button.addEventListener('click', () => goTo(i));
-          dots.append(button);
+<main class="wrap">
+  <div class="stage" id="stage"></div>
+</main>
+{% include footer.html %}
+
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="backdrop" id="backdrop"></div>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="dtop">
+      <span class="dchip" id="mCat"></span>
+      <button class="xbtn" id="mX" type="button" aria-label="關閉預覽">×</button>
+    </div>
+    <h2 id="mTitle"></h2>
+    <p class="dsub" id="mSub" hidden></p>
+    <div class="dmeta" id="mMeta" hidden></div>
+    <div class="prev"><div class="pvbody" id="mPrev"></div></div>
+    <div class="dact">
+      <button class="ghost" id="mClose" type="button">關閉</button>
+      <a class="primary" id="mRead" href="#">閱讀全文 →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* 文章連結的開啟方式：預覽用 "_blank"（新分頁）；正式上線改成 "_self"（同分頁） */
+var LINK_TARGET = "_self";
+
+/* ---------- 資料：由你整理的文件自動轉入 ---------- */
+var CATS = [
+ {
+  "key": "basics",
+  "name": "基礎概念101",
+  "en": "Fundamentals",
+  "lead": "關於榮格心理學、經典榮格、類型與功能的定義，一切入門所需。",
+  "sections": [
+   {
+    "label": "基礎指南",
+    "intro": "了解類型學為何而生，以及「主體／客體」兩個重要基本用詞。",
+    "type": "btns",
+    "items": [
+     {
+      "b": [
+       "類型學的初衷"
+      ],
+      "t": "榮格類型學的初衷",
+      "meta": [],
+      "pv": [
+       "榮格創立類型學，目的是幫助人認識自己、理解他人。",
+       "・個人：覺察無意識，整合出完整的「自性」",
+       "・群體：明白每個人有不同的認知方式，減少誤會，也避免被壓抑的陰暗面（陰影）聚成集體之惡",
+       "類型學的目標是運用類型知識自我覺察。"
+      ],
+      "url": "https://jungian16types.com/post-1392.html",
+      "art": "榮格類型學的初衷",
+      "where": "基礎概念101 › 基礎指南"
+     },
+     {
+      "b": [
+       "主體與客體"
+      ],
+      "t": "主體與客體是什麼？",
+      "meta": [],
+      "pv": [
+       "主體是認識事物的人，客體是被認識的對象。",
+       "・主體：作出認識的一方，通常指你自己",
+       "・客體：被認識的人或物",
+       "認識時，主體心中會形成客體的內在印象，它與真實客體有落差。榮格依主體如何看待這個落差，分出內傾與外傾。"
+      ],
+      "url": "https://jungian16types.com/post-1464.html",
+      "art": "主體與客體是什麼？",
+      "where": "基礎概念101 › 基礎指南"
+     }
+    ]
+   },
+   {
+    "label": "態度：外傾與內傾",
+    "intro": "面對客體的兩種取向。",
+    "type": "matrix",
+    "hasLabel": false,
+    "corner": "",
+    "cols": [
+     "外傾",
+     "內傾"
+    ],
+    "rows": [
+     {
+      "label": "",
+      "sub": "",
+      "cells": [
+       [
+        {
+         "b": [
+          "外傾態度"
+         ],
+         "t": "外傾態度",
+         "en": null,
+         "meta": [
+          "分類｜意識態度",
+          "相對概念｜內傾"
+         ],
+         "pv": [
+          "外傾是心理能量（力比多）向外流向客體的態度。",
+          "・注意力放在客體本身的特性",
+          "・重視與現實互動，以外在事實為決定因素",
+          "・無意識為內傾：長期忽略自己時，會自動平衡（「補償」），令人突然察覺內在需要"
+         ],
+         "url": "https://jungian16types.com/post-1471.html",
+         "art": "外傾",
+         "where": "基礎概念101 › 態度：外傾與內傾"
         }
-      }
-      root.querySelector('[data-theory-prev]').addEventListener('click', () => goTo(currentPage() - 1));
-      root.querySelector('[data-theory-next]').addEventListener('click', () => goTo(currentPage() + 1));
-      track.addEventListener('scroll', () => requestAnimationFrame(drawDots), {passive:true});
-      window.addEventListener('resize', drawDots);
-      drawDots();
-    })();
-  </script>
+       ],
+       [
+        {
+         "b": [
+          "內傾態度"
+         ],
+         "t": "內傾態度",
+         "en": null,
+         "meta": [
+          "分類｜意識態度",
+          "相對概念｜外傾"
+         ],
+         "pv": [
+          "內傾是心理能量（力比多）向內流動的態度。",
+          "・注意力放在客體在自己心中留下的印象",
+          "・客體是觸發內在意象的契機，結論偏主觀、抽象",
+          "・無意識為外傾：長期忽略外界時，會自動平衡（稱「補償」），令人突然想掌控或探索外界"
+         ],
+         "url": "https://jungian16types.com/post-1487.html",
+         "art": "內傾",
+         "where": "基礎概念101 › 態度：外傾與內傾"
+        }
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "label": "性質：理性與非理性",
+    "intro": "面對客體的兩種功能性質。",
+    "type": "matrix",
+    "hasLabel": false,
+    "corner": "",
+    "cols": [
+     "理性",
+     "非理性"
+    ],
+    "rows": [
+     {
+      "label": "",
+      "sub": "",
+      "cells": [
+       [
+        {
+         "b": [
+          "理性"
+         ],
+         "t": "理性",
+         "en": null,
+         "meta": [
+          "分類｜性質",
+          "相對概念｜非理性"
+         ],
+         "pv": [
+          "理性是按常理與原則作判斷的方式，包含邏輯與情感兩種功能。",
+          "・邏輯：整理客體本身的結構（如度量單位、科學理論）",
+          "・情感：整理客體與人的關係（如禮儀、價值觀）",
+          "理性替經驗找出秩序與意義，過程中會捨去無法解釋的偶然。"
+         ],
+         "url": "https://jungian16types.com/post-1508.html",
+         "art": "理性類型",
+         "where": "基礎概念101 › 性質：理性與非理性"
+        }
+       ],
+       [
+        {
+         "b": [
+          "非理性"
+         ],
+         "t": "非理性",
+         "en": null,
+         "meta": [
+          "分類｜性質",
+          "相對概念｜理性"
+         ],
+         "pv": [
+          "非理性是直接接收經驗、保留原貌的感知方式，包含感覺與直覺兩種功能。",
+          "・感覺：感知客體的存在形式",
+          "・直覺：感知客體背後的隱藏連結",
+          "特點：被動、即時發生；如音樂的律動難以轉述，一經解釋便轉為理性。"
+         ],
+         "url": "https://jungian16types.com/post-1522.html",
+         "art": "非理性類型",
+         "where": "基礎概念101 › 性質：理性與非理性"
+        }
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "label": "功能的結構與發展",
+    "intro": "四種功能如何由無意識分化到意識，以及功能疊中各位置的角色。依發展次序：分化 → 功能疊 → 對軸與弱勢 → 輔助 → 次弱勢。",
+    "type": "btns",
+    "items": [
+     {
+      "b": [
+       "功能的分化"
+      ],
+      "t": "意識與功能的分化過程",
+      "meta": [],
+      "pv": [
+       "分化是功能從混合狀態中分離出來、被意識單獨發展的過程。",
+       "1. 意識取一種態度（內傾或外傾），無意識取相反態度",
+       "2. 主導功能進入意識，並把對軸功能壓抑成弱勢功能",
+       "3. 餘下兩個功能，其一發展為輔助功能；與它相對的成為次弱勢功能",
+       "共四組功能對軸：Ti-Fe、Fi-Te、Si-Ne、Ni-Se"
+      ],
+      "url": "https://jungian16types.com/post-1568.html",
+      "art": "意識與功能的分化過程",
+      "where": "基礎概念101 › 功能的結構與發展"
+     },
+     {
+      "b": [
+       "類型名稱與功能疊"
+      ],
+      "t": "類型功能疊對照表",
+      "meta": [],
+      "pv": [
+       "功能疊是四種功能由意識到無意識的排列：主導、輔助、次弱勢、弱勢。",
+       "・命名：內外傾態度＋主導功能＋輔助功能",
+       "例： ITS＝內傾、邏輯主導、感覺輔助",
+       "・規律：意識的兩個功能同為內傾或外傾，無意識的兩個取相反",
+       "本文列出16種類型的名稱與功能疊。"
+      ],
+      "url": "https://jungian16types.com/post-1768.html",
+      "art": "類型功能疊對照表",
+      "where": "基礎概念101 › 功能的結構與發展"
+     },
+     {
+      "b": [
+       "功能對軸與弱勢功能"
+      ],
+      "t": "功能對軸與弱勢功能",
+      "meta": [],
+      "pv": [
+       "功能對軸是互相對立的兩個功能：",
+       "・邏輯↔情感：判斷「是什麼」↔評價「有何價值」",
+       "・感覺↔直覺：感知「存在形式」↔感知「背後連結」",
+       "對軸功能無法同時專注，主導功能因此把它的對軸壓到最深的無意識，成為弱勢功能。弱勢功能發展最弱，長期忽視會令人格失衡。"
+      ],
+      "url": "https://jungian16types.com/post-3253.html",
+      "art": "功能對軸與弱勢功能",
+      "where": "基礎概念101 › 功能的結構與發展"
+     },
+     {
+      "b": [
+       "輔助功能"
+      ],
+      "t": "關於輔助功能的內外傾態度",
+      "meta": [
+       "位於意識的功能"
+      ],
+      "pv": [
+       "輔助功能是協助主導功能達成目標的第二功能。",
+       "・與主導功能不直接對立，可同在意識",
+       "・內外傾與主導功能相同",
+       "例：如 Te 搭配 Se 或 Ne",
+       "・運作方式：輔助功能支持主導功能完成訂立的目標"
+      ],
+      "url": "https://jungian16types.com/post-3290.html",
+      "art": "關於輔助功能的內外傾態度",
+      "where": "基礎概念101 › 功能的結構與發展"
+     },
+     {
+      "b": [
+       "次弱勢功能"
+      ],
+      "t": "次弱勢功能是什麼？",
+      "meta": [
+       "位於無意識的功能"
+      ],
+      "pv": [
+       "次弱勢功能是輔助功能進入意識時，被推入無意識的對軸功能。",
+       "・與輔助功能互為對軸",
+       "・內外傾與弱勢功能相同",
+       "・馮·法蘭茲認為，整合弱勢功能要先經過它",
+       "發展次序：主導＞輔助＞次弱勢＞弱勢。"
+      ],
+      "url": "https://jungian16types.com/post-3298.html",
+      "art": "次弱勢功能是什麼？",
+      "where": "基礎概念101 › 功能的結構與發展"
+     }
+    ]
+   },
+   {
+    "label": "功能軸",
+    "intro": "四組功能軸。I與E相對，T與F相對，N與S相對。",
+    "type": "matrix",
+    "hasLabel": true,
+    "corner": "對軸",
+    "cols": [
+     "",
+     ""
+    ],
+    "rows": [
+     {
+      "label": "理性軸",
+      "sub": "邏輯 ↔ 情感",
+      "cells": [
+       [
+        {
+         "b": [
+          "Ti-Fe 功能軸"
+         ],
+         "t": "Ti-Fe 功能軸",
+         "en": null,
+         "meta": [
+          "分類｜理性"
+         ],
+         "pv": [
+          "Ti（內傾邏輯）↔Fe（外傾情感）",
+          "・Ti：客體內部自洽的邏輯結構，代表身份",
+          "・Fe：客體對外的表達，以及群體賦予它的價值與關係",
+          "例：語言與方言的地位高低，來自社會賦予的權威。兩者互相依存。"
+         ],
+         "url": "https://jungian16types.com/post-3794.html",
+         "art": "從社會語言學看Ti-Fe軸",
+         "where": "基礎概念101 › 功能軸"
+        }
+       ],
+       [
+        {
+         "b": [
+          "Fi-Te 功能軸"
+         ],
+         "t": "Fi-Te 功能軸",
+         "en": null,
+         "meta": [
+          "分類｜理性"
+         ],
+         "pv": [
+          "Fi（內傾情感）↔Te（外傾邏輯）",
+          "・Fi：主體對客體的內在價值評價，代表意願",
+          "・Te：客體客觀的運作秩序，代表行事準則",
+          "例：法律背後有價值排序；法律須獲得認同才有力量，個人道德須配合公共秩序才能共存。"
+         ],
+         "url": "https://jungian16types.com/post-3825.html",
+         "art": "從人權與法治看Fi-Te軸",
+         "where": "基礎概念101 › 功能軸"
+        }
+       ]
+      ]
+     },
+     {
+      "label": "非理性軸",
+      "sub": "感覺 ↔ 直覺",
+      "cells": [
+       [
+        {
+         "b": [
+          "Si-Ne 功能軸"
+         ],
+         "t": "Si-Ne 功能軸",
+         "en": null,
+         "meta": [
+          "分類｜非理性"
+         ],
+         "pv": [
+          "Si（內傾感覺）↔Ne（外傾直覺）",
+          "・Ne：感知客體發展的所有可能，像量子未被觀測時的疊加狀態",
+          "・Si：把客體的過去與未來收成一個完整印象，像量子被觀測時的坍縮",
+          "Ne展開可能，Si收攏成形，兩者互相依存。"
+         ],
+         "url": "https://jungian16types.com/post-3769.html",
+         "art": "從量子物理學看Si-Ne軸",
+         "where": "基礎概念101 › 功能軸"
+        }
+       ],
+       [
+        {
+         "b": [
+          "Ni-Se 功能軸"
+         ],
+         "t": "Ni-Se 功能軸",
+         "en": null,
+         "meta": [
+          "分類｜非理性"
+         ],
+         "pv": [
+          "Ni（內傾直覺）↔Se（外傾感覺）",
+          "・Ni：感知世界整體同一而不斷幻變的「意象海」",
+          "・Se：感知意象化成的具體形態，如形狀、顏色、觸感",
+          "例：李小龍的「Be Water」，水隨容器成形是Se所見，水本身的變幻意象是Ni所見。"
+         ],
+         "url": "https://jungian16types.com/post-3787.html",
+         "art": "從李小龍Be Water看Ni-Se軸",
+         "where": "基礎概念101 › 功能軸"
+        }
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "label": "自我成長與整合",
+    "intro": "關於自我與自性，說明整合無意識的方向。",
+    "type": "btns",
+    "items": [
+     {
+      "b": [
+       "自我與自性"
+      ],
+      "t": "榮格類型學的建議與啟發",
+      "meta": [],
+      "pv": [
+       "・自我：意識的中心，即說「我」時所指的部分",
+       "・自性：意識與無意識合起來的整個人格中心，常透過夢與原型意象（人類共通的內心圖像）出現",
+       "・主導功能：自我最慣常出現的力比多（心理能量）流動形式",
+       "成長如英雄之旅：發展各功能、整合弱勢功能，最後帶著理解自由地回到主導功能。"
+      ],
+      "url": "https://jungian16types.com/post-1580.html",
+      "art": "榮格類型學的建議與啟發",
+      "where": "基礎概念101 › 自我成長與整合"
+     },
+     {
+      "b": [
+       "阿尼瑪／阿尼姆斯"
+      ],
+      "t": "阿尼瑪/阿尼姆斯是什麼？",
+      "meta": [],
+      "pv": [
+       "被壓抑到無意識的原型形象（人類共通的內心圖像）。",
+       "・阿尼瑪：男性內心的女性形象",
+       "・阿尼姆斯：女性內心的男性形象",
+       "・類型對應：功能順序完全相反的「相反類型」",
+       "例： INF（Ni-Fi-Te-Se）與 EST（Se-Te-Fi-Ni）",
+       "人對它既陌生又著迷。向相反類型學習，有助整合弱勢功能。"
+      ],
+      "url": "https://jungian16types.com/post-3265.html",
+      "art": "阿尼瑪/阿尼姆斯是什麼？",
+      "where": "基礎概念101 › 自我成長與整合"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "types",
+  "name": "類型描述",
+  "en": "Eight Psychological Types",
+  "lead": "八種經典榮格主導類型的描述。",
+  "sections": [
+   {
+    "label": "態度與性質",
+    "intro": "關於外傾與内傾、理性與非理性。",
+    "type": "matrix",
+    "hasLabel": true,
+    "corner": "類別",
+    "cols": [
+     "",
+     ""
+    ],
+    "rows": [
+     {
+      "label": "態度",
+      "sub": "外傾 ↔ 內傾",
+      "cells": [
+       [
+        {
+         "b": [
+          "外傾態度",
+          "Extraversion"
+         ],
+         "t": "外傾態度",
+         "en": "Extraversion",
+         "meta": [
+          "分類｜意識態度",
+          "相對概念｜內傾"
+         ],
+         "pv": [
+          "外傾者的決定與行動，主要取決於客觀情況。",
+          "・從外界取得確定感，道德標準隨社會要求而變",
+          "・容易為外界付出過多，忽略自己的身體與需要",
+          "・失衡時出現身心不適，迫使能量回流向內",
+          "無意識為內傾，帶強烈的自我中心傾向，起自動平衡的作用。"
+         ],
+         "url": "https://jungian16types.com/post-1477.html",
+         "art": "榮格原文：外傾類型",
+         "where": "類型描述 › 態度與性質"
+        }
+       ],
+       [
+        {
+         "b": [
+          "內傾態度",
+          "Introversion"
+         ],
+         "t": "內傾態度",
+         "en": "Introversion",
+         "meta": [
+          "分類｜意識態度",
+          "相對概念｜外傾"
+         ],
+         "pv": [
+          "內傾者以主觀因素為判斷依據。",
+          "・認識必須有主體：世界也是主觀印象中的世界",
+          "・榮格認為「自戀」「自我中心」的說法是外傾觀點的偏見",
+          "・源自先天心理結構（集體無意識與原型）",
+          "過度主觀時會與外界脫節，無意識中的外界反過來壓迫自己。"
+         ],
+         "url": "https://jungian16types.com/post-1495.html",
+         "art": "榮格原文：內傾類型",
+         "where": "類型描述 › 態度與性質"
+        }
+       ]
+      ]
+     },
+     {
+      "label": "性質",
+      "sub": "理性 ↔ 非理性",
+      "cells": [
+       [
+        {
+         "b": [
+          "理性",
+          "Rational"
+         ],
+         "t": "理性",
+         "en": "Rational",
+         "meta": [
+          "分類｜性質",
+          "相對概念｜非理性"
+         ],
+         "pv": [
+          "榮格把理性理解為一種態度：依客觀價值來思考、感受與行動。",
+          "・理性功能：思考（本站稱邏輯）與情感",
+          "・人類長期適應環境累積的共同經驗",
+          "・符合理性法則的屬理性，不符的屬非理性"
+         ],
+         "url": "https://jungian16types.com/post-1515.html",
+         "art": "榮格原文：理性類型",
+         "where": "類型描述 › 態度與性質"
+        }
+       ],
+       [
+        {
+         "b": [
+          "非理性",
+          "Irrational"
+         ],
+         "t": "非理性",
+         "en": "Irrational",
+         "meta": [
+          "分類｜感知方式",
+          "相對概念｜理性"
+         ],
+         "pv": [
+          "非理性是超出理性、理性無法解釋的範圍，如偶發事件。",
+          "・非理性功能：感覺與直覺，目的是完整察覺發生的一切",
+          "・需放下理性預設，適應偶然與各種可能",
+          "・無法成為學術研究對象，卻是實用心理學的重要因素"
+         ],
+         "url": "https://jungian16types.com/post-1530.html",
+         "art": "榮格原文：非理性類型",
+         "where": "類型描述 › 態度與性質"
+        }
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "label": "四大功能",
+    "intro": "四大功能包括邏輯T、情感F、感覺S、直覺N。榮格認為這是最基本的四個功能，每個人都擁有全部四種。",
+    "type": "matrix",
+    "hasLabel": false,
+    "corner": "",
+    "cols": [
+     "理性功能",
+     "非理性功能"
+    ],
+    "rows": [
+     {
+      "label": "",
+      "sub": "",
+      "cells": [
+       [
+        {
+         "b": [
+          "邏輯功能 Thinking"
+         ],
+         "t": "邏輯功能 Thinking",
+         "en": null,
+         "meta": [
+          "屬性｜理性功能",
+          "相對概念｜情感功能",
+          "Thinking｜內傾Ti／外傾Te"
+         ],
+         "pv": [
+          "邏輯功能判斷「客體是什麼」，建立定義、分類與原則（如時間單位、科學理論）。",
+          "・外傾邏輯Te：理型可被客觀驗證，成為共識",
+          "・内傾邏輯Ti：理型出自內在意象，自洽而先驗",
+          "・主導類型：ETS／ETN／ITS／ITN"
+         ],
+         "url": "https://jungian16types.com/post-1537.html",
+         "art": "邏輯功能",
+         "where": "類型描述 › 四大功能"
+        },
+        {
+         "b": [
+          "情感功能 Feeling"
+         ],
+         "t": "情感功能 Feeling",
+         "en": null,
+         "meta": [
+          "屬性｜理性功能",
+          "相對概念｜邏輯功能",
+          "Feeling｜內傾Fi／外傾Fe"
+         ],
+         "pv": [
+          "情感功能判斷「客體對人的價值」，評價好壞並命名情感與關係。它是穩定的價值判斷，有別於短暫的情緒。",
+          "・外傾情感Fe：依循群體公認的價值與氛圍",
+          "・内傾情感Fi：依循內在價值，欣賞情感意象",
+          "・主導類型：EFS／EFN／IFS／IFN"
+         ],
+         "url": "https://jungian16types.com/post-1545.html",
+         "art": "情感功能",
+         "where": "類型描述 › 四大功能"
+        }
+       ],
+       [
+        {
+         "b": [
+          "感覺功能 Sensing"
+         ],
+         "t": "感覺功能 Sensing",
+         "en": null,
+         "meta": [
+          "屬性｜非理性功能",
+          "相對概念｜直覺功能",
+          "Sensing｜內傾Si／外傾Se"
+         ],
+         "pv": [
+          "感覺功能感知「客體的存在形式」，直接接收體感細節。",
+          "・外傾感覺Se：接受現實原貌，即時互動",
+          "・内傾感覺Si：沉澱客體引發的主觀印象，常以藝術表達",
+          "・主導類型：EST／ESF／IST／ISF"
+         ],
+         "url": "https://jungian16types.com/post-1551.html",
+         "art": "感覺功能",
+         "where": "類型描述 › 四大功能"
+        },
+        {
+         "b": [
+          "直覺功能 iNtuition"
+         ],
+         "t": "直覺功能 iNtuition",
+         "en": null,
+         "meta": [
+          "屬性｜非理性功能",
+          "相對概念｜感覺功能",
+          "iNtuition｜內傾Ni／外傾Ne"
+         ],
+         "pv": [
+          "直覺功能感知「客體背後的隱藏連結與可能」，如預感、靈感，過程隨機而瞬間。",
+          "・外傾直覺Ne：察覺外在事物的可能與趨勢",
+          "・内傾直覺Ni：察覺內在的原型意象（人類共通的內心圖像）",
+          "・主導類型：ENT／ENF／INT／INF"
+         ],
+         "url": "https://jungian16types.com/post-1557.html",
+         "art": "直覺功能",
+         "where": "類型描述 › 四大功能"
+        }
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "label": "主導功能與力比多",
+    "intro": "主導功能作為整個意識中最壓倒性的傾向，主宰意識的一切活動。",
+    "type": "btns",
+    "items": [
+     {
+      "b": [
+       "主導功能與力比多"
+      ],
+      "t": "什麼是主導功能/力比多？",
+      "meta": [
+       "位於意識的功能"
+      ],
+      "pv": [
+       "力比多是心理能量，原指性衝動，榮格擴大為一般的心理動力。",
+       "・功能：力比多的呈現方式",
+       "・主導功能：主宰人格的功能，是追尋動力的方式",
+       "・外傾者：能量流向客體，追求統一外界的原則",
+       "・內傾者：能量收回主體，追求根本性原則",
+       "理性者追求把握原則，非理性者追求觀測意象與經驗。"
+      ],
+      "url": "https://jungian16types.com/post-1574.html",
+      "art": "什麼是主導功能/力比多？",
+      "where": "類型描述 › 主導功能與力比多"
+     }
+    ]
+   },
+   {
+    "label": "八種類型",
+    "intro": "兩種態度X四大功能，共可能產生八種主導類型。",
+    "type": "matrix",
+    "hasLabel": true,
+    "corner": "態度 / 功能",
+    "cols": [
+     "理性（Rational）",
+     "非理性（Irrational）"
+    ],
+    "rows": [
+     {
+      "label": "外傾（Extraversion）",
+      "sub": "意識取向受客觀因素導引",
+      "cells": [
+       [
+        {
+         "b": [
+          "ET",
+          "外傾邏輯類型",
+          "Extraverted Thinking Type"
+         ],
+         "t": "外傾邏輯類型 ET",
+         "en": "Extraverted Thinking Type",
+         "meta": [
+          "外傾｜理性｜邏輯"
+         ],
+         "pv": [
+          "定義：以最客觀的方式整理公認事實，建立人人可驗證的秩序，形象如執法者、科學家。",
+          "弱勢功能Fi被壓抑，個人價值觀會不自覺混入，造成徇私。",
+          "具有兩種輔助功能亞型：",
+          "・ETS：Te-Se-Ni-Fi",
+          "・ETN：Te-Ne-Si-Fi"
+         ],
+         "url": "https://jungian16types.com/post-1638.html",
+         "art": "外傾邏輯類型 ET",
+         "where": "類型描述 › 八種類型"
+        },
+        {
+         "b": [
+          "EF",
+          "外傾情感類型",
+          "Extraverted Feeling Type"
+         ],
+         "t": "外傾情感類型 EF",
+         "en": "Extraverted Feeling Type",
+         "meta": [
+          "外傾｜理性｜情感"
+         ],
+         "pv": [
+          "定義：依群體公認的價值作評價，建立團結群體的倫理秩序，形象如導師、政客。",
+          "弱勢功能Ti被壓抑，個人邏輯會不自覺混入，突然冷冷批評。",
+          "具有兩種輔助功能亞型：",
+          "・EFS：Fe-Se-Ni-Ti",
+          "・EFN：Fe-Ne-Si-Ti"
+         ],
+         "url": "https://jungian16types.com/post-1657.html",
+         "art": "外傾情感類型 EF",
+         "where": "類型描述 › 八種類型"
+        }
+       ],
+       [
+        {
+         "b": [
+          "ES",
+          "外傾感覺類型",
+          "Extraverted Sensing Type"
+         ],
+         "t": "外傾感覺類型 ES",
+         "en": "Extraverted Sensing Type",
+         "meta": [
+          "外傾｜非理性｜感覺"
+         ],
+         "pv": [
+          "定義：感知外在客體的實際特性並與之互動，是最貼近現實的功能，形象如企業家、運動員。",
+          "弱勢功能Ni被壓抑，可能疑神疑鬼或迷信。",
+          "具有兩種輔助功能亞型：",
+          "・EST：Se-Te-Fi-Ni",
+          "・ESF：Se-Fe-Ti-Ni"
+         ],
+         "url": "https://jungian16types.com/post-1669.html",
+         "art": "外傾感覺類型 ES",
+         "where": "類型描述 › 八種類型"
+        },
+        {
+         "b": [
+          "EN",
+          "外傾直覺類型",
+          "Extraverted iNtuition Type"
+         ],
+         "t": "外傾直覺類型 EN",
+         "en": "Extraverted iNtuition Type",
+         "meta": [
+          "外傾｜非理性｜直覺"
+         ],
+         "pv": [
+          "定義：察覺外在客體潛藏的可能與趨勢，不斷開展新想法，形象如投資者、記者。",
+          "弱勢功能Si被壓抑，可能被突然湧來的體感經驗淹沒，或產生恐懼症。",
+          "具有兩種輔助功能亞型：",
+          "・ENT：Ne-Te-Fi-Si",
+          "・ENF：Ne-Fe-Ti-Si"
+         ],
+         "url": "https://jungian16types.com/post-1681.html",
+         "art": "外傾直覺類型 EN",
+         "where": "類型描述 › 八種類型"
+        }
+       ]
+      ]
+     },
+     {
+      "label": "內傾（Introversion）",
+      "sub": "意識取向受主觀因素導引",
+      "cells": [
+       [
+        {
+         "b": [
+          "IT",
+          "內傾邏輯類型",
+          "Introverted Thinking Type"
+         ],
+         "t": "內傾邏輯類型 IT",
+         "en": "Introverted Thinking Type",
+         "meta": [
+          "內傾｜理性｜邏輯"
+         ],
+         "pv": [
+          "定義：以客體的內在特性定義客體，建立內部自洽的邏輯框架，形象如哲學家、學者。",
+          "弱勢功能Fe被壓抑，渴望被認同卻不知如何表達。",
+          "具有兩種輔助功能亞型：",
+          "・ITS：Ti-Si-Ne-Fe",
+          "・ITN：Ti-Ni-Se-Fe"
+         ],
+         "url": "https://jungian16types.com/post-1693.html",
+         "art": "內傾邏輯類型 IT",
+         "where": "類型描述 › 八種類型"
+        },
+        {
+         "b": [
+          "IF",
+          "內傾情感類型",
+          "Introverted Feeling Type"
+         ],
+         "t": "內傾情感類型 IF",
+         "en": "Introverted Feeling Type",
+         "meta": [
+          "內傾｜理性｜情感"
+         ],
+         "pv": [
+          "定義：以客體對自己的內在意義作價值評價，守護一套珍貴的價值體系，形象如作家、照顧者。",
+          "外表沉默，內心豐富。弱勢功能Te被壓抑，易忙於實踐原則。",
+          "具有兩種輔助功能亞型：",
+          "・IFS：Fi-Si-Ne-Te",
+          "・IFN：Fi-Ni-Se-Te"
+         ],
+         "url": "https://jungian16types.com/post-1705.html",
+         "art": "內傾情感類型 IF",
+         "where": "類型描述 › 八種類型"
+        }
+       ],
+       [
+        {
+         "b": [
+          "IS",
+          "內傾感覺類型",
+          "Introverted Sensing Type"
+         ],
+         "t": "內傾感覺類型 IS",
+         "en": "Introverted Sensing Type",
+         "meta": [
+          "內傾｜非理性｜感覺"
+         ],
+         "pv": [
+          "定義：留意客體在自己內心留下的深刻體感印象，帶有主觀色彩，形象如藝術家、工匠。",
+          "弱勢功能Ne被壓抑，易懼怕不可預測的意象。",
+          "具有兩種輔助功能亞型：",
+          "・IST：Si-Ti-Fe-Ne",
+          "・ISF：Si-Fi-Te-Ne"
+         ],
+         "url": "https://jungian16types.com/post-1717.html",
+         "art": "內傾感覺類型 IS",
+         "where": "類型描述 › 八種類型"
+        },
+        {
+         "b": [
+          "IN",
+          "內傾直覺類型",
+          "Introverted iNtuition Type"
+         ],
+         "t": "內傾直覺類型 IN",
+         "en": "Introverted iNtuition Type",
+         "meta": [
+          "內傾｜非理性｜直覺"
+         ],
+         "pv": [
+          "定義：察覺客體暗示的原型意象與象徵，追逐無形的本質，形象如先知、詩人。",
+          "弱勢功能Se被壓抑，失衡時會突然衝動地被客體吸引。",
+          "具有兩種輔助功能亞型：",
+          "・INT：Ni-Ti-Fe-Se",
+          "・INF：Ni-Fi-Te-Se"
+         ],
+         "url": "https://jungian16types.com/post-1729.html",
+         "art": "內傾直覺類型 IN",
+         "where": "類型描述 › 八種類型"
+        }
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "label": "榮格八種類型原文",
+    "intro": "榮格《心理類型》第十章對八種類型的描述原文節錄。",
+    "type": "matrix",
+    "hasLabel": true,
+    "corner": "態度 / 功能",
+    "cols": [
+     "理性（Rational）",
+     "非理性（Irrational）"
+    ],
+    "rows": [
+     {
+      "label": "外傾（Extraversion）",
+      "sub": "意識取向受客觀因素導引",
+      "cells": [
+       [
+        {
+         "b": [
+          "ET",
+          "外傾思維類型",
+          "Extraverted Thinking Type"
+         ],
+         "t": "外傾思維類型 ET",
+         "en": "Extraverted Thinking Type",
+         "meta": [
+          "外傾｜理性｜邏輯"
+         ],
+         "pv": [
+          "・以一道「公式」分辨對錯善惡，要求人人遵守",
+          "・公式涵蓋面廣，可成改革者；涵蓋面窄，易流於說教",
+          "・判斷標準來自客觀事實或社會公認的觀念",
+          "過度受制於客體時，思考只剩對事實的仿效。"
+         ],
+         "url": "https://jungian16types.com/post-1648.html",
+         "art": "外傾思維類型 ET",
+         "where": "類型描述 › 榮格八種類型原文"
+        },
+        {
+         "b": [
+          "EF",
+          "外傾情感類型",
+          "Extraverted Feeling Type"
+         ],
+         "t": "外傾情感類型 EF",
+         "en": "Extraverted Feeling Type",
+         "meta": [
+          "外傾｜理性｜情感"
+         ],
+         "pv": [
+          "・評價依據客觀標準與傳統：稱讚畫作「好」，因為場合合適，屬社交上的適應",
+          "・社交和諧與文化活動靠它推動",
+          "・思考服從情感：無法感受的，便不去想",
+          "客體影響過大時，情感失去個人特色，變得空洞誇張。"
+         ],
+         "url": "https://jungian16types.com/post-1663.html",
+         "art": "外傾情感類型 EF",
+         "where": "類型描述 › 榮格八種類型原文"
+        }
+       ],
+       [
+        {
+         "b": [
+          "ES",
+          "外傾感覺類型",
+          "Extraverted Sensing Type"
+         ],
+         "t": "外傾感覺類型 ES",
+         "en": "Extraverted Sensing Type",
+         "meta": [
+          "外傾｜非理性｜感覺"
+         ],
+         "pv": [
+          "・感知受外在客體制約，以感知強度衡量客體",
+          "・對現實事物極為敏銳，目標是具體的享受",
+          "・思考與情感服從感知，發展較弱",
+          "被壓抑的直覺會以強迫性的疑慮、迷信反撲。"
+         ],
+         "url": "https://jungian16types.com/post-1675.html",
+         "art": "外傾感覺類型 ES",
+         "where": "類型描述 › 榮格八種類型原文"
+        },
+        {
+         "b": [
+          "EN",
+          "外傾直覺類型",
+          "Extraverted iNtuition Type"
+         ],
+         "t": "外傾直覺類型 EN",
+         "en": "Extraverted iNtuition Type",
+         "meta": [
+          "外傾｜非理性｜直覺"
+         ],
+         "pv": [
+          "・以預感與洞察穿透表象，追求最大的可能性",
+          "・價值要靠事後的結果驗證",
+          "・處境如牢籠，客體是通往新可能的階梯，用完即棄",
+          "感覺會以大量刺激干擾直覺，故被高度壓制。"
+         ],
+         "url": "https://jungian16types.com/post-1687.html",
+         "art": "外傾直覺類型 EN",
+         "where": "類型描述 › 榮格八種類型原文"
+        }
+       ]
+      ]
+     },
+     {
+      "label": "內傾（Introversion）",
+      "sub": "意識取向受主觀因素導引",
+      "cells": [
+       [
+        {
+         "b": [
+          "IT",
+          "內傾思維類型",
+          "Introverted Thinking Type"
+         ],
+         "t": "內傾思維類型 IT",
+         "en": "Introverted Thinking Type",
+         "meta": [
+          "內傾｜理性｜思維"
+         ],
+         "pv": [
+          "・起點與終點都在主體：事實只是說明用的例子",
+          "・把模糊的原初意象（古老的內心圖像）整理成清晰觀念",
+          "・擅長提出理論與洞見",
+          "與外界脫節時，信念日益僵化，難被理解而孤立。"
+         ],
+         "url": "https://jungian16types.com/post-1699.html",
+         "art": "內傾思維類型 IT",
+         "where": "類型描述 › 榮格八種類型原文"
+        },
+        {
+         "b": [
+          "IF",
+          "內傾情感類型",
+          "Introverted Feeling Type"
+         ],
+         "t": "內傾情感類型 IF",
+         "en": "Introverted Feeling Type",
+         "meta": [
+          "內傾｜理性｜情感"
+         ],
+         "pv": [
+          "・依主觀先決條件判斷，目標是讓內心的原初意象成為現實",
+          "・極少表露，需要語言或藝術才能傳達",
+          "・自我與無意識混同時，變得專橫、有權力欲",
+          "被壓抑的思考若投射到外界，會變成猜疑他人。"
+         ],
+         "url": "https://jungian16types.com/post-1711.html",
+         "art": "內傾情感類型 IF",
+         "where": "類型描述 › 榮格八種類型原文"
+        }
+       ],
+       [
+        {
+         "b": [
+          "IS",
+          "內傾感覺類型",
+          "Introverted Sensing Type"
+         ],
+         "t": "內傾感覺類型 IS",
+         "en": "Introverted Sensing Type",
+         "meta": [
+          "內傾｜非理性｜感覺"
+         ],
+         "pv": [
+          "・感知帶有主觀因素：幾位畫家寫生同一風景，畫作各異",
+          "・客體只是外在刺激，主體感知的是被引發的內在意象",
+          "・現實因此帶有鬼神般的色彩",
+          "被壓抑的直覺會洞悉背後的危險，失衡時產生強迫症狀。"
+         ],
+         "url": "https://jungian16types.com/post-1723.html",
+         "art": "內傾感覺類型 IS",
+         "where": "類型描述 › 榮格八種類型原文"
+        },
+        {
+         "b": [
+          "IN",
+          "內傾直覺類型",
+          "Introverted iNtuition Type"
+         ],
+         "t": "內傾直覺類型 IN",
+         "en": "Introverted iNtuition Type",
+         "meta": [
+          "內傾｜非理性｜直覺"
+         ],
+         "pv": [
+          "・轉向「內在客體」：無意識內容（含集體無意識）呈現的意象",
+          "・專注意象的細節、變化與消逝，清晰如外傾感覺看外物",
+          "・視自己的靈視為使命，語言過於主觀而難被理解",
+          "被壓抑的感覺會以強迫性感知反撲。"
+         ],
+         "url": "https://jungian16types.com/post-1735.html",
+         "art": "內傾直覺類型 IN",
+         "where": "類型描述 › 榮格八種類型原文"
+        }
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "label": "類型功能疊對照表",
+    "intro": "",
+    "type": "stack",
+    "groups": [
+     {
+      "name": "外傾邏輯類型 ET",
+      "rows": [
+       {
+        "code": "ETS",
+        "fns": [
+         "Te",
+         "Se",
+         "Ni",
+         "Fi"
+        ]
+       },
+       {
+        "code": "ETN",
+        "fns": [
+         "Te",
+         "Ne",
+         "Si",
+         "Fi"
+        ]
+       }
+      ]
+     },
+     {
+      "name": "外傾情感類型 EF",
+      "rows": [
+       {
+        "code": "EFS",
+        "fns": [
+         "Fe",
+         "Se",
+         "Ni",
+         "Ti"
+        ]
+       },
+       {
+        "code": "EFN",
+        "fns": [
+         "Fe",
+         "Ne",
+         "Si",
+         "Ti"
+        ]
+       }
+      ]
+     },
+     {
+      "name": "外傾感覺類型 ES",
+      "rows": [
+       {
+        "code": "EST",
+        "fns": [
+         "Se",
+         "Te",
+         "Fi",
+         "Ni"
+        ]
+       },
+       {
+        "code": "ESF",
+        "fns": [
+         "Se",
+         "Fe",
+         "Ti",
+         "Ni"
+        ]
+       }
+      ]
+     },
+     {
+      "name": "外傾直覺類型 EN",
+      "rows": [
+       {
+        "code": "ENT",
+        "fns": [
+         "Ne",
+         "Te",
+         "Fi",
+         "Si"
+        ]
+       },
+       {
+        "code": "ENF",
+        "fns": [
+         "Ne",
+         "Fe",
+         "Ti",
+         "Si"
+        ]
+       }
+      ]
+     },
+     {
+      "name": "內傾邏輯類型 IT",
+      "rows": [
+       {
+        "code": "ITS",
+        "fns": [
+         "Ti",
+         "Si",
+         "Ne",
+         "Fe"
+        ]
+       },
+       {
+        "code": "ITN",
+        "fns": [
+         "Ti",
+         "Ni",
+         "Se",
+         "Fe"
+        ]
+       }
+      ]
+     },
+     {
+      "name": "內傾情感類型 IF",
+      "rows": [
+       {
+        "code": "IFS",
+        "fns": [
+         "Fi",
+         "Si",
+         "Ne",
+         "Te"
+        ]
+       },
+       {
+        "code": "IFN",
+        "fns": [
+         "Fi",
+         "Ni",
+         "Se",
+         "Te"
+        ]
+       }
+      ]
+     },
+     {
+      "name": "內傾感覺類型 IS",
+      "rows": [
+       {
+        "code": "IST",
+        "fns": [
+         "Si",
+         "Ti",
+         "Fe",
+         "Ne"
+        ]
+       },
+       {
+        "code": "ISF",
+        "fns": [
+         "Si",
+         "Fi",
+         "Te",
+         "Ne"
+        ]
+       }
+      ]
+     },
+     {
+      "name": "內傾直覺類型 IN",
+      "rows": [
+       {
+        "code": "INT",
+        "fns": [
+         "Ni",
+         "Ti",
+         "Fe",
+         "Se"
+        ]
+       },
+       {
+        "code": "INF",
+        "fns": [
+         "Ni",
+         "Fi",
+         "Te",
+         "Se"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "sources",
+  "name": "榮格原文",
+  "en": "Primary Sources",
+  "lead": "榮格《心理類型》原文節錄，以及書中包含的詞條定義。",
+  "sections": [
+   {
+    "label": "四大功能",
+    "intro": "",
+    "type": "matrix",
+    "hasLabel": false,
+    "corner": "",
+    "cols": [
+     "理性功能",
+     "非理性功能"
+    ],
+    "rows": [
+     {
+      "label": "",
+      "sub": "",
+      "cells": [
+       [
+        {
+         "b": [
+          "思維功能",
+          "Thinking"
+         ],
+         "t": "思維功能",
+         "en": "Thinking",
+         "meta": [
+          "分類｜理性功能",
+          "相對概念｜情感功能"
+         ],
+         "pv": [
+          "思維功能依概念把觀念連結起來，作出判斷。",
+          "・主動思考（導向性思考）：有意識地進行，屬理性，榮格稱為智識",
+          "・被動思考（直覺性思考）：自行浮現，屬非理性",
+          "・與情感結合的思考，依情感原則運作，思維只是外表"
+         ],
+         "url": "https://jungian16types.com/post-1820.html",
+         "art": "榮格原文：邏輯/思考功能",
+         "where": "榮格原文 › 四大功能"
+        },
+        {
+         "b": [
+          "情感功能",
+          "Feeling"
+         ],
+         "t": "情感功能",
+         "en": "Feeling",
+         "meta": [
+          "分類｜理性功能",
+          "相對概念｜思維功能"
+         ],
+         "pv": [
+          "情感功能以接受或拒絕（愉悅或不快）賦予內容價值，是一種主觀的判斷。",
+          "・心境：持續的情感狀態",
+          "・情緒：情感強到引發明顯身體反應",
+          "・具體情感混有感知；抽象情感形成統一的心境",
+          "價值判定依循理性法則，故屬理性功能。"
+         ],
+         "url": "https://jungian16types.com/post-1827.html",
+         "art": "榮格原文：情感功能",
+         "where": "榮格原文 › 四大功能"
+        }
+       ],
+       [
+        {
+         "b": [
+          "感覺功能",
+          "Sensing"
+         ],
+         "t": "感覺功能",
+         "en": "Sensing",
+         "meta": [
+          "分類｜非理性功能",
+          "相對概念｜直覺功能"
+         ],
+         "pv": [
+          "感覺功能傳達被察覺的生理刺激，來源包括外界與體內器官。",
+          "・具體感知：混雜觀念與情感",
+          "・抽象感知：只抽取最鮮明的特徵（如花瓣的紅色），多見於藝術家",
+          "感覺是意識的知覺，直覺是無意識的知覺，二者互補。"
+         ],
+         "url": "https://jungian16types.com/post-1833.html",
+         "art": "榮格原文：感覺/感知功能",
+         "where": "榮格原文 › 四大功能"
+        },
+        {
+         "b": [
+          "直覺功能",
+          "iNtuition"
+         ],
+         "t": "直覺功能",
+         "en": "iNtuition",
+         "meta": [
+          "分類｜非理性功能",
+          "相對概念｜感覺功能"
+         ],
+         "pv": [
+          "直覺功能透過無意識傳達察覺，對象可以是外在客體、內在客體或兩者的關係。",
+          "・內容完整浮現，卻說不出如何形成",
+          "・有主觀與客觀、具體與抽象之分",
+          "・可內傾（察覺內在）或外傾（察覺外在）"
+         ],
+         "url": "https://jungian16types.com/post-1839.html",
+         "art": "榮格原文：直覺功能",
+         "where": "榮格原文 › 四大功能"
+        }
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "label": "類型與功能",
+    "intro": "",
+    "type": "btns",
+    "items": [
+     {
+      "b": [
+       "類型"
+      ],
+      "t": "榮格原文：詞條-類型",
+      "meta": [],
+      "pv": [
+       "類型是能代表某種普遍特徵的典型。",
+       "心理類型是習慣化的態度所反映的性格典型：",
+       "・功能類型：思維T、情感F、感覺S、直覺N四種",
+       "・理性類型包括思維T、情感F；非理性類型包括感覺S、直覺N",
+       "・態度類型：內傾I、外傾E，層級高於功能類型，每種功能類型都可內傾或外傾"
+      ],
+      "url": "https://jungian16types.com/post-1974.html",
+      "art": "榮格原文：詞條-類型",
+      "where": "榮格原文 › 類型與功能"
+     },
+     {
+      "b": [
+       "功能"
+      ],
+      "t": "榮格原文：詞條-功能",
+      "meta": [],
+      "pv": [
+       "功能是原則上不會改變的心理活動形式，也是力比多（心理能量）的表現形式。",
+       "四種基本功能：",
+       "・理性功能：思維T、情感F",
+       "・非理性功能：感覺S、直覺N",
+       "四者原則互不相同。幻想可出現在每種功能之中。"
+      ],
+      "url": "https://jungian16types.com/post-1911.html",
+      "art": "榮格原文：詞條-功能",
+      "where": "榮格原文 › 類型與功能"
+     },
+     {
+      "b": [
+       "態度"
+      ],
+      "t": "榮格原文：詞條-態度",
+      "meta": [],
+      "pv": [
+       "態度是準備以某種傾向行動或回應的心理狀態。",
+       "・決定個體如何選擇、理解外來刺激",
+       "・意識與無意識各有態度",
+       "・意識態度促進相似內容的察覺，造成偏重一方；無意識自動平衡（補償）",
+       "某功能習慣性佔優，便形成典型態度，即心理類型。"
+      ],
+      "url": "https://jungian16types.com/post-1902.html",
+      "art": "榮格原文：詞條-態度",
+      "where": "榮格原文 › 類型與功能"
+     },
+     {
+      "b": [
+       "分化"
+      ],
+      "t": "榮格原文：詞條-分化",
+      "meta": [],
+      "pv": [
+       "分化是整體中的部分分離出來，獨立發展。",
+       "・未分化功能：與其他功能混合（如思維混著情感），處於古老原始的狀態，常帶矛盾傾向，如愛恨交織",
+       "・已分化功能：與其他功能分離，排除屬性不同的成分，能有方向地被運用"
+      ],
+      "url": "https://jungian16types.com/post-1896.html",
+      "art": "榮格原文：詞條-分化",
+      "where": "榮格原文 › 類型與功能"
+     },
+     {
+      "b": [
+       "弱勢功能"
+      ],
+      "t": "榮格原文：詞條-弱勢/劣勢功能",
+      "meta": [],
+      "pv": [
+       "弱勢功能是分化過程中發展落後的功能。",
+       "・成因：社會要求使最常用的功能高度發展，其餘落後",
+       "・屬於發展落差，並非疾病",
+       "・能量沉入無意識，退回古老原始的狀態並激發幻想",
+       "讓這些幻想浮現並分析，功能便能重新發展。"
+      ],
+      "url": "https://jungian16types.com/post-1941.html",
+      "art": "榮格原文：詞條-弱勢/劣勢功能",
+      "where": "榮格原文 › 類型與功能"
+     }
+    ]
+   },
+   {
+    "label": "心理結構",
+    "intro": "",
+    "type": "btns",
+    "items": [
+     {
+      "b": [
+       "意識"
+      ],
+      "t": "榮格原文：詞條-意識",
+      "meta": [],
+      "pv": [
+       "意識是心理內容與自我之間的關係。",
+       "・自我能感知這種關係：意識",
+       "・自我無法感知：無意識",
+       "意識是維繫這種關係的活動。心理（Psyche）是所有心理內容的總和，其中許多內容（如情結，以情感為核心的心理內容群）不一定與自我相關。"
+      ],
+      "url": "https://jungian16types.com/post-1875.html",
+      "art": "榮格原文：詞條-意識",
+      "where": "榮格原文 › 心理結構"
+     },
+     {
+      "b": [
+       "無意識"
+      ],
+      "t": "榮格原文：詞條-無意識",
+      "meta": [],
+      "pv": [
+       "無意識是個體沒有察覺、與自我無關的心理內容與過程。",
+       "・依據：臨床經驗，如被遺忘的內容會在夢、催眠中重現",
+       "・個體無意識：個人經歷中被遺忘、壓抑的內容",
+       "・集體無意識：遺傳而來、不斷再生的神話題材與意象",
+       "無意識對意識的偏重起自動平衡（補償）作用。"
+      ],
+      "url": "https://jungian16types.com/post-1980.html",
+      "art": "榮格原文：詞條-無意識",
+      "where": "榮格原文 › 心理結構"
+     },
+     {
+      "b": [
+       "自我"
+      ],
+      "t": "榮格原文：詞條-自我",
+      "meta": [],
+      "pv": [
+       "自我是構成個體意識領域的觀念綜合體，即意識的中心。",
+       "・自我只是眾多心理綜合體之一",
+       "・整體心理（含意識與無意識）的主體是「本質我」（即自性）",
+       "・本質我常以浮士德、查拉圖斯特拉般的崇高形象出現在幻想中；自我的原始面則以魔鬼般的影子與之對照"
+      ],
+      "url": "https://jungian16types.com/post-1917.html",
+      "art": "榮格原文：詞條-自我",
+      "where": "榮格原文 › 心理結構"
+     },
+     {
+      "b": [
+       "自性（本質我）"
+      ],
+      "t": "榮格原文：詞條-自性/本質我",
+      "meta": [],
+      "pv": [
+       "自性是個人所有心理現象的整體，代表整體人格的統一。",
+       "・包含意識與無意識，只有一部分可被經驗",
+       "・常以國王、英雄等崇高形象，或圓形、四方形、十字等象徵，出現在夢與神話中",
+       "・也以陰陽、英雄與惡龍等對立的統合呈現",
+       "屬原型觀念，居核心位置。"
+      ],
+      "url": "https://jungian16types.com/post-1953.html",
+      "art": "榮格原文：詞條-自性/本質我",
+      "where": "榮格原文 › 心理結構"
+     },
+     {
+      "b": [
+       "個體化"
+      ],
+      "t": "榮格原文：詞條-個體化",
+      "meta": [],
+      "pv": [
+       "個體化是個體形成並獨特化的過程。",
+       "・心理個體從集體心理中分化出來，發展自己的人格",
+       "・等於從原初同一的狀態出發，擴展意識",
+       "・與集體建立更密切的連繫",
+       "・前提：先具備生存所需的最低集體規範",
+       "個體方式與集體準則方向不同，把個體方式升為準則時才會衝突。"
+      ],
+      "url": "https://jungian16types.com/post-1923.html",
+      "art": "榮格原文：詞條-個體化",
+      "where": "榮格原文 › 心理結構"
+     },
+     {
+      "b": [
+       "補償"
+      ],
+      "t": "榮格原文：詞條-補償",
+      "meta": [],
+      "pv": [
+       "補償是心理自行調節的機制，即無意識自動平衡意識。",
+       "・意識選擇必然排除部分內容，造成偏重",
+       "・被排除的內容落入無意識，形成抗衡力量",
+       "・經夢與自發意象傳達給意識，補充意識態度",
+       "意識與無意識過度對立時，補償受阻，出現精神官能症（心理失調）。"
+      ],
+      "url": "https://jungian16types.com/post-1929.html",
+      "art": "榮格原文：詞條-補償",
+      "where": "榮格原文 › 心理結構"
+     }
+    ]
+   },
+   {
+    "label": "能量與動力",
+    "intro": "",
+    "type": "btns",
+    "items": [
+     {
+      "b": [
+       "力比多"
+      ],
+      "t": "榮格原文：詞條-力比多",
+      "meta": [],
+      "pv": [
+       "力比多是心理能量，代表心理過程的強度與心理價值。",
+       "・價值體現在實際的心理效應上，如心理能力的展現",
+       "・榮格以「能量」一詞形容強度，沒有把它當成某種實體",
+       "・類型學中，功能是力比多的呈現方式"
+      ],
+      "url": "https://jungian16types.com/post-1935.html",
+      "art": "榮格原文：詞條-力比多",
+      "where": "榮格原文 › 能量與動力"
+     },
+     {
+      "b": [
+       "驅力"
+      ],
+      "t": "榮格原文：詞條-驅力",
+      "meta": [],
+      "pv": [
+       "驅力是迫使個體行動的強制性力量。",
+       "・來源：外在或內在刺激，或生理原因",
+       "・榮格定義：所有在能量上不受意識支配的心理過程，情緒也屬於此",
+       "・意志過程：受意識控制；意識範圍縮窄（如過度疲勞）時，可能轉為驅力過程",
+       "已自動化的過程稱「自動過程」。"
+      ],
+      "url": "https://jungian16types.com/post-1968.html",
+      "art": "榮格原文：詞條-驅力",
+      "where": "榮格原文 › 能量與動力"
+     },
+     {
+      "b": [
+       "意志"
+      ],
+      "t": "榮格原文：詞條-意志",
+      "meta": [],
+      "pv": [
+       "意志是意識所能支配的心理能量總和。",
+       "・意志過程：由意識動機引發的能量過程",
+       "・無意識動機引起的過程不屬意志過程",
+       "意志可歸因於文化與道德教育，原始人的思維方式中極為缺乏。"
+      ],
+      "url": "https://jungian16types.com/post-1986.html",
+      "art": "榮格原文：詞條-意志",
+      "where": "榮格原文 › 能量與動力"
+     },
+     {
+      "b": [
+       "情緒"
+      ],
+      "t": "榮格原文：詞條-情緒",
+      "meta": [],
+      "pv": [
+       "情緒是情感強到引起身體神經反應、擾亂思緒的狀態。",
+       "・情感：個體可任意支配的功能",
+       "・情緒：通常不受控制，心理與身體狀態互相增強",
+       "因伴隨明顯的身體感受，榮格把這類情緒歸入感覺功能。"
+      ],
+      "url": "https://jungian16types.com/post-1863.html",
+      "art": "榮格原文：詞條-情緒",
+      "where": "榮格原文 › 能量與動力"
+     }
+    ]
+   },
+   {
+    "label": "意象與想像",
+    "intro": "",
+    "type": "btns",
+    "items": [
+     {
+      "b": [
+       "意象"
+      ],
+      "t": "榮格原文：詞條-意象",
+      "meta": [],
+      "pv": [
+       "意象是由無意識幻想產生的內心圖像，常以靈視般的方式突然浮現。",
+       "・特點：有幻想的質感，具高度心理價值",
+       "・表達意識與無意識當前的整體狀況",
+       "・原初意象（原型）：與神話主題一致的意象，反映集體無意識，對整個民族或時代共通"
+      ],
+      "url": "https://jungian16types.com/post-1881.html",
+      "art": "榮格原文：詞條-意象",
+      "where": "榮格原文 › 意象與想像"
+     },
+     {
+      "b": [
+       "古老的原始性"
+      ],
+      "t": "榮格原文：詞條-古老的原始性",
+      "meta": [],
+      "pv": [
+       "指從遠古留存下來的心理特徵，與原始人的思維方式一致，主要見於無意識幻想。",
+       "・與神話相似的無意識意象",
+       "・象徵性的聯想",
+       "・分不清自己與外物（神祕參與）",
+       "・思考與情感等功能混在一起",
+       "・同時帶有正反兩面的矛盾傾向"
+      ],
+      "url": "https://jungian16types.com/post-1869.html",
+      "art": "榮格原文：詞條-古老的原始性",
+      "where": "榮格原文 › 意象與想像"
+     },
+     {
+      "b": [
+       "幻想"
+      ],
+      "t": "榮格原文：詞條-幻想",
+      "meta": [],
+      "pv": [
+       "幻想有兩個意思：幻象（不符合外在事實的觀念）與想像活動。",
+       "・積極幻想：由直覺引發，意識主動參與，能把意識與無意識人格融合，屬最高等的心理活動",
+       "・消極幻想：意識被動，由與意識對立的無意識突破而生，常顯得病態",
+       "幻想可出現在四種功能之中。"
+      ],
+      "url": "https://jungian16types.com/post-1947.html",
+      "art": "榮格原文：詞條-幻想",
+      "where": "榮格原文 › 意象與想像"
+     },
+     {
+      "b": [
+       "象徵"
+      ],
+      "t": "榮格原文：詞條-象徵",
+      "meta": [],
+      "pv": [
+       "象徵是對尚未明白、難以言喻之事最恰當的表達。",
+       "・符號：代表已知事物（如鐵路局徽章標示隸屬）",
+       "・象徵：表達未知（如十字架對信徒表達說不盡的心理事實）",
+       "象徵有隱含的意義才有效力；一旦被解釋清楚，就變成只具歷史意義的符號。"
+      ],
+      "url": "https://jungian16types.com/post-1962.html",
+      "art": "榮格原文：詞條-象徵",
+      "where": "榮格原文 › 意象與想像"
+     }
+    ]
+   },
+   {
+    "label": "夢的解釋層面",
+    "intro": "",
+    "type": "matrix",
+    "hasLabel": false,
+    "corner": "",
+    "cols": [
+     "客觀層面",
+     "主觀層面"
+    ],
+    "rows": [
+     {
+      "label": "",
+      "sub": "",
+      "cells": [
+       [
+        {
+         "b": [
+          "客觀層面"
+         ],
+         "t": "客觀層面",
+         "en": null,
+         "meta": [],
+         "pv": [
+          "客觀層面是解釋夢與幻想的一種角度。",
+          "・做法：把夢中的人物與關係，視為現實中真實的人或關係",
+          "・相對：主觀層面",
+          "榮格指出佛洛伊德多用此角度，以相關的實在客體與性的作用解釋夢中的願望。"
+         ],
+         "url": "https://jungian16types.com/post-1992.html",
+         "art": "榮格原文：詞條-客觀層面",
+         "where": "榮格原文 › 夢的解釋層面"
+        }
+       ],
+       [
+        {
+         "b": [
+          "主觀層面"
+         ],
+         "t": "主觀層面",
+         "en": null,
+         "meta": [],
+         "pv": [
+          "主觀層面是解釋夢與幻想的一種角度。",
+          "・做法：把夢中的人物與情況，視為自己內心的主觀因素",
+          "・依據：心中的客體影像（Imago）經感官與統覺形成，必受主觀影響，反映的是自己與客體的關係",
+          "夢中人物代表自己心理的各個部分；文學角色亦可如此理解。"
+         ],
+         "url": "https://jungian16types.com/post-1998.html",
+         "art": "榮格原文：詞條-主觀層面",
+         "where": "榮格原文 › 夢的解釋層面"
+        }
+       ]
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "compare",
+  "name": "系統對比",
+  "en": "Comparisons",
+  "lead": "與其他人格類型學系統如 MBTI、榮格八維、16p、九型人格、社會人格學等的比較。",
+  "sections": [
+   {
+    "label": "總論",
+    "intro": "關於如何定位榮格類型學的問題。",
+    "type": "btns",
+    "items": [
+     {
+      "b": [
+       "類型測驗的局限"
+      ],
+      "t": "為何測驗不完全可靠",
+      "meta": [],
+      "pv": [
+       "測驗結果只是認識類型的起點，原因有四：",
+       "・自我只認識意識的部分，作答也受當下狀態影響",
+       "・力比多等概念難以量化，有意識的推測易被誤當成直覺",
+       "・榮格概念難以符合現代量表對信度（穩定）與效度（準確）的要求",
+       "・坊間測驗常改動榮格概念"
+      ],
+      "url": "https://jungian16types.com/post-1586.html",
+      "art": "為何測驗不完全可靠",
+      "where": "系統對比 › 總論"
+     },
+     {
+      "b": [
+       "類型論與特質論"
+      ],
+      "t": "榮格類型學「科學」嗎？",
+      "meta": [],
+      "pv": [
+       "・特質論：以外顯、可變的性格特質描述人，如大五人格，是目前獲心理學界認證的理論",
+       "・類型論（榮格）：觀測不變的核心心理驅力，即力比多",
+       "現行量表只能測到性格特質，要符合科學認證就會削弱榮格理論的特色。類型論背後仍有值得保留的假設。"
+      ],
+      "url": "https://jungian16types.com/post-2086.html",
+      "art": "榮格類型學「科學」嗎？",
+      "where": "系統對比 › 總論"
+     }
+    ]
+   },
+   {
+    "label": "類型論",
+    "intro": "",
+    "subs": [
+     {
+      "label": "榮格類型分支",
+      "items": [
+       {
+        "b": [
+         "各系統類型不互通"
+        ],
+        "t": "經典榮格類型跟MBTI/16p互通嗎？",
+        "meta": [
+         "類型論｜榮格類型分支"
+        ],
+        "pv": [
+         "經典榮格、MBTI、16p 各有自己的類型命名與功能定義，同名類型內容不同，判型結果不能互換。",
+         "・16p：屬特質論，把F定義為「感性」、N定義為「愛談抽象」",
+         "・MBTI：把內傾理性與內傾非理性類型的名稱對調，並假設輔助功能與主導功能的內外傾相反",
+         "經典榮格以榮格原著定義為準。"
+        ],
+        "url": "https://jungian16types.com/post-2094.html",
+        "art": "經典榮格類型跟MBTI/16p互通嗎？",
+        "where": "系統對比 › 類型論 › 榮格類型分支"
+       },
+       {
+        "b": [
+         "MBTI／榮格八維"
+        ],
+        "t": "經典榮格 vs MBTI/榮格八維",
+        "meta": [
+         "類型論｜榮格類型分支"
+        ],
+        "pv": [
+         "MBTI 有兩處與經典榮格不同：",
+         "・功能疊：輔助功能與主導功能內外傾相反（IEIE）；經典榮格為同向（IIEE），平衡由整個無意識負責",
+         "・命名：內傾理性與內傾非理性類型的名稱對調",
+         "榮格八維沿用這些設定，並加入「陰面」模型，把無意識功能當作另一組功能。"
+        ],
+        "url": "https://jungian16types.com/post-2108.html",
+        "art": "經典榮格 vs MBTI/榮格八維",
+        "where": "系統對比 › 類型論 › 榮格類型分支"
+       }
+      ]
+     },
+     {
+      "label": "靈性與精神分析分支",
+      "items": [
+       {
+        "b": [
+         "九型人格"
+        ],
+        "t": "經典榮格 vs 九型人格",
+        "meta": [
+         "類型論｜靈性與精神分析分支"
+        ],
+        "pv": [
+         "九型人格與榮格類型學的相同處：",
+         "・同屬類型論，同源於精神分析",
+         "・「激情與固著」與主導功能相近，都描述心理動力",
+         "相異處：",
+         "・九型以九種客體關係（與對象的內在關係）分類；榮格以八種主導功能分類",
+         "・九型視慾望為強迫的固著；榮格只在過度依賴時視為失衡",
+         "兩者都鼓勵人擁抱更完整的自己。"
+        ],
+        "url": "https://jungian16types.com/post-3234.html",
+        "art": "經典榮格 vs 九型人格",
+        "where": "系統對比 › 類型論 › 靈性與精神分析分支"
+       }
+      ]
+     },
+     {
+      "label": "榮格類型與代謝論分支",
+      "items": [
+       {
+        "b": [
+         "社會人格學"
+        ],
+        "t": "經典榮格 vs 社會人格學",
+        "meta": [
+         "類型論｜榮格類型與代謝論分支"
+        ],
+        "pv": [
+         "社會人格學沿用榮格術語，並重新定義、延伸，與經典榮格不能互通。",
+         "・學派眾多：有近似榮格原意的經典學派，也有改動較大的現代學派",
+         "・例：內外傾的定義不同；意志力被納入功能",
+         "同名術語含義不同，宜先穩固一個系統，再學另一個。"
+        ],
+        "url": "https://jungian16types.com/post-3244.html",
+        "art": "經典榮格 vs 社會人格學",
+        "where": "系統對比 › 類型論 › 榮格類型與代謝論分支"
+       }
+      ]
+     },
+     {
+      "label": "生物學分支",
+      "items": [
+       {
+        "b": [
+         "四大氣質"
+        ],
+        "t": "經典榮格與四大氣質",
+        "meta": [
+         "類型論｜生物學分支"
+        ],
+        "pv": [
+         "四種氣質：膽汁質（領袖、衝動）、多血質（社交、樂觀）、黏液質（平靜、有耐性）、憂鬱質（細膩、悲觀）。",
+         "主要與次要氣質組成4×4＝16種組合，可對應16種類型：",
+         "・膽汁質：EST、ETS、EFN、ETN",
+         "・多血質：ESF、EFS、ENT、ENF",
+         "・黏液質：ISF、IFS、INT、INF",
+         "・憂鬱質：IST、ITS、ITN、IFN"
+        ],
+        "url": "https://jungian16types.com/post-3327.html",
+        "art": "經典榮格與四大氣質",
+        "where": "系統對比 › 類型論 › 生物學分支"
+       }
+      ]
+     }
+    ],
+    "type": "subs"
+   },
+   {
+    "label": "特質論",
+    "intro": "",
+    "type": "btns",
+    "items": [
+     {
+      "b": [
+       "16P（16personalities）"
+      ],
+      "t": "經典榮格 vs 16P",
+      "meta": [
+       "特質論"
+      ],
+      "pv": [
+       "16p 沿用 MBTI 式命名，實質是大五人格的改裝。",
+       "・量度方式：各維度獨立打百分比，另加 A/T 維度對應神經質",
+       "・限制：看不出主導功能；題目含刻板印象，如以「喜歡藝術」量度情感功能",
+       "・優點：四組二分（內外傾、感覺直覺、邏輯情感、理性非理性）本於榮格，類型形象亦較貼近原著"
+      ],
+      "url": "https://jungian16types.com/post-2123.html",
+      "art": "經典榮格 vs 16P",
+      "where": "系統對比 › 特質論"
+     }
+    ]
+   },
+   {
+    "label": "玄學",
+    "intro": "",
+    "subs": [
+     {
+      "label": "西方玄學分支",
+      "items": [
+       {
+        "b": [
+         "塔羅宮廷卡"
+        ],
+        "t": "經典榮格與塔羅宮廷卡",
+        "meta": [
+         "玄學｜西方玄學分支"
+        ],
+        "pv": [
+         "宮廷卡的四種角色，對應榮格參考的原型形象（人類共通的典型形象）：",
+         "・國王：外傾理性主導（ETS、ETN、EFS、EFN），推行群體準則",
+         "・皇后：內傾理性主導（ITS、ITN、IFS、IFN），守護自己的原則",
+         "・騎士：外傾非理性主導（EST、ESF、ENT、ENF），好奇探索",
+         "・侍從：內傾非理性主導（IST、ISF、INT、INF），觀察存在的意義",
+         "配合四元素得16種。"
+        ],
+        "url": "https://jungian16types.com/post-3335.html",
+        "art": "經典榮格與塔羅宮廷卡",
+        "where": "系統對比 › 玄學 › 西方玄學分支"
+       }
+      ]
+     }
+    ],
+    "type": "subs"
+   }
+  ]
+ },
+ {
+  "key": "faq",
+  "name": "常見問題",
+  "en": "FAQ",
+  "lead": "各種關於榮格類型學和經典榮格的常見問題，以及常見誤解的闢謠。",
+  "sections": [],
+  "items": [
+   {
+    "t": "N人比較「抽象」嗎？",
+    "url": "https://jungian16types.com/post-3890.html",
+    "d": "2026年3月11日",
+    "tags": [
+     "直覺功能/類型",
+     "內傾功能/類型"
+    ],
+    "pv": [
+     "部分正確，但「抽象」有三種成因：一、直覺忽略客體本身，聚焦其引發的可能與意味；二、內傾本身處理內化的主觀客體，更接近日常所說的抽象（內傾感覺亦極抽象）；三、任何功能分化成熟後，都會因統覺（把經驗統合成自己的理解）而產生抽象性。不能因思維抽象就判為直覺類型。"
+    ]
+   },
+   {
+    "t": "雙內傾會變得「自閉」嗎？",
+    "url": "https://jungian16types.com/post-3870.html",
+    "d": "2026年2月25日",
+    "tags": [
+     "內傾功能/類型",
+     "外傾功能/類型"
+    ],
+    "pv": [
+     "不會。內傾指力比多流向內在客體，與社交內外向無關；意識內傾者（I型）的無意識是外傾的，會不自覺地影響外界，只是較難察覺。本文說明如何辨別：內傾者予人「深度」感、外傾者予人「廣度」感，且不能以是否社交外向來判斷。"
+    ]
+   },
+   {
+    "t": "Te代表效率快的意思嗎？",
+    "url": "https://jungian16types.com/post-3834.html",
+    "d": "2026年2月18日",
+    "tags": [
+     "邏輯功能/類型"
+    ],
+    "pv": [
+     "不是。「Te＝效率」是社會人格學的定義，不適用於榮格。外傾邏輯（Te）屬理性功能，須先提取普遍原則再套用，面對臨場情況反而較慢；外傾感覺與外傾直覺更能即時把握變化。各功能在自己的領域都最具「效益」；Te追求的是程序的公正與客觀普世，而非速度。"
+    ]
+   },
+   {
+    "t": "類型與創傷有關嗎？",
+    "url": "https://jungian16types.com/post-3636.html",
+    "d": "2026年1月21日",
+    "tags": [
+     "哲學/精神分析基礎概念"
+    ],
+    "pv": [
+     "有關，但不是「某類型創傷最多」。精神分析認為人格源於早期母子分離的創傷，主導功能就是我們應對慾望受挫的主要手段，所以每種類型都是創傷的產物，只是應對方式不同：理性類型尋找可把握的資訊，非理性類型快速適應環境。請勿比慘，也勿否定他人的創傷。"
+    ]
+   },
+   {
+    "t": "類型的道德、真理與意義",
+    "url": "https://jungian16types.com/post-3378.html",
+    "d": "2026年1月17日",
+    "tags": [],
+    "pv": [
+     "「道德」「真理」「意義」三詞，在各類型眼中定義不同。道德：外傾邏輯重公共規條，內傾邏輯堅持自洽的內在格言，情感類型近乎情感共識，非理性類型視之為基本事實。真理：邏輯者是統領一切的原則，情感者是真善美，感覺者是事實，直覺者是靈光一現。意義：外傾重情境效果，內傾重客體內在。"
+    ]
+   },
+   {
+    "t": "N人的想象力比較強？",
+    "url": "https://jungian16types.com/post-3368.html",
+    "d": "2026年1月17日",
+    "tags": [
+     "直覺功能/類型",
+     "功能定義"
+    ],
+    "pv": [
+     "不是。榮格把「幻想」分為幻象與想像活動，後者是所有功能都有的普遍心理活動，並非直覺專利；直覺的想像多是無意識的靈光，沒有具體畫面。例如內傾感覺的藝術家想像出鮮明的體感場景，邏輯者想像結構，情感者想像人際情境。"
+    ]
+   },
+   {
+    "t": "Si是遵循傳統或習慣的意思嗎？",
+    "url": "https://jungian16types.com/post-3361.html",
+    "d": "2026年1月17日",
+    "tags": [
+     "理性非理性",
+     "理性功能/類型",
+     "非理性功能/類型",
+     "功能定義",
+     "感覺功能/類型"
+    ],
+    "pv": [
+     "不是。內傾感覺（Si）是非理性功能，感知客體留下的主觀體感印象，不帶對常理的判斷；傳統屬集體常理，是理性功能的範疇。重視傳統的形象，更接近以理性功能（邏輯或情感）為主導、感覺為輔助的四種類型；而「重視已存」不等於認同，他們也可以選擇改革。"
+    ]
+   },
+   {
+    "t": "類型之間的相處契合度",
+    "url": "https://jungian16types.com/post-3342.html",
+    "d": "2026年1月17日",
+    "tags": [],
+    "pv": [
+     "類型能準確預測相處契合度嗎？不能。目前沒有相關統計或理論，網上的「官配」多屬想像。從榮格理論可推出三道鴻溝：內傾與外傾、理性與非理性、對軸功能（邏輯↔情感、感覺↔直覺）。人常被完全相反的類型吸引（阿尼瑪／阿尼姆斯），而相同類型也未必合得來。請勿以類型挑選對象。"
+    ]
+   },
+   {
+    "t": "Fi = Follow Your Heart?",
+    "url": "https://jungian16types.com/post-2215.html",
+    "d": "2026年1月13日",
+    "tags": [
+     "情感功能/類型"
+    ],
+    "pv": [
+     "不能把內傾情感（Fi）簡化為「跟隨內心」：榮格認為每種類型的主導功能都是力比多（慾望）的呈現，故每個類型（包括外傾類型）都在遵從自己的慾望。本文釐清Fi的定義：向內流動的情感力量、沉默而英雄式的同理，以及內部自洽並符合原型意象的主觀道德原則，並非自私或我行我素。"
+    ]
+   },
+   {
+    "t": "既然Se很衝動，那Ni就應該很理性？",
+    "url": "https://jungian16types.com/post-2208.html",
+    "d": "2026年1月13日",
+    "tags": [],
+    "pv": [
+     "直覺（N）與感覺（S）雖互為對軸，卻同屬非理性功能：感知已存的事物（S）與感知隱藏的連結（N），都是瞬間發生的直接感知，不含推導與規劃，因此不能以為Se衝動、Ni就必然理性。若你需要主動推導或詮釋意味，多半是在運用理性功能，而非直覺。"
+    ]
+   },
+   {
+    "t": "因為我很奇怪，所以我是稀有類型？",
+    "url": "https://jungian16types.com/post-2201.html",
+    "d": "2026年1月13日",
+    "tags": [],
+    "pv": [
+     "奇怪不等於稀有類型。榮格確實說過內傾非理性類型因看法詭異而易被視為怪人，但人的奇怪也來自成長環境、創傷、文化與個人習慣，任何類型都可能奇怪。我們多只看見他人的偽裝而見自己的奇怪，是一種認知偏差。類型不應成為把痛苦歸咎的藉口。"
+    ]
+   },
+   {
+    "t": "N人就是有深度，S人就是膚淺？",
+    "url": "https://jungian16types.com/post-2194.html",
+    "d": "2026年1月13日",
+    "tags": [
+     "直覺功能/類型",
+     "內傾功能/類型",
+     "外傾功能/類型",
+     "感覺功能/類型"
+    ],
+    "pv": [
+     "不是。深度與廣度取決於內傾或外傾，而非感覺／直覺：內傾者經主體內化，想法原創而有深度；外傾者重客觀共識，換來對不同情境的廣泛認知。例如，內傾感覺者的體感印象亦極主觀獨特；外傾直覺從一個特性跳到另一個，並非內化的深度。"
+    ]
+   },
+   {
+    "t": "外傾主導代表沒主見、從眾嗎？",
+    "url": "https://jungian16types.com/post-2186.html",
+    "d": "2026年1月13日",
+    "tags": [
+     "外傾功能/類型"
+    ],
+    "pv": [
+     "不是。外傾邏輯（Te）與外傾情感（Fe）按外在群體建立客觀判斷，並透過對比各種主觀意見取得客觀性，這同樣是個體化（獨立發展主導功能）的表現，成熟者對公共秩序的理解極為細緻。盲從權威或氛圍的，反而是以Te或Fe為弱勢功能的類型。"
+    ]
+   },
+   {
+    "t": "如何區分Te和Se？",
+    "url": "https://jungian16types.com/post-2178.html",
+    "d": "2026年1月13日",
+    "tags": [
+     "邏輯功能/類型",
+     "外傾功能/類型",
+     "感覺功能/類型"
+    ],
+    "pv": [
+     "外傾感覺者行事貼近現實，常被誤認為理性類型，尤其易與外傾邏輯者混淆。本文比較二者：外傾邏輯（Te）以客觀公共框架為準，要求人人服從，道德觀較僵化；外傾感覺（Se）則依客體特性互動、善用客體，視存在即合理。前者像律師、管理層，後者更像投資者。"
+    ]
+   },
+   {
+    "t": "關於Fi-Ti雙高的問題",
+    "url": "https://jungian16types.com/post-2171.html",
+    "d": "2026年1月13日",
+    "tags": [
+     "理性功能/類型",
+     "邏輯功能/類型",
+     "情感功能/類型"
+    ],
+    "pv": [
+     "按榮格的定義，情感與邏輯是相對的判斷功能，一方強勢必然壓抑另一方，不會雙高。覺得自己既重人情又理性，是因為情感同樣屬理性功能，並非情緒化。本文也解釋情感主導者為何常誤判成邏輯主導：情感被誤解為情緒化，且被社會視為軟弱。"
+    ]
+   },
+   {
+    "t": "I和E與社交內外向有關嗎？",
+    "url": "https://jungian16types.com/post-2164.html",
+    "d": "2026年1月13日",
+    "tags": [
+     "內傾功能/類型",
+     "內外傾態度",
+     "外傾功能/類型"
+    ],
+    "pv": [
+     "沒有直接關係。榮格所說的內傾與外傾，是主體聚焦於客體對自己的影響，還是客體本身的特性；「獨處充電、社交充電」的說法源自大五人格。外傾者也可以社交內向，而社交也不限於大場合，每個人都需要與他人連結。"
+    ]
+   },
+   {
+    "t": "F人/情感主導更情緒化嗎？",
+    "url": "https://jungian16types.com/post-2157.html",
+    "d": "2026年1月13日",
+    "tags": [
+     "情感功能/類型"
+    ],
+    "pv": [
+     "不一定。榮格的情感功能是穩定、理性的價值判斷（如「這個現象是有害的」），屬理性功能，有別於短暫的情緒狀態。本文說明成熟情感功能的特質，並比較情感主導與情感輔助類型的差異；容易隨環境起伏、感受強烈的人，榮格反而歸入感覺功能。"
+    ]
+   },
+   {
+    "t": "人格類型會變嗎？",
+    "url": "https://jungian16types.com/post-2142.html",
+    "d": "2026年1月12日",
+    "tags": [],
+    "pv": [
+     "不會。榮格的類型論研究的是人的核心原動力（力比多），好比不變的運算方程式；會變的是隨環境浮動的性格特質。本文解釋為何人常覺得自己變了：測驗只測到特質、功能發展成熟令人更平衡、狀態與環境帶來不同的呈現；但主導功能始終是人格的主宰，類型不會因此改變。"
+    ]
+   }
+  ],
+  "tags": [
+   "外傾功能/類型",
+   "內傾功能/類型",
+   "直覺功能/類型",
+   "邏輯功能/類型",
+   "感覺功能/類型",
+   "情感功能/類型",
+   "功能定義",
+   "理性功能/類型",
+   "哲學/精神分析基礎概念",
+   "理性非理性",
+   "非理性功能/類型",
+   "內外傾態度"
+  ]
+ },
+ {
+  "key": "commentary",
+  "name": "站主銳評",
+  "en": "Commentary",
+  "lead": "站主本人對於各種現象主觀到不行的銳評，透過榮格心理學看世界，也會批判榮格心理學。",
+  "sections": [],
+  "items": [
+   {
+    "t": "類型典型角色/名人列表（不定期更新）",
+    "url": "https://jungian16types.com/post-3399.html",
+    "d": "2026年1月18日",
+    "tags": [],
+    "pv": [
+     "按16種類型列出典型的虛構角色與名人，讓讀者對各類型形象有個大概概念。站主提醒：虛構角色的類型未必穩定，名人只能由公共形象推測，判型本身亦帶主觀性與爭議，故列表僅供參考，並會不定期更新。"
+    ]
+   },
+   {
+    "t": "類型學的局限：在分類與切割之後",
+    "url": "https://jungian16types.com/post-3391.html",
+    "d": "2026年1月17日",
+    "tags": [
+     "哲學/精神分析基礎概念"
+    ],
+    "pv": [
+     "類型學作為邏輯的產物，擅長分類與切割，能讓人看清彼此差異，卻無法回答「之後如何共存」。站主借黑格爾的「異化與揚棄」說明：分類差異只是認識彼此與世界的第一步，終點是整合，而這一頁須由人的倫理與責任來填補。文末邀請讀者思考：看見差異後，是否仍願意尋找整合？"
+    ]
+   },
+   {
+    "t": "論判型所帶來的自我認知與改變",
+    "url": "https://jungian16types.com/post-2149.html",
+    "d": "2026年1月12日",
+    "tags": [],
+    "pv": [
+     "判型是為你既有的生活方式與行為模式命名，並不會改變本質，如同蘋果改稱梨子仍是蘋果。人們常因刻板印象抗拒被判成某類型。判型只應在讓你覺察不良的應對方式時帶來改變：若為迎合他人目光，只是戴上更厚的人格面具（對外展示的社會角色）；若是意識到未整合的無意識，才是走向個體化。"
+    ]
+   },
+   {
+    "t": "類型之間從來都不是「平等」",
+    "url": "https://jungian16types.com/post-2132.html",
+    "d": "2026年1月12日",
+    "tags": [],
+    "pv": [
+     "「F人也可以很有邏輯」之類的說法，忽視了優勢與弱勢互為對軸：發展一個功能，必以壓抑另一個為代價。站主指出類型之間不是平等（equality），而是公平（equity）：各有所長。類型的鄙視鏈源自我們看不見其他類型的才華，應確切認識差異並公正欣賞。"
+    ]
+   }
+  ],
+  "tags": [
+   "哲學/精神分析基礎概念"
+  ],
+  "featured": true,
+  "note": "站主聲明：以下皆為個人主觀觀點，不代表榮格或任何學術立場。"
+ }
+];
+
+var LIVE_POSTS = {
+ faq: [
+{% for post in site.posts %}{% if post.categories contains '理論文章' and post.subcategory == '常見問題' %}{
+  t: {{ post.title | jsonify }}, url: {{ post.url | relative_url | jsonify }},
+  d: {{ post.date | date: "%Y年%-m月%-d日" | jsonify }},
+  tags: {{ post.tags | default: empty | jsonify }},
+  pv: [{{ post.excerpt | default: post.content | strip_html | normalize_whitespace | truncate: 240 | jsonify }}]
+ }{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}
+ ],
+ commentary: [
+{% for post in site.posts %}{% if post.categories contains '理論文章' and post.subcategory == '站主銳評' %}{
+  t: {{ post.title | jsonify }}, url: {{ post.url | relative_url | jsonify }},
+  d: {{ post.date | date: "%Y年%-m月%-d日" | jsonify }},
+  tags: {{ post.tags | default: empty | jsonify }},
+  pv: [{{ post.excerpt | default: post.content | strip_html | normalize_whitespace | truncate: 240 | jsonify }}]
+ }{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}
+ ]
+};
+var faqCat = CATS.filter(function(cat){ return cat.key === "faq"; })[0];
+var commentaryCat = CATS.filter(function(cat){ return cat.key === "commentary"; })[0];
+function normalizeLivePosts(items){
+ return items.map(function(item){ item.tags = Array.isArray(item.tags) ? item.tags : []; return item; });
+}
+if (faqCat) faqCat.items = normalizeLivePosts(LIVE_POSTS.faq);
+if (commentaryCat) commentaryCat.items = normalizeLivePosts(LIVE_POSTS.commentary);
+
+/* ---------- 工具 ---------- */
+function $(s,r){return (r||document).querySelector(s);}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function linkAttrs(url){ return ' href="'+esc(url)+'" target="'+LINK_TARGET+'"'+(LINK_TARGET==="_blank"?' rel="noopener"':''); }
+var store = {}, uid = 0;
+function btnHtml(it){
+  var id = "i"+(uid++); store[id] = it;
+  var b = it.b, inner;
+  if(b.length > 1){
+    inner = '<span class="bt"><span class="b1">'+esc(b[0])+'</span>'+
+      b.slice(1).map(function(x){return '<span class="b2">'+esc(x)+'</span>';}).join("")+'</span>';
+  } else {
+    inner = '<span class="bt">'+esc(b[0])+'</span>';
+  }
+  return '<button class="btn'+(b.length>1?' multi':'')+'" type="button" data-id="'+id+'">'+inner+'</button>';
+}
+function headHtml(cat){
+  return '<div class="phead"><h1>'+esc(cat.name)+'</h1><span class="en">'+esc(cat.en)+'</span></div>'+
+    '<p class="lead">'+esc(cat.lead)+'</p>'+
+    '<div class="banner" role="img" aria-label="橫向 Banner 圖佔位">〔橫向 Banner 圖 · 建議 1920 × 400〕</div>';
+}
+
+/* ---------- 辭典面板 ---------- */
+function matrixHtml(sec){
+  var h = '<div class="matrix'+(sec.hasLabel?' lab':'')+'" style="--n:'+sec.cols.length+'">';
+  if(sec.hasLabel){
+    h += sec.corner ? '<div class="mh">'+esc(sec.corner)+'</div>' : '<div class="mh blank" aria-hidden="true"></div>';
+  }
+  sec.cols.forEach(function(c){
+    h += c ? '<div class="mh">'+esc(c)+'</div>' : '<div class="mh blank" aria-hidden="true"></div>';
+  });
+  sec.rows.forEach(function(r){
+    if(sec.hasLabel){
+      h += '<div class="ml"><b>'+esc(r.label)+'</b>'+(r.sub?'<small>'+esc(r.sub)+'</small>':'')+'</div>';
+    }
+    r.cells.forEach(function(items, ci){
+      h += '<div class="mc">'+(sec.cols[ci]?'<span class="mcap">'+esc(sec.cols[ci])+'</span>':'')+
+        items.map(btnHtml).join("")+'</div>';
+    });
+  });
+  return h + '</div>';
+}
+function stackHtml(sec, key){
+  var h = '<button class="disc" type="button" aria-expanded="false" aria-controls="stack-'+key+'"><span class="dl">展開表格</span><span class="chev" aria-hidden="true"></span></button>'+
+    '<div class="collapse" id="stack-'+key+'"><div class="cin"><div class="tscroll"><table class="stack">'+
+    '<thead><tr><th scope="col" rowspan="2">類型</th><th scope="colgroup" colspan="2">意識</th><th scope="colgroup" colspan="2" class="un">無意識</th></tr>'+
+    '<tr><th scope="col">主導</th><th scope="col">輔助</th><th scope="col" class="un">次弱勢</th><th scope="col" class="un">弱勢</th></tr></thead><tbody>';
+  sec.groups.forEach(function(g){
+    h += '<tr class="gh"><td colspan="5">'+esc(g.name)+'</td></tr>';
+    g.rows.forEach(function(r){
+      h += '<tr><th scope="row">'+esc(r.code)+'</th>'+
+        r.fns.map(function(f,i){ return '<td class="'+(i===0?'dom ':'')+(i===2?'sep':'')+'">'+esc(f)+'</td>'; }).join("")+'</tr>';
+    });
+  });
+  return h + '</tbody></table></div></div></div>';
+}
+function secHtml(sec, key){
+  var body = sec.intro ? '<p class="intro">'+esc(sec.intro)+'</p>' : '';
+  if(sec.type === "btns"){
+    body += '<div class="btns">'+sec.items.map(btnHtml).join("")+'</div>';
+  } else if(sec.type === "subs"){
+    body += sec.subs.map(function(s){
+      return '<div class="sub"><h3>'+esc(s.label)+'</h3><div class="btns">'+s.items.map(btnHtml).join("")+'</div></div>';
+    }).join("");
+  } else if(sec.type === "matrix"){
+    body += matrixHtml(sec);
+  } else if(sec.type === "stack"){
+    body += stackHtml(sec, key);
+  }
+  return '<div class="grp"><div class="glabel"><b>'+esc(sec.label).replace("：","：<br>")+'</b></div><div class="gbody">'+body+'</div></div>';
+}
+function dictPanel(cat){
+  return headHtml(cat)+'<div class="card"><div class="groups">'+cat.sections.map(function(s){return secHtml(s, cat.key);}).join("")+'</div></div>';
+}
+
+/* ---------- 列表面板 ---------- */
+function rowHtml(it, i, animFrom){
+  var enter = animFrom >= 0 && i >= animFrom;
+  return '<a class="row'+(enter?' enter':'')+'"'+(enter?' style="--i:'+(i-animFrom)+'"':'')+linkAttrs(it.url)+'><span class="rmain"><span class="rtitle">'+esc(it.t)+'</span>'+
+    it.pv.map(function(p){return '<p class="rex">'+esc(p)+'</p>';}).join("")+
+    '<span class="rdate">'+esc(it.d)+'</span></span><span class="rtags">'+
+    it.tags.map(function(t){return '<span class="tag">'+esc(t)+'</span>';}).join("")+'</span></a>';
+}
+function listPanel(cat){
+  var h = headHtml(cat) + '<div class="card">';
+  if(cat.note){ h += '<p class="note">'+esc(cat.note)+'</p>'; }
+  if(cat.featured){ h += '<a class="feat" id="feat-'+cat.key+'" hidden></a>'; }
+  h += '<div class="toolbar"><label class="sr" for="q-'+cat.key+'">搜尋文章</label>'+
+    '<input id="q-'+cat.key+'" type="search" placeholder="搜尋標題、預覽文字或標籤" autocomplete="off">'+
+    '<span class="count" id="count-'+cat.key+'" aria-live="polite"></span></div>'+
+    '<div class="chips" id="chips-'+cat.key+'" role="group" aria-label="標籤篩選"></div>'+
+    '<div class="rows" id="rows-'+cat.key+'"></div>'+
+    '<div class="more"><button class="btn" id="more-'+cat.key+'" type="button">載入更多 ↓</button><span class="shown" id="shown-'+cat.key+'"></span></div>'+
+    '<p class="endmsg" id="end-'+cat.key+'" role="status" hidden></p>';
+  return h + '</div>';
+}
+
+var PAGE = 6;
+var lists = {};
+function setupList(cat){
+  var st = lists[cat.key] = { tag:"全部", q:"", shown:PAGE };
+  var chips = $("#chips-"+cat.key);
+  chips.innerHTML = ["全部"].concat(cat.tags).map(function(t){
+    return '<button class="chip" type="button" data-tag="'+esc(t)+'" aria-pressed="'+(t==="全部")+'">'+esc(t)+'</button>';
+  }).join("");
+  chips.addEventListener("click", function(e){
+    var b = e.target.closest(".chip"); if(!b) return;
+    st.tag = b.getAttribute("data-tag"); st.shown = PAGE; renderList(cat, -1);
+  });
+  $("#q-"+cat.key).addEventListener("input", function(e){ st.q = e.target.value.trim().toLowerCase(); st.shown = PAGE; renderList(cat, -1); });
+  $("#more-"+cat.key).addEventListener("click", function(){ var from = st.shown; st.shown += PAGE; renderList(cat, from); });
+  renderList(cat, -1);
+}
+/* animFrom >= 0：從該筆開始的新列依序淡入（載入更多）；-1：不做動畫 */
+function renderList(cat, animFrom){
+  var st = lists[cat.key];
+  var active = st.tag !== "全部" || !!st.q;
+  var hit = cat.items.filter(function(it){
+    if(st.tag !== "全部" && it.tags.indexOf(st.tag) < 0) return false;
+    if(st.q){
+      var hay = (it.t+" "+it.pv.join(" ")+" "+it.tags.join(" ")).toLowerCase();
+      if(hay.indexOf(st.q) < 0) return false;
+    }
+    return true;
+  });
+  /* 站主銳評：沒有篩選時，最新一篇用置頂卡片顯示，列表從第二篇開始 */
+  var feat = (cat.featured && !active && hit.length) ? hit[0] : null;
+  var listItems = feat ? hit.slice(1) : hit;
+  var fEl = $("#feat-"+cat.key);
+  if(fEl){
+    if(feat){
+      fEl.setAttribute("href", feat.url); fEl.setAttribute("target", LINK_TARGET);
+      if(LINK_TARGET==="_blank") fEl.setAttribute("rel","noopener");
+      fEl.innerHTML = '<span class="flag">最新一篇</span><span class="ft">'+esc(feat.t)+'</span>'+
+        feat.pv.map(function(p){return '<span class="fe">'+esc(p)+'</span>';}).join("")+'<span class="fd">'+esc(feat.d)+'</span>';
+      fEl.hidden = false;
+    } else { fEl.hidden = true; }
+  }
+  var base = feat ? 1 : 0;
+  var vis = listItems.slice(0, st.shown);
+  var animating = animFrom >= 0;
+  $("#rows-"+cat.key).innerHTML = vis.length ? vis.map(function(it, i){ return rowHtml(it, i, animFrom); }).join("")
+    : (hit.length ? '' : '<div class="empty">找不到符合的文章，換個關鍵字或標籤試試。</div>');
+  var total = cat.items.length;
+  $("#count-"+cat.key).textContent = (active ? "符合 "+hit.length+" 篇（共 "+total+" 篇）" : "共 "+total+" 篇")+" · 依最新排序";
+
+  var all = vis.length >= listItems.length;
+  var more = $("#more-"+cat.key), shown = $("#shown-"+cat.key), end = $("#end-"+cat.key);
+  more.hidden = all || !hit.length;
+  shown.textContent = "已顯示 "+(vis.length+base)+" / "+hit.length;
+  shown.hidden = all || !hit.length;
+  end.classList.remove("enter");
+  if(all && hit.length){
+    end.textContent = "已顯示全部 "+hit.length+" 篇";
+    end.hidden = false;
+    if(animating){
+      end.style.setProperty("--i", String(vis.length - animFrom + 1));
+      void end.offsetWidth;
+      end.classList.add("enter");
+    }
+  } else {
+    end.hidden = true;
+  }
+  [].forEach.call($("#chips-"+cat.key).children, function(c){
+    c.setAttribute("aria-pressed", String(c.getAttribute("data-tag") === st.tag));
+  });
+  /* 按鈕已消失時，把焦點交給第一筆新內容，避免鍵盤使用者迷失 */
+  if(animating && all){
+    var first = $("#rows-"+cat.key).children[animFrom];
+    if(first && first.focus) first.focus({preventScroll:true});
+  }
+}
+
+/* ---------- 組裝頁面 ---------- */
+var stage = $("#stage"), tabsEl = $("#tabs");
+var panels = {}, tabs = {}, current = null;
+CATS.forEach(function(cat, i){
+  var isList = !!cat.items;
+  var p = document.createElement("section");
+  p.className = "panel"; p.id = "panel-"+cat.key; p.setAttribute("role","tabpanel");
+  p.setAttribute("aria-labelledby","tab-"+cat.key); p.setAttribute("aria-hidden","true");
+  p.innerHTML = isList ? listPanel(cat) : dictPanel(cat);
+  stage.appendChild(p); panels[cat.key] = p;
+  if(isList) setupList(cat);
+
+  var t = document.createElement("button");
+  t.className = "tab" + (i===3 ? " sep" : ""); t.type = "button"; t.id = "tab-"+cat.key;
+  t.setAttribute("role","tab"); t.setAttribute("aria-controls","panel-"+cat.key);
+  t.setAttribute("aria-selected","false"); t.tabIndex = -1; t.textContent = cat.name;
+  t.addEventListener("click", function(){ go(cat.key); });
+  tabsEl.appendChild(t); tabs[cat.key] = t;
+});
+
+/* 功能疊表：展開／收合 */
+[].forEach.call(document.querySelectorAll(".disc"), function(btn){
+  btn.addEventListener("click", function(){
+    var box = document.getElementById(btn.getAttribute("aria-controls"));
+    var open = btn.getAttribute("aria-expanded") !== "true";
+    btn.setAttribute("aria-expanded", String(open));
+    $(".dl", btn).textContent = open ? "收合表格" : "展開表格";
+    box.classList.toggle("open", open);
+  });
+});
+
+function fit(){ if(current) stage.style.height = panels[current].offsetHeight + "px"; }
+if(window.ResizeObserver){
+  var ro = new ResizeObserver(fit);
+  Object.keys(panels).forEach(function(k){ ro.observe(panels[k]); });
+}
+window.addEventListener("resize", fit);
+
+function centerTab(key, smooth){
+  var t = tabs[key];
+  var left = Math.max(0, t.offsetLeft - (tabsEl.clientWidth - t.offsetWidth) / 2);
+  if(tabsEl.scrollTo){ tabsEl.scrollTo({left:left, behavior: smooth ? "smooth" : "auto"}); } else { tabsEl.scrollLeft = left; }
+}
+function show(key, fromUser){
+  if(!panels[key] || key === current) return;
+  var first = current === null;
+  if(current){
+    panels[current].classList.remove("active"); panels[current].setAttribute("aria-hidden","true");
+    tabs[current].setAttribute("aria-selected","false"); tabs[current].tabIndex = -1;
+  }
+  current = key;
+  panels[key].classList.add("active"); panels[key].setAttribute("aria-hidden","false");
+  tabs[key].setAttribute("aria-selected","true"); tabs[key].tabIndex = 0;
+  fit();
+  if(first){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ stage.classList.add("ready"); }); }); }
+  centerTab(key, !first);
+  if(fromUser){
+    var top = stage.getBoundingClientRect().top + window.scrollY - $(".subbar").offsetHeight - 16;
+    if(window.scrollY > top) window.scrollTo(0, Math.max(0, top));
+  }
+}
+function go(key){
+  show(key, true);
+  try{ history.pushState(null, "", "#"+key); }catch(e){}
+}
+function fromHash(){
+  var k = (location.hash||"").replace("#","");
+  return panels[k] ? k : (panels[window.__START] ? window.__START : CATS[0].key);
+}
+window.addEventListener("popstate", function(){ show(fromHash(), true); });
+window.addEventListener("hashchange", function(){ show(fromHash(), true); });
+tabsEl.addEventListener("keydown", function(e){
+  var keys = CATS.map(function(c){return c.key;}), i = keys.indexOf(current), n = i;
+  if(e.key==="ArrowRight") n = (i+1)%keys.length;
+  else if(e.key==="ArrowLeft") n = (i-1+keys.length)%keys.length;
+  else if(e.key==="Home") n = 0;
+  else if(e.key==="End") n = keys.length-1;
+  else return;
+  e.preventDefault(); go(keys[n]); tabs[keys[n]].focus();
+});
+show(fromHash(), false);
+
+/* ---------- 預覽彈窗（辭典按鈕） ---------- */
+var modal = $("#modal"), lastFocus = null;
+function pvHtml(lines){
+  return lines.map(function(l){
+    return '<p'+(/^(・|\d+\.\s)/.test(l)?' class="li"':'')+'>'+esc(l)+'</p>';
+  }).join("");
+}
+function openModal(id){
+  var it = store[id]; if(!it) return;
+  lastFocus = document.activeElement;
+  $("#mCat").textContent = it.where;
+  $("#mTitle").textContent = it.t;
+  var sub = $("#mSub"); sub.textContent = it.en || ""; sub.hidden = !it.en;
+  var mm = $("#mMeta");
+  mm.innerHTML = (it.meta||[]).map(function(m){return '<span class="meta">'+esc(m)+'</span>';}).join("");
+  mm.hidden = !(it.meta && it.meta.length);
+  $("#mPrev").innerHTML = pvHtml(it.pv);
+  var rd = $("#mRead");
+  rd.setAttribute("href", it.url); rd.setAttribute("target", LINK_TARGET);
+  if(LINK_TARGET==="_blank") rd.setAttribute("rel","noopener"); else rd.removeAttribute("rel");
+  rd.setAttribute("title", "文章：" + it.art);
+  modal.classList.add("open"); modal.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+  $(".dlg").scrollTop = 0;
+  $("#mX").focus();
+}
+function closeModal(){
+  if(!modal.classList.contains("open")) return;
+  modal.classList.remove("open"); modal.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+  if(lastFocus && lastFocus.focus) lastFocus.focus();
+}
+document.addEventListener("click", function(e){
+  var b = e.target.closest("[data-id]");
+  if(b && !modal.contains(b)) openModal(b.getAttribute("data-id"));
+});
+$("#mX").addEventListener("click", closeModal);
+$("#mClose").addEventListener("click", closeModal);
+$("#backdrop").addEventListener("click", closeModal);
+document.addEventListener("keydown", function(e){
+  if(!modal.classList.contains("open")) return;
+  if(e.key === "Escape"){ closeModal(); return; }
+  if(e.key === "Tab"){
+    var f = [].filter.call(modal.querySelectorAll("button, a[href]"), function(el){ return !el.hidden; });
+    if(!f.length) return;
+    var first = f[0], last = f[f.length-1];
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+});
+})();
+</script>
 </body>
 </html>
-
