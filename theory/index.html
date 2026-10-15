@@ -39,8 +39,8 @@ a{color:inherit}
 
 /* sub header */
 .subbar{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--line);box-shadow:0 1px 4px rgba(23,48,79,.06)}
-.tabs{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}
-.tab{flex:0 0 auto;min-height:48px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:transparent;
+.tabs{display:flex;flex-wrap:nowrap;align-items:stretch;overflow-x:auto;scrollbar-width:thin}
+.tab{display:flex;align-items:center;justify-content:center;align-self:stretch;flex:0 0 auto;min-height:48px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:transparent;line-height:1.4;
   color:var(--muted);font-family:var(--serif);font-size:15px;white-space:nowrap;cursor:pointer;transition:color .2s ease}
 .tab{text-decoration:none}.tab:hover{color:var(--navy)}
 .tab[aria-selected="true"]{color:var(--navy);font-weight:600;border-bottom-color:var(--navy)}
