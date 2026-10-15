@@ -144,4 +144,59 @@ html[data-theme="night"] body:has(.workshop) .vessel .lbl2{fill:#a9bddb!importan
 html[data-theme="night"] body:has(.workshop) .emptyhint{color:#d6dfec!important}
 html[data-theme="night"] body:has(.workshop) .emptyhint small{color:#a9b8ce!important}
 html[data-theme="night"] body:has(.workshop) .readout .pane.cs{background:#142139!important}
-html[data-theme="night"] .about-layout-refined .about-panel-refined>p strong{color:#e7c96f!important}
+html[data-theme="night"] .about-layout-refined .about-panel-refined>p strong{color:#e7c96f!important}/* Homepage uses its own palette tokens and several fixed-color card rules. */
+html[data-theme="night"] body:has(.home-main){--home-ink:#e5e9f0;--home-muted:#c1ccdb;--home-green:#7199cf;--home-line:#30405a;--home-pale:#15243a}
+html[data-theme="night"] .home-copy,html[data-theme="night"] .home-note,html[data-theme="night"] .about-text,html[data-theme="night"] .feature-copy,html[data-theme="night"] .site-about,html[data-theme="night"] .site-about p{color:#c5d0df!important}
+html[data-theme="night"] .home-copy a,html[data-theme="night"] .home-main .home-paper-panel a{color:#edcf79!important}
+html[data-theme="night"] .home-main .home-paper-panel{background:linear-gradient(145deg,#111b2d,#17263d)!important;color:#dce3ee!important;border-color:#30405a!important}
+html[data-theme="night"] .home-main .home-paper-panel :is(p,li){color:#c5d0df!important}
+html[data-theme="night"] .home-main .home-paper-panel :is(h2,h3){color:#e7c96f!important}
+html[data-theme="night"] .latest .article-card--text{background:linear-gradient(145deg,#111b2d,#17263d)!important;color:#dce3ee!important;border-color:#30405a!important}
+html[data-theme="night"] .latest .article-card--text .article-title{color:#e7c96f!important}
+html[data-theme="night"] .latest .article-card--text :is(.article-category,.article-date,.article-excerpt){color:#bdc9d9!important}
+html[data-theme="night"] .latest .article-card-more{color:#e2bd63!important}
+html[data-theme="night"] .home-main :is(.carousel-control,.latest .carousel-control){background:#17263d!important;color:#e2bd63!important;border:1px solid #51472f!important}
+html[data-theme="night"] .home-main :is(.carousel-control,.latest .carousel-control):hover{background:#29466e!important;color:#fff0bd!important}
+html[data-theme="night"] .home-main .carousel-dots button{background:#60738f!important}
+html[data-theme="night"] .home-main .carousel-dots button[aria-current="true"]{background:#e2bd63!important}
+html[data-theme="night"] .ig-empty{background:#142139!important;color:#c5d0df!important;border-color:#40536e!important}
+/* Announcement carousel has its own fixed light backgrounds and black CTA. */
+html[data-theme="night"] .announcement-heading{color:#e7c96f!important}
+html[data-theme="night"] .announcement-body{background:#111b2d!important;color:#dce3ee!important}
+html[data-theme="night"] .announcement-title{color:#e5e9f0!important}
+html[data-theme="night"] .announcement-label{color:#a6b2c5!important}
+html[data-theme="night"] .announcement-read{background:linear-gradient(135deg,#26476f,#315c88)!important;color:#f2d98d!important;border:1px solid #8b7240!important}
+html[data-theme="night"] .announcement-control{background:#17263d!important;color:#e2bd63!important;border-color:#51472f!important}
+html[data-theme="night"] .announcement-dots button{background:#60738f!important}
+html[data-theme="night"] .announcement-dots button[aria-current="true"]{background:#e2bd63!important}/* Theory subheader and concept tables have a private palette in theory/index.html. */
+html[data-theme="night"] body:has(.subbar){--bg:#080e1b;--card:#111b2d;--line:#30405a;--line2:#435572;--line3:#2d3e57;--navy:#29466e;--beige:#18263d;--tan:#d9b85f;--text:#dce3ee;--muted:#aab8cc;--gold:#e2bd63}
+html[data-theme="night"] .subbar{background:#0e1829!important;border-color:#30405a!important;box-shadow:0 4px 14px rgba(0,0,0,.35)!important}
+html[data-theme="night"] .subbar .tab{color:#b8c5d7!important}
+html[data-theme="night"] .subbar .tab:hover,html[data-theme="night"] .subbar .tab[aria-selected="true"]{color:#f0d17b!important}
+html[data-theme="night"] .subbar .tab[aria-selected="true"]{border-bottom-color:#e2bd63!important}
+html[data-theme="night"] .gbody,html[data-theme="night"] .mc,html[data-theme="night"] table.stack,html[data-theme="night"] .mc .btn,html[data-theme="night"] .note,html[data-theme="night"] .toolbar input,html[data-theme="night"] .chip{background:#111b2d!important;color:#dce3ee!important;border-color:#30405a!important}
+html[data-theme="night"] .gbody>.intro,html[data-theme="night"] .lead,html[data-theme="night"] .rex,html[data-theme="night"] .tag,html[data-theme="night"] .ml small{color:#bdc9d9!important}
+html[data-theme="night"] .rtitle,html[data-theme="night"] .phead h1,html[data-theme="night"] .glabel b,html[data-theme="night"] .ml b,html[data-theme="night"] .stack tbody th,html[data-theme="night"] .stack td.dom{color:#e7c96f!important}
+html[data-theme="night"] .mh,html[data-theme="night"] .stack thead th,html[data-theme="night"] .feat,html[data-theme="night"] .btn:hover,html[data-theme="night"] .disc:hover{background:#29466e!important;color:#f0d17b!important;border-color:#806b3d!important}
+html[data-theme="night"] .glabel,html[data-theme="night"] .ml,html[data-theme="night"] .stack tr.gh td{background:#18263d!important;color:#dce3ee!important;border-color:#30405a!important}
+html[data-theme="night"] .tab.sep,html[data-theme="night"] .stack td,html[data-theme="night"] .stack th{border-color:#394b65!important}
+html[data-theme="night"] .mc .btn{background:#17263d!important;color:#e2bd63!important;border-color:#806b3d!important}
+html[data-theme="night"] .mc .btn:hover,html[data-theme="night"] .btn[aria-pressed="true"],html[data-theme="night"] .chip[aria-pressed="true"]{background:#29466e!important;color:#f0d17b!important}
+html[data-theme="night"] .row:hover{background:#142139!important}
+html[data-theme="night"] .toolbar input::placeholder{color:#91a0b7!important}html[data-theme="night"] .btn,html[data-theme="night"] .disc{background:#17263d!important;color:#e2bd63!important;border-color:#806b3d!important}
+html[data-theme="night"] .chip{color:#e2bd63!important}
+html[data-theme="night"] .btn:hover,html[data-theme="night"] .disc:hover{background:#29466e!important;color:#fff0bd!important}/* Theory article preview modal: replace its remaining fixed light surfaces. */
+html[data-theme="night"] .dlg{background:#111b2d!important;color:#dce3ee!important;border-color:#435572!important;box-shadow:0 18px 54px rgba(0,0,0,.58)!important}
+html[data-theme="night"] .backdrop{background:rgba(3,8,17,.78)!important}
+html[data-theme="night"] .dtop{border-color:#394b65!important}
+html[data-theme="night"] .dchip{background:#1c2d46!important;color:#cbd5e3!important}
+html[data-theme="night"] .dlg h2{color:#e7c96f!important}
+html[data-theme="night"] .dlg .meta{background:#17263d!important;color:#dce3ee!important;border-color:#435572!important}
+html[data-theme="night"] .dlg .dsub{color:#e2bd63!important}
+html[data-theme="night"] .dlg .prev{border-color:#7199cf!important;color:#dce3ee!important}
+html[data-theme="night"] .dlg .pvbody,html[data-theme="night"] .dlg .pvbody p{color:#dce3ee!important}
+html[data-theme="night"] .dlg .ghost{background:#17263d!important;color:#e2bd63!important;border-color:#806b3d!important}
+html[data-theme="night"] .dlg .primary{background:linear-gradient(135deg,#26476f,#315c88)!important;color:#f2d98d!important;border:1px solid #8b7240!important}
+html[data-theme="night"] .dlg .primary:hover{background:linear-gradient(135deg,#315a89,#3b6a9e)!important;color:#fff0bd!important}
+html[data-theme="night"] .dlg .xbtn{color:#e2bd63!important}
+html[data-theme="night"] .dlg .xbtn:hover{background:#1c2d46!important;color:#fff0bd!important;border-radius:50%}
