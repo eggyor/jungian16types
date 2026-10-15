@@ -242,3 +242,36 @@ html[data-theme="night"] .home-main .home-social-icon:hover{
   color:#fff0bd!important;
   border-color:#e2bd63!important;
 }
+
+/* Result pages have their own high-specificity light palette rules. */
+html[data-theme="night"] .quiz-result-page.result-redesign .result-content>h2,
+html[data-theme="night"] .quiz-result-page.tie-redesign .tie-content>h2{
+  color:#e7c96f!important;
+}
+html[data-theme="night"] .quiz-result-page.result-redesign .result-note,
+html[data-theme="night"] .quiz-result-page.tie-redesign .result-note{
+  color:#b8c5d7!important;
+}
+html[data-theme="night"] .quiz-result-page.result-redesign .result-note-link,
+html[data-theme="night"] .quiz-result-page.tie-redesign .result-note-link{
+  color:#e2bd63!important;
+  text-decoration-color:#7199cf!important;
+}
+
+/* The about page has inline styles with greater specificity than the shared theme. */
+html[data-theme="night"] body:has(.about-shop-grid) .contact-section h2{
+  color:#e7c96f!important;
+}
+html[data-theme="night"] body:has(.about-shop-grid) .about-layout-refined .social-links .social-icon,
+html[data-theme="night"] body:has(.about-shop-grid) .about-layout-refined .shop-instagram{
+  background:#29466e!important;
+  color:#f2d98d!important;
+  border-color:#8b7240!important;
+  box-shadow:0 0 0 4px #111b2d,0 0 0 5px #51472f,0 5px 16px rgba(0,0,0,.38)!important;
+}
+html[data-theme="night"] body:has(.about-shop-grid) .about-layout-refined .social-links .social-icon:hover,
+html[data-theme="night"] body:has(.about-shop-grid) .about-layout-refined .shop-instagram:hover{
+  background:#315c88!important;
+  color:#fff0bd!important;
+  border-color:#e2bd63!important;
+}
