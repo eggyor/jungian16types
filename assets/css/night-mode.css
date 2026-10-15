@@ -200,3 +200,45 @@ html[data-theme="night"] .dlg .primary{background:linear-gradient(135deg,#26476f
 html[data-theme="night"] .dlg .primary:hover{background:linear-gradient(135deg,#315a89,#3b6a9e)!important;color:#fff0bd!important}
 html[data-theme="night"] .dlg .xbtn{color:#e2bd63!important}
 html[data-theme="night"] .dlg .xbtn:hover{background:#1c2d46!important;color:#fff0bd!important;border-radius:50%}
+
+/* Final night palette fixes: inactive theory tabs, contact form contrast and homepage social links. */
+html[data-theme="night"] .subbar .tabs>.tab{
+  border-bottom:3px solid transparent!important;
+  box-shadow:none!important;
+  text-decoration:none!important;
+}
+html[data-theme="night"] .subbar .tabs>.tab[aria-selected="true"]{
+  border-bottom-color:#e2bd63!important;
+}
+html[data-theme="night"] .subbar .tabs>.tab:focus:not(:focus-visible){outline:none!important}
+html[data-theme="night"] .subbar .tabs>.tab:focus-visible{
+  outline:2px solid #7199cf!important;
+  outline-offset:-3px!important;
+}
+html[data-theme="night"] .contact-section,
+html[data-theme="night"] .contact-section :is(p,em,label,.contact-required,.contact-status){
+  color:#dce3ee!important;
+}
+html[data-theme="night"] .contact-section :is(input,select,textarea){
+  background:#0d1728!important;
+  color:#f0f3f8!important;
+  border-color:#526783!important;
+}
+html[data-theme="night"] .contact-section :is(input,select,textarea)::placeholder{color:#aab8cc!important;opacity:1}
+html[data-theme="night"] .contact-section select option{background:#111b2d!important;color:#e5e9f0!important}
+html[data-theme="night"] .contact-section .contact-submit{
+  background:linear-gradient(135deg,#26476f,#315c88)!important;
+  color:#f2d98d!important;
+  border:1px solid #8b7240!important;
+}
+html[data-theme="night"] .home-main .home-social-icon{
+  background:#29466e!important;
+  color:#f2d98d!important;
+  border-color:#8b7240!important;
+  box-shadow:0 0 0 4px #111b2d,0 0 0 5px #51472f,0 5px 16px rgba(0,0,0,.38)!important;
+}
+html[data-theme="night"] .home-main .home-social-icon:hover{
+  background:#315c88!important;
+  color:#fff0bd!important;
+  border-color:#e2bd63!important;
+}
