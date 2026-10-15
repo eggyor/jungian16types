@@ -51,7 +51,32 @@ a.text-link{color:#0067ff}.shop-image{width:150px;height:150px;object-fit:cover;
 .about-layout-refined .shop-instagram{display:grid!important;place-items:center;margin:14px 0 0!important;border:1px solid rgba(167,131,62,.7);box-shadow:0 0 0 4px #fbf9f3,0 0 0 5px #e4d6b2,0 5px 12px rgba(43,55,45,.1)}
 @media(max-width:760px){.about-layout-refined{grid-template-columns:minmax(0,1fr)!important;gap:16px!important}.about-layout-refined>.about-panel-refined,.about-layout-refined>.shop-panel-refined{padding:22px 20px!important}.about-layout-refined .shop-brand-row{grid-template-columns:minmax(0,1fr) 104px;gap:15px}.about-layout-refined .shop-address-refined{margin-top:15px;padding-top:13px}}
 @media(max-width:420px){.about-layout-refined>.about-panel-refined,.about-layout-refined>.shop-panel-refined{padding:19px 16px!important}.about-layout-refined .shop-brand-row{grid-template-columns:minmax(0,1fr) 84px;gap:12px}}
-</style>
+/* Keep the about text on the left and stack two independent recommendation cards on the right. */
+@media(min-width:761px){
+  .about-layout-refined{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto}
+  .about-layout-refined>.about-panel-refined{grid-column:1;grid-row:1/span 2}
+  .about-layout-refined>.shop-panel-refined{grid-column:2;grid-row:1}
+  .about-layout-refined>.friend-panel-refined{grid-column:2;grid-row:2}
+}
+.about-layout-refined>.friend-panel-refined{display:block;min-width:0;padding:clamp(22px,2.8vw,34px);border:1px solid var(--cj-line,#ded8c9);border-radius:8px;background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(250,247,238,.94));box-shadow:0 10px 28px rgba(43,55,45,.055)}
+.about-layout-refined .friend-panel-refined>h2{margin:0 0 15px;padding:0 0 14px;border-bottom:1px solid var(--cj-line,#ded8c9);color:var(--cj-green,#405b49);font-size:clamp(25px,2.3vw,32px);font-weight:500;line-height:1.35}
+.about-layout-refined .friend-subtitle{margin:0 0 8px;color:var(--cj-green,#405b49);font-size:clamp(18px,1.6vw,22px);line-height:1.5}
+.about-layout-refined .friend-panel-refined>p{margin:0 0 10px;line-height:1.7}
+.about-layout-refined .friend-tagline strong{color:var(--cj-gold,#a7833e);font-weight:700}
+.about-layout-refined .friend-visit{margin:4px 0 0}
+.about-layout-refined .shop-address-row{display:flex;align-items:flex-end;justify-content:space-between;gap:18px}
+.about-layout-refined .shop-address-copy{min-width:0}
+.about-layout-refined .shop-address-copy h3{margin:0 0 7px;color:var(--cj-green,#405b49);font-size:16px;letter-spacing:.06em}
+.about-layout-refined .shop-address-copy p{margin:0 0 7px;line-height:1.65}
+.about-layout-refined .shop-address-copy p span{color:var(--cj-green,#405b49);font-weight:600}
+.about-layout-refined .shop-address-row .shop-instagram{flex:0 0 auto;margin:0!important}
+@media(max-width:760px){
+  .about-layout-refined{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto!important}
+  .about-layout-refined>.about-panel-refined,.about-layout-refined>.shop-panel-refined,.about-layout-refined>.friend-panel-refined{grid-column:auto;grid-row:auto}
+  .about-layout-refined>.friend-panel-refined{padding:22px 20px}
+  .about-layout-refined .shop-address-row{align-items:flex-end;gap:12px}
+}
+@media(max-width:420px){.about-layout-refined>.friend-panel-refined{padding:19px 16px}}</style>
  {% include seo-canonical.html %}
 </head>
 <body id="site-top">
@@ -106,11 +131,24 @@ a.text-link{color:#0067ff}.shop-image{width:150px;height:150px;object-fit:cover;
           <img class="shop-image" alt="恭仔 Gong Chai Everything 周邊店標誌" loading="lazy" src="{{ '/img/gongchai.jpg' | relative_url }}">
         </div>
         <div class="shop-address-refined">
-          <h3>門店地址</h3>
-          <p><span>📍深水埗西九龍中心</span><br>7樓7002舖 October.box AO5格仔</p>
-          <p><span>📍葵芳葵涌廣場</span><br>2樓C72舖 別樹一格C35格仔</p>
+          <div class="shop-address-row">
+            <div class="shop-address-copy">
+              <h3>門店地址</h3>
+              <p><span>📍深水埗西九龍中心</span><br>7樓7002舖 October.box AO5格仔</p>
+              <p><span>📍葵芳葵涌廣場</span><br>2樓C72舖 別樹一格C35格仔</p>
+            </div>
+            <a class="social-icon instagram shop-instagram" href="https://www.instagram.com/gongchai.hk/" target="_blank" rel="noopener noreferrer" aria-label="恭仔 Gong Chai Everything Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1" fill="currentColor" stroke="none"/></svg></a>
+          </div>
         </div>
-        <a class="social-icon instagram shop-instagram" href="https://www.instagram.com/gongchai.hk/" target="_blank" rel="noopener" aria-label="恭仔 Gong Chai Everything Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1" fill="currentColor" stroke="none"/></svg></a>
+      </section>
+      <section class="friend-panel-refined">
+        <p class="about-kicker">FRIEND SITE</p>
+        <h2>友站推薦</h2>
+        <h3 class="friend-subtitle">《心理類型》索引工具</h3>
+        <p class="friend-author">作者：NC</p>
+        <p class="friend-tagline">不讓榮格《心理類型》那麼難讀的小工具：<strong>清晰的架構 x 舒適的頁面</strong></p>
+        <p class="friend-description">榮格《心理類型》是經典榮格背後理論基礎，不論初學者或是資深研究者都會頻繁引用《心理類型》。這個網站提供有效工具，讓你輕鬆查找相關章節閲讀這本超越時代的經典著作。</p>
+        <a class="btn friend-visit" href="https://mistdesk.fantasydeity.space/cj-structure-tool/" target="_blank" rel="noopener noreferrer">前往該站 <span aria-hidden="true">→</span></a>
       </section>
     </div>
     <section class="contact-section" aria-labelledby="contact-heading">

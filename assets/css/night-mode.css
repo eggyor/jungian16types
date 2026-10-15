@@ -300,3 +300,8 @@ html[data-theme="night"] .share-block .share-button:hover {
 html[data-theme="night"] .share-block .share-button:hover svg {
   color: #fff0bd !important;
 }
+
+html[data-theme="night"] .about-layout-refined>.friend-panel-refined{background:linear-gradient(145deg,#111b2d,#17263d)!important;color:#dce3ee!important;border-color:#30405a!important}
+html[data-theme="night"] .about-layout-refined .friend-panel-refined :is(p,.friend-subtitle){color:#d0d9e6!important}
+html[data-theme="night"] .about-layout-refined .friend-panel-refined h2{color:#e7c96f!important}
+html[data-theme="night"] .about-layout-refined .friend-panel-refined .friend-tagline strong{color:#e2bd63!important}
