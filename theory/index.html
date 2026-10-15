@@ -8,7 +8,8 @@ description: '按基礎概念、類型描述、常見問題、榮格原文、系
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>理論文章｜{{ site.title }}</title>
+<title>理論文章｜{{ site.title | default: "經典榮格 Classic Jung" }}</title>
+<meta name="description" content="{{ page.description | escape }}">
 <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
 {% include site-theme-links.html %}
 <style>
@@ -41,7 +42,7 @@ a{color:inherit}
 .tabs{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}
 .tab{flex:0 0 auto;min-height:48px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:transparent;
   color:var(--muted);font-family:var(--serif);font-size:15px;white-space:nowrap;cursor:pointer;transition:color .2s ease}
-.tab:hover{color:var(--navy)}
+.tab{text-decoration:none}.tab:hover{color:var(--navy)}
 .tab[aria-selected="true"]{color:var(--navy);font-weight:600;border-bottom-color:var(--navy)}
 .tab.sep{border-right:1px solid var(--line2)}
 .tab:focus-visible,.btn:focus-visible,.chip:focus-visible,.row:focus-visible,.feat:focus-visible,input:focus-visible,.primary:focus-visible,.ghost:focus-visible,.xbtn:focus-visible,.disc:focus-visible{outline:3px solid #2B6CB0;outline-offset:2px}
@@ -248,6 +249,7 @@ table.stack{width:100%;min-width:440px;border-collapse:collapse;background:#fff;
   .row.enter,.endmsg.enter{animation:none !important}
 }
 </style>
+ {% include seo-canonical.html %}
 </head>
 <body>
 {% include header.html %}
@@ -2726,6 +2728,19 @@ function listPanel(cat){
 
 var PAGE = 6;
 var lists = {};
+var THEORY_URL = {{ '/theory/' | absolute_url | jsonify }};
+var SITE_TITLE = {{ site.title | default: "經典榮格 Classic Jung" | jsonify }};
+var canonicalEl = document.querySelector('link[rel="canonical"]');
+var descriptionEl = document.querySelector('meta[name="description"]');
+function updateSectionSeo(cat){
+  document.title = cat.name + "｜理論文章｜" + SITE_TITLE;
+  if(descriptionEl) descriptionEl.content = cat.lead + " 在經典榮格理論文章中閱讀相關概念、原文與說明。";
+  if(canonicalEl){
+    var canonicalUrl = new URL(THEORY_URL);
+    canonicalUrl.searchParams.set("section", cat.key);
+    canonicalEl.href = canonicalUrl.href;
+  }
+}
 function setupList(cat){
   var st = lists[cat.key] = { tag:"全部", q:"", shown:PAGE };
   var chips = $("#chips-"+cat.key);
@@ -2812,11 +2827,14 @@ CATS.forEach(function(cat, i){
   stage.appendChild(p); panels[cat.key] = p;
   if(isList) setupList(cat);
 
-  var t = document.createElement("button");
-  t.className = "tab" + (i===3 ? " sep" : ""); t.type = "button"; t.id = "tab-"+cat.key;
+  var t = document.createElement("a");
+  t.className = "tab" + (i===3 ? " sep" : ""); t.id = "tab-"+cat.key;
+  var categoryUrl = new URL(THEORY_URL);
+  categoryUrl.searchParams.set("section", cat.key);
+  t.href = categoryUrl.href;
   t.setAttribute("role","tab"); t.setAttribute("aria-controls","panel-"+cat.key);
   t.setAttribute("aria-selected","false"); t.tabIndex = -1; t.textContent = cat.name;
-  t.addEventListener("click", function(){ go(cat.key); });
+  t.addEventListener("click", function(event){ event.preventDefault(); go(cat.key); });
   tabsEl.appendChild(t); tabs[cat.key] = t;
 });
 
@@ -2851,6 +2869,7 @@ function show(key, fromUser){
     tabs[current].setAttribute("aria-selected","false"); tabs[current].tabIndex = -1;
   }
   current = key;
+  updateSectionSeo(CATS.filter(function(cat){ return cat.key === key; })[0]);
   panels[key].classList.add("active"); panels[key].setAttribute("aria-hidden","false");
   tabs[key].setAttribute("aria-selected","true"); tabs[key].tabIndex = 0;
   fit();
@@ -2863,14 +2882,21 @@ function show(key, fromUser){
 }
 function go(key){
   show(key, true);
-  try{ history.pushState(null, "", "#"+key); }catch(e){}
+  try{
+    var nextUrl = new URL(THEORY_URL);
+    nextUrl.searchParams.set("section", key);
+    history.pushState(null, "", nextUrl.href);
+  }catch(e){}
 }
-function fromHash(){
-  var k = (location.hash||"").replace("#","");
-  return panels[k] ? k : (panels[window.__START] ? window.__START : CATS[0].key);
+function fromLocation(){
+  var params = new URLSearchParams(location.search);
+  var section = params.get("section");
+  if(panels[section]) return section;
+  var legacyHash = (location.hash||"").replace("#","");
+  return panels[legacyHash] ? legacyHash : (panels[window.__START] ? window.__START : CATS[0].key);
 }
-window.addEventListener("popstate", function(){ show(fromHash(), true); });
-window.addEventListener("hashchange", function(){ show(fromHash(), true); });
+window.addEventListener("popstate", function(){ show(fromLocation(), true); });
+window.addEventListener("hashchange", function(){ show(fromLocation(), true); });
 tabsEl.addEventListener("keydown", function(e){
   var keys = CATS.map(function(c){return c.key;}), i = keys.indexOf(current), n = i;
   if(e.key==="ArrowRight") n = (i+1)%keys.length;
@@ -2880,7 +2906,7 @@ tabsEl.addEventListener("keydown", function(e){
   else return;
   e.preventDefault(); go(keys[n]); tabs[keys[n]].focus();
 });
-show(fromHash(), false);
+show(fromLocation(), false);
 
 /* ---------- 預覽彈窗（辭典按鈕） ---------- */
 var modal = $("#modal"), lastFocus = null;

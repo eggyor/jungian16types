@@ -1,1 +1,7 @@
 encoding: UTF-8
+title: 經典榮格 Classic Jung
+url: https://jungian16types.com
+baseurl: ""
+plugins:
+  - jekyll-sitemap
+  - jekyll-redirect-from
