@@ -44,8 +44,8 @@ const questionSets={
  ['本質對我而言是對於事物透徹的經驗與沉澱','本質對我而言是對於事物最終連結通往的道']
  ]
 };
-const typePages={ENFJ:2889,ESFJ:2877,ENFP:2957,ENTP:2951,ESFP:2939,ESTP:2934,ENTJ:2865,ESTJ:2832,INFJ:2922,ISFJ:2917,INFP:2996,INTP:2987,ISFP:2975,ISTP:2969,INTJ:2905,ISTJ:2899};
-const domOnlyPages={Te:2871,Fe:2894,Se:2945,Ne:2963,Ti:2911,Fi:2928,Si:2981,Ni:3002};
+const typePages={ENFJ:'enfj',ESFJ:'esfj',ENFP:'enfp',ENTP:'entp',ESFP:'esfp',ESTP:'estp',ENTJ:'entj',ESTJ:'estj',INFJ:'infj',ISFJ:'isfj',INFP:'infp',INTP:'intp',ISFP:'isfp',ISTP:'istp',INTJ:'intj',ISTJ:'istj'};
+const domOnlyPages={Te:'function-te',Fe:'function-fe',Se:'function-se',Ne:'function-ne',Ti:'function-ti',Fi:'function-fi',Si:'function-si',Ni:'function-ni'};
 const auxiliary={Te:['Ne','Se'],Fe:['Ne','Se'],Ne:['Te','Fe'],Se:['Te','Fe'],Ti:['Ni','Si'],Fi:['Ni','Si'],Ni:['Ti','Fi'],Si:['Ti','Fi']};
 const functions=['Te','Fe','Ne','Se','Ti','Fi','Ni','Si'];
 const app=document.getElementById('quiz-app');
@@ -65,9 +65,10 @@ function positive(n){return Math.max(0,n);}
 function getScores(){const totals={ETF:0,ENS:0,ITF:0,INS:0};let groups;if(branch==='E')groups=Array(6).fill('ETF').concat(Array(6).fill('ENS'));else if(branch==='I')groups=Array(6).fill('ITF').concat(Array(6).fill('INS'));else groups=['ETF','ETF','ETF','ENS','ENS','ENS','ITF','ITF','ITF','INS','INS','INS'];secondAnswers.forEach((n,i)=>{totals[groups[i]]+=n;});return {totals,scores:{Te:positive(-totals.ETF),Fe:positive(totals.ETF),Se:positive(-totals.ENS),Ne:positive(totals.ENS),Ti:positive(-totals.ITF),Fi:positive(totals.ITF),Si:positive(-totals.INS),Ni:positive(totals.INS)}};}
 function deriveType(dom,aux){const perceptive=['Se','Si','Ne','Ni'],judging=['Te','Ti','Fe','Fi'];const p=perceptive.includes(dom)?dom:aux;const j=judging.includes(dom)?dom:aux;return (['Te','Fe','Ne','Se'].includes(dom)?'E':'I')+(['Se','Si'].includes(p)?'S':'N')+(['Te','Ti'].includes(j)?'T':'F')+(judging.includes(dom)?'J':'P');}
 function goToResult(url){quizFinished=true;location.href=url;}
-function finish(){const data=getScores(),scores=data.scores;const max=Math.max(...functions.map(f=>scores[f]));const domTies=functions.filter(f=>scores[f]===max);const dom=domTies[0];if(domTies.length>1){const candidates=[];domTies.forEach(d=>{const pool=auxiliary[d];const best=Math.max(...pool.map(a=>scores[a]));pool.filter(a=>scores[a]===best).forEach(a=>candidates.push(deriveType(d,a)));});const q=new URLSearchParams({type_candidates:[...new Set(candidates)].join(',')});goToResult(siteRoot+'page-3008.html?'+q.toString());return;}
-const pool=auxiliary[dom],best=Math.max(...pool.map(a=>scores[a])),auxTies=pool.filter(a=>scores[a]===best);if(auxTies.length>1){const q=new URLSearchParams({aux_tie:'1',aux_ties:auxTies.join(','),jung_dom:dom});goToResult(siteRoot+'page-'+domOnlyPages[dom]+'.html?'+q.toString());return;}
-const aux=auxTies[0],type=deriveType(dom,aux),page=typePages[type];if(!page){app.innerHTML='<p class="quiz-message error">無法對應結果頁，請稍後再試。</p>';return;}goToResult(siteRoot+'page-'+page+'.html');}
+function finish(){const data=getScores(),scores=data.scores;const max=Math.max(...functions.map(f=>scores[f]));const domTies=functions.filter(f=>scores[f]===max);const dom=domTies[0];
+if(domTies.length>1){const candidates=[];domTies.forEach(d=>{const pool=auxiliary[d];const best=Math.max(...pool.map(a=>scores[a]));pool.filter(a=>scores[a]===best).forEach(a=>candidates.push(deriveType(d,a)));});const q=new URLSearchParams({type_candidates:[...new Set(candidates)].join(',')});goToResult(siteRoot+'quiz/results/ambiguous/?'+q.toString());return;}
+const pool=auxiliary[dom],best=Math.max(...pool.map(a=>scores[a])),auxTies=pool.filter(a=>scores[a]===best);if(auxTies.length>1){const q=new URLSearchParams({aux_tie:'1',aux_ties:auxTies.join(','),jung_dom:dom});goToResult(siteRoot+'quiz/results/'+domOnlyPages[dom]+'/?'+q.toString());return;}
+const aux=auxTies[0],type=deriveType(dom,aux),page=typePages[type];if(!page){app.innerHTML='<p class="quiz-message error">無法對應結果頁，請稍後再試。</p>';return;}goToResult(siteRoot+'quiz/results/'+page+'/');}
 document.addEventListener('click',function(event){
  const link=event.target.closest('a[href]');
  if(!link||!quizStarted||quizFinished||link.hasAttribute('download')||link.target==='_blank')return;
