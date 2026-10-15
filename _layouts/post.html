@@ -7,6 +7,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title | escape }}｜{{ site.title | default: "經典榮格 Classic Jung" | escape }}</title>
   {% assign seo_description = page.description | default: page.excerpt %}{% if seo_description %}<meta name="description" content="{{ seo_description | strip_html | strip_newlines | escape | truncate: 160 }}">{% endif %}
+  {% assign social_image = page.cover | default: '/img/logo2.jpeg' | absolute_url %}
+  {% assign social_description = seo_description | default: site.description | default: site.title | strip_html | strip_newlines | truncate: 200 %}
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="{{ site.title | escape }}">
+  <meta property="og:locale" content="zh_HK">
+  <meta property="og:title" content="{{ page.title | escape }}">
+  <meta property="og:description" content="{{ social_description | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ social_image }}">
+  <meta property="og:image:alt" content="{{ page.cover_alt | default: page.title | escape }}">
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+  <meta property="article:modified_time" content="{{ page.last_modified_at | default: page.date | date_to_xmlschema }}">
+  {% if page.subcategory %}<meta property="article:section" content="{{ page.subcategory | escape }}">{% endif %}
+  {% if page.tags %}{% for tag in page.tags %}<meta property="article:tag" content="{{ tag | escape }}">{% endfor %}{% endif %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title | escape }}">
+  <meta name="twitter:description" content="{{ social_description | escape }}">
+  <meta name="twitter:image" content="{{ social_image }}">
+  <meta name="twitter:image:alt" content="{{ page.cover_alt | default: page.title | escape }}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {"@type": "WebPage", "@id": {{ page.url | absolute_url | jsonify }}},
+    "headline": {{ page.title | jsonify }},
+    "description": {{ social_description | jsonify }},
+    "image": [{{ social_image | jsonify }}],
+    "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+    "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
+    "author": {"@type": "Organization", "name": {{ site.title | jsonify }}},
+    "publisher": {
+      "@type": "Organization",
+      "name": {{ site.title | jsonify }},
+      "logo": {"@type": "ImageObject", "url": {{ '/img/logo2.jpeg' | absolute_url | jsonify }}}
+    }{% if page.subcategory %},
+    "articleSection": {{ page.subcategory | jsonify }}{% endif %}{% if page.tags and page.tags.size > 0 %},
+    "keywords": {{ page.tags | jsonify }}{% endif %}
+  }
+  </script>
   <style>
     :root { --ink:#202536; --muted:#667085; --line:#e7e9ee; --green:#a8b686; --soft:#f7f8f5; }
     * { box-sizing:border-box; }
