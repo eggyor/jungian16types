@@ -4,12 +4,12 @@
 <section class="result-section">
   <p class="result-kicker">主導類型簡介</p>
   <h3>{{ type_article.title | escape }}</h3>
-  <p class="result-preview type-preview">{{ result_articles.type_preview | strip_html | strip | escape }}</p>
-  <a class="btn result-read" href="{{ result_articles.type_url | relative_url }}">閱讀類型描述全文</a>
+  <p class="result-preview type-preview">{{ result_articles.type_preview | strip_html | strip | escape }}<span class="result-ellipsis" aria-label="節錄未完">…</span></p>
+  <a class="btn result-read" href="{{ result_articles.type_url | relative_url }}">閱讀類型描述全文<span class="result-arrow" aria-hidden="true">→</span></a>
 </section>
 <section class="result-section jung-section">
   <p class="result-kicker">榮格原文節錄</p>
   <h3>{{ jung_article.title | escape }}</h3>
-  <p class="result-preview jung-excerpt">{{ jung_article.excerpt | strip_html | strip | truncate: 210, "…" | escape }}</p>
-  <a class="btn result-read" href="{{ result_articles.jung_url | relative_url }}">閱讀榮格原文全文</a>
+  <p class="result-preview jung-excerpt">{{ jung_article.excerpt | strip_html | strip | truncate: 205, "" | escape }}<span class="result-ellipsis" aria-label="節錄未完">…</span></p>
+  <a class="btn result-read" href="{{ result_articles.jung_url | relative_url }}">閱讀榮格原文全文<span class="result-arrow" aria-hidden="true">→</span></a>
 </section>
