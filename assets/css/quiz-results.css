@@ -17,7 +17,7 @@
 .quiz-result-page.result-redesign{width:min(1280px,calc(100% - 48px));max-width:none;padding:18px 0 24px;color:var(--cj-ink,#26372e);font:inherit}
 .result-redesign .result-content{width:100%;max-width:none;padding:clamp(18px,2.1vw,28px);background:var(--cj-paper-light,#fcfaf5);border-color:var(--cj-line,#ded9ca);box-shadow:var(--cj-shadow,0 10px 28px rgba(43,55,45,.08))}
 .result-redesign .result-content>h2{margin:0 0 14px;color:var(--cj-green-deep,#354f3d);font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;font-size:clamp(24px,2.4vw,32px);letter-spacing:.03em}
-.result-layout{display:grid;grid-template-columns:minmax(260px,.78fr) minmax(0,1.22fr);align-items:center;gap:clamp(24px,4vw,58px)}
+.quiz-result-page.result-redesign .result-layout{display:grid;grid-template-columns:minmax(260px,.78fr) minmax(0,1.22fr);align-items:center;gap:clamp(24px,4vw,58px)}
 .result-visual{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
 .result-redesign .result-visual img{width:auto;max-width:100%;max-height:min(54svh,560px);height:auto;margin:0;border-radius:4px;object-fit:contain;box-shadow:0 5px 20px rgba(38,55,46,.08)}
 .result-redesign .result-visual .btn,.result-redesign .result-read{display:inline-flex;align-items:center;justify-content:center;min-height:42px;margin:0;padding:9px 18px;border:1px solid var(--cj-green,#4d6854);border-radius:4px;background:var(--cj-green,#4d6854);color:var(--cj-paper-light,#fcfaf5);text-align:center;line-height:1.35;transition:background .18s ease,color .18s ease,transform .18s ease}
@@ -37,7 +37,7 @@
   .quiz-result-page.result-redesign{width:100%;padding:14px 14px 36px}
   .result-redesign .result-content{padding:18px 16px}
   .result-redesign .result-content>h2{margin-bottom:12px}
-  .result-layout{grid-template-columns:minmax(0,1fr);gap:22px}
+  .quiz-result-page.result-redesign .result-layout{grid-template-columns:minmax(0,1fr);gap:22px}
   .result-redesign .result-visual img{max-height:54svh}
   .result-redesign .result-visual .btn,.result-redesign .result-read{display:inline-flex;width:auto;max-width:100%}
   .result-copy{gap:16px}
