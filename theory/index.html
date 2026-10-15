@@ -61,8 +61,8 @@ main.wrap{padding-top:22px;padding-bottom:36px}
 .phead h1{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(28px,4.4vw,38px);letter-spacing:.04em;color:var(--navy)}
 .phead .en{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--muted)}
 .lead{margin:4px 0 0;font-size:14px;color:#55524A}
-.banner{margin:12px 0 14px;height:140px;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 16px;
-  background:repeating-linear-gradient(135deg,#21406A 0 14px,#1B3558 14px 28px);color:#E8E1D0;font-size:14px;letter-spacing:.08em}
+.banner{margin:12px 0 14px;width:100%;aspect-ratio:2272 / 464;border-radius:8px;overflow:hidden;background:var(--beige)}
+.banner img{display:block;width:100%;height:100%;object-fit:cover}
 .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;box-shadow:0 1px 3px rgba(23,48,79,.06)}
 
 /* dictionary groups */
@@ -198,7 +198,7 @@ table.stack{width:100%;min-width:440px;border-collapse:collapse;background:#fff;
   .phead h1{font-size:28px}
   .phead .en{font-size:14px}
   .lead{font-size:14px}
-  .banner{height:80px;margin:10px 0 12px;font-size:12px}
+  .banner{margin:10px 0 12px}
   .card{padding:8px}
   /* 辭典表格：標籤格變橫條，按鈕變整列 */
   .grp{flex-direction:column;gap:6px}
@@ -2638,10 +2638,18 @@ function btnHtml(it){
   }
   return '<button class="btn'+(b.length>1?' multi':'')+'" type="button" data-id="'+id+'">'+inner+'</button>';
 }
+var BANNER_PATHS = {
+  basics: "{{ '/assets/images/theory-banners/基礎概念101.webp' | relative_url }}",
+  types: "{{ '/assets/images/theory-banners/類型描述.webp' | relative_url }}",
+  sources: "{{ '/assets/images/theory-banners/榮格原文.webp' | relative_url }}",
+  compare: "{{ '/assets/images/theory-banners/系統對比.webp' | relative_url }}",
+  faq: "{{ '/assets/images/theory-banners/常見問題.webp' | relative_url }}",
+  commentary: "{{ '/assets/images/theory-banners/站主銳評.webp' | relative_url }}"
+};
 function headHtml(cat){
   return '<div class="phead"><h1>'+esc(cat.name)+'</h1><span class="en">'+esc(cat.en)+'</span></div>'+
     '<p class="lead">'+esc(cat.lead)+'</p>'+
-    '<div class="banner" role="img" aria-label="橫向 Banner 圖佔位">〔橫向 Banner 圖 · 建議 1920 × 400〕</div>';
+    '<div class="banner"><img src="'+esc(BANNER_PATHS[cat.key])+'" width="1920" height="392" alt="'+esc(cat.name)+'橫額" loading="lazy" decoding="async"></div>';
 }
 
 /* ---------- 辭典面板 ---------- */
