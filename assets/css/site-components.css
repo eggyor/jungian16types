@@ -37,7 +37,7 @@
   gap:clamp(18px,2vw,30px);
   min-width:0
 }
-.main-nav>a,.nav-dropdown-toggle {
+.main-nav>a {
   font-size:18px;
   line-height:1.4;
   color:var(--cj-ink);
@@ -45,84 +45,9 @@
   white-space:nowrap;
   cursor:pointer
 }
-.main-nav>a:hover,.main-nav>a:focus-visible,.nav-dropdown-toggle:hover,.nav-dropdown-toggle:focus-visible {
+.main-nav>a:hover,.main-nav>a:focus-visible {
   color:var(--cj-green)!important
-}
-.nav-dropdown {
-  position:relative
-}
-.nav-dropdown-toggle {
-  position:relative;
-  z-index:1;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:0;
-  border:0;
-  background:transparent;
-  font:inherit;
-  font-size:18px;
-  pointer-events:auto
-}
-.nav-caret {
-  display:block;
-  width:0;
-  height:0;
-  margin-left:5px;
-  border-left:4px solid transparent;
-  border-right:4px solid transparent;
-  border-top:5px solid var(--cj-gold);
-  transition:transform .2s ease
-}
-.nav-dropdown.is-open>.nav-dropdown-toggle .nav-caret {
-  transform:rotate(180deg)
-}
-.dropdown-menu {
-  display:none;
-  position:absolute;
-  left:-35px;
-  top:calc(100% + 34px);
-  width:264px;
-  padding:6px 0;
-  background:var(--cj-paper-light);
-  border:1px solid var(--cj-line);
-  box-shadow:0 8px 24px rgba(25,31,42,.16);
-  z-index:35
-}
-.dropdown-menu a {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:61px;
-  padding:12px 16px;
-  border-bottom:1px solid var(--cj-line);
-  color:var(--cj-ink);
-  text-decoration:none;
-  font-size:20px;
-  white-space:nowrap
-}
-.dropdown-menu a:last-child {
-  border-bottom:0
-}
-.dropdown-menu a:hover,.dropdown-menu a:focus {
-  background:var(--cj-green-soft);
-  color:var(--cj-green-deep)
-}
-.nav-dropdown::after {
-  content:"";
-  position:absolute;
-  left:-35px;
-  right:-35px;
-  top:100%;
-  height:34px
-}
-.nav-dropdown .dropdown-menu {
-  display:none!important
-}
-.nav-dropdown.is-open .dropdown-menu {
-  display:block!important
-}
-.site-menu-toggle,.site-burger {
+}.site-menu-toggle,.site-burger {
   display:none
 }
 .site-search {
@@ -264,7 +189,7 @@
 .main-nav {
   gap:26px
 }
-.main-nav>a,.nav-dropdown-toggle {
+.main-nav>a {
   font-size:18px
 }
 }
@@ -283,7 +208,7 @@
 }
 .header-logo { width:64px; height:64px }
 .main-nav { gap:18px }
-.main-nav>a,.nav-dropdown-toggle { font-size:17px }
+.main-nav>a { font-size:17px }
 }
 @media(max-width:760px) {
   .header-inner {
@@ -343,29 +268,9 @@ box-shadow:0 8px 16px rgba(0,0,0,.12)
 #site-menu-toggle:checked~.main-nav {
   display:flex
 }
-.main-nav>a,.nav-dropdown-toggle {
+.main-nav>a {
 padding:11px 8px;
 font-size:16px
-}
-.nav-dropdown {
-  width:100%
-}
-.nav-dropdown::after {
-  display:none
-}
-.dropdown-menu {
-position:static;
-top:auto;
-left:auto;
-width:100%;
-background:var(--cj-paper-light);
-box-shadow:none;
-padding:0 0 0 14px
-}
-.dropdown-menu a {
-  justify-content:flex-start;
-  min-height:44px;
-  font-size:16px
 }
 .site-search-results {
   right:-2px;
