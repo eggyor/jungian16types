@@ -11,15 +11,12 @@ description: '按基礎概念、類型描述、常見問題、榮格原文、系
 <title>理論文章｜{{ site.title }}</title>
 <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
 {% include site-theme-links.html %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#F7F4EC; --card:#FBFAF6; --line:#DED7C8; --line2:#CFC4AA; --line3:#E8E1D3;
   --navy:#30483B; --beige:#EEE8D9; --tan:#987746; --text:#454A43; --muted:#777568; --gold:#C9AA70;
-  --serif:"Noto Serif TC","Songti TC","PMingLiU","Source Han Serif TC",serif;
-  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Source Han Sans TC",sans-serif;
+  --serif:var(--cj-font-family,"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif);
+  --sans:var(--cj-font-family,"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:auto}

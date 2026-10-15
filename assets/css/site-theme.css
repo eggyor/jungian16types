@@ -1,5 +1,6 @@
 /* Visual refresh: warm ivory, scholar green, restrained gold. Presentation only. */
 :root{
+  --cj-font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
   --cj-paper:#f7f4eb;
   --cj-paper-light:#fcfaf5;
   --cj-paper-deep:#eee8d9;
@@ -18,7 +19,7 @@ html{background:var(--cj-paper)}
 body{
   color:var(--cj-ink)!important;
   background:var(--cj-paper)!important;
-  font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif!important;
+  font-family:var(--cj-font-family)!important;
   text-rendering:optimizeLegibility;
 }
 ::selection{color:var(--cj-ink);background:var(--cj-gold-soft)}

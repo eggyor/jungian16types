@@ -12,9 +12,6 @@ description: 把心理功能投入煉金容器，觀察意識與無意識如何�
 <title>煉金工房｜經典榮格</title>
 <meta name="description" content="把 I、E、N、S、T、F 投入人格煉金容器，觀察意識與無意識如何互相映照，煉成經典榮格的人格類型。">
 <meta name="color-scheme" content="light">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
 {% include site-theme-links.html %}
 <style>
@@ -32,8 +29,8 @@ description: 把心理功能投入煉金容器，觀察意識與無意識如何�
   --axA2:#e6c677; --axB2:#f0a483; --axC2:#8ed0a8;   /* 無意識面（深底）用的亮色 */
   --g1:var(--cj-gold,#a7833e); --g2:var(--cj-green,#4d6854); --g3:#a8604a;        /* 文章分組色：內外傾／主導類型／功能軸 */
   --glow:#b9b39f;
-  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
-  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --sans:var(--cj-font-family,"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif);
+  --serif:var(--cj-font-family,"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif);
 }
 body[data-stage="1"]{--glow:#8a9bbd}   /* 黑化→白化→赤化：靛藍灰 → 金 → 赤陶 */
 body[data-stage="2"]{--glow:#c8aa63}
