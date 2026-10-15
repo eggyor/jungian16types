@@ -12,24 +12,16 @@ description: '經典榮格類型測驗結果：混合結果。查看此結果的
 </head>
 <body>
 {% include header.html %}
-<main class="quiz-result-page"><div class="content page"><h2>類型結果</h2><div id="quiz-tie-panel" class="quiz-tie-panel" hidden></div><script>(function(){var q=new URLSearchParams(location.search),raw=q.get("type_candidates"),box=document.getElementById("quiz-tie-panel");if(!raw||!box)return;var ids={ENFJ:2889,ESFJ:2877,ENFP:2957,ENTP:2951,ESFP:2939,ESTP:2934,ENTJ:2865,ESTJ:2832,INFJ:2922,ISFJ:2917,INFP:2996,INTP:2987,ISFP:2975,ISTP:2969,INTJ:2905,ISTJ:2899};var list=raw.split(",").filter(function(t){return ids[t]});if(!list.length)return;box.hidden=false;box.innerHTML="<h3>主導功能分數接近</h3><p>你的分數顯示主導功能較接近，以下類型可作為閱讀和自我觀察的參考：</p><ul>"+list.map(function(t){return "<li><a href=\"{{ '/page-' | relative_url }}"+ids[t]+".html\">"+t+"</a></li>"}).join("")+"</ul><p>測驗結果僅供初步參考，建議配合理論文章和長期自我觀察。</p>"})();</script>
-<h2>所有類型描述</h2>
-<a href="{{ '/post-1638.html' | relative_url }}">
-<img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-et.png' | relative_url }}" width="2048"/> </a>
-<a href="{{ '/post-1657.html' | relative_url }}">
-<img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-ef.png' | relative_url }}" width="2048"/> </a>
-<a href="{{ '/post-1669.html' | relative_url }}">
-<img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-es.png' | relative_url }}" width="2048"/> </a>
-<a href="{{ '/post-1681.html' | relative_url }}">
-<img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-en.png' | relative_url }}" width="2048"/> </a>
-<a href="{{ '/post-1693.html' | relative_url }}">
-<img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-it.png' | relative_url }}" width="2048"/> </a>
-<a href="{{ '/post-1705.html' | relative_url }}">
-<img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-if.png' | relative_url }}" width="2048"/> </a>
-<a href="{{ '/post-1717.html' | relative_url }}">
-<img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-is.png' | relative_url }}" width="2048"/> </a>
-<a href="{{ '/post-1729.html' | relative_url }}">
-<img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-in.png' | relative_url }}" width="2048"/> </a></div></main>
+<main class="quiz-result-page tie-redesign"><div class="content page tie-content"><h2>類型結果</h2><div id="quiz-tie-panel" class="quiz-tie-panel" hidden></div><script>(function(){var q=new URLSearchParams(location.search),raw=q.get("type_candidates"),box=document.getElementById("quiz-tie-panel");if(!raw||!box)return;var ids={ENFJ:2889,ESFJ:2877,ENFP:2957,ENTP:2951,ESFP:2939,ESTP:2934,ENTJ:2865,ESTJ:2832,INFJ:2922,ISFJ:2917,INFP:2996,INTP:2987,ISFP:2975,ISTP:2969,INTJ:2905,ISTJ:2899};var list=raw.split(",").filter(function(t){return ids[t]});if(!list.length)return;box.hidden=false;box.innerHTML="<h3>主導功能分數接近</h3><p>你的分數顯示主導功能較接近，以下類型可作為閱讀和自我觀察的參考：</p><ul>"+list.map(function(t){return "<li><a href=\"{{ '/page-' | relative_url }}"+ids[t]+".html\">"+t+"</a></li>"}).join("")+"</ul><p>測驗結果僅供初步參考，建議配合理論文章和長期自我觀察。</p>"})();</script>
+<h2 class="tie-grid-title">所有類型描述</h2><div class="tie-grid">
+<a class="tie-card" href="{{ '/post-1638.html' | relative_url }}"><img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-et.png' | relative_url }}" width="2048"/> </a>
+<a class="tie-card" href="{{ '/post-1657.html' | relative_url }}"><img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-ef.png' | relative_url }}" width="2048"/> </a>
+<a class="tie-card" href="{{ '/post-1669.html' | relative_url }}"><img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-es.png' | relative_url }}" width="2048"/> </a>
+<a class="tie-card" href="{{ '/post-1681.html' | relative_url }}"><img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-en.png' | relative_url }}" width="2048"/> </a>
+<a class="tie-card" href="{{ '/post-1693.html' | relative_url }}"><img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-it.png' | relative_url }}" width="2048"/> </a>
+<a class="tie-card" href="{{ '/post-1705.html' | relative_url }}"><img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-if.png' | relative_url }}" width="2048"/> </a>
+<a class="tie-card" href="{{ '/post-1717.html' | relative_url }}"><img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-is.png' | relative_url }}" width="2048"/> </a>
+<a class="tie-card" href="{{ '/post-1729.html' | relative_url }}"><img alt="" height="1024" loading="lazy" onerror="this.classList.add('broken')" src="{{ '/assets/images/img/banners-in.png' | relative_url }}" width="2048"/> </a></div></div></main>
 {% include footer.html %}
 </body></html>
 

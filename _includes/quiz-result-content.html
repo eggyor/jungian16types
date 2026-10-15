@@ -1,0 +1,15 @@
+{% assign result_articles = site.data.quiz_results[page.dominant_function] %}
+{% assign type_article = site.posts | where: "url", result_articles.type_url | first %}
+{% assign jung_article = site.posts | where: "url", result_articles.jung_url | first %}
+<section class="result-section">
+  <p class="result-kicker">主導類型簡介</p>
+  <h3>{{ type_article.title | escape }}</h3>
+  <p>{{ type_article.description | strip_html | strip | escape }}…</p>
+  <a class="btn result-read" href="{{ result_articles.type_url | relative_url }}">閱讀類型描述全文</a>
+</section>
+<section class="result-section jung-section">
+  <p class="result-kicker">榮格原文節錄</p>
+  <h3>{{ jung_article.title | escape }}</h3>
+  <p class="jung-excerpt">{{ jung_article.excerpt | strip_html | strip | truncate: 150, "…" | escape }}</p>
+  <a class="btn result-read" href="{{ result_articles.jung_url | relative_url }}">閱讀榮格原文全文</a>
+</section>
