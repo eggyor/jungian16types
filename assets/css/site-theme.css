@@ -1185,4 +1185,17 @@ body:has(.quiz-landing) .quiz-landing-hero .lead{display:inline-block;margin:0;p
   html:has(.home-main) { scroll-padding-top: var(--cj-header-height, 86px); }
   body:has(.home-main) .home-main > section { min-height: calc(100svh - var(--cj-header-height, 86px)); }
   body:has(.home-main) > .site-footer { scroll-margin-top: var(--cj-header-height, 86px); }
+}/* Slightly shorter shared header to keep more page content in view. */
+@media (min-width: 1051px) {
+  .header-inner { min-height: 60px; padding: 6px 28px; }
+  .header-logo { width: 48px; height: 48px; }
+}
+@media (min-width: 761px) and (max-width: 1050px) {
+  .header-inner { min-height: 54px; padding: 6px 22px; }
+  .header-logo { width: 40px; height: 40px; }
+}
+@media (max-width: 760px) {
+  .header-inner { min-height: 62px; padding: 7px 15px; }
+  .header-logo { width: 46px; height: 46px; }
+  .main-nav { top: 62px; }
 }
