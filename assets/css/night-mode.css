@@ -326,3 +326,7 @@ html[data-theme="night"] .article-body :is(h2,h3,h4){color:#e7c96f!important}
 html[data-theme="night"] .article-body a{color:#9fc3f2!important;text-decoration-color:#7199cf!important}
 html[data-theme="night"] .article-body blockquote{background:#17263b!important;border-color:#7199cf!important;color:#dce3ee!important}
 html[data-theme="night"] .article .cover{background:#111b2d!important;border-color:#51472f!important}
+
+/* Tag result pages use .post-list, so include their h1 in the night palette. */
+html[data-theme="night"] body:has(.tag-list) main>h1,
+html[data-theme="night"] body:has(.post-list) main>h1{color:#e7c96f!important}

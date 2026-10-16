@@ -15,4 +15,13 @@
     </div>
   </div>
 </footer>
-<a class="back-to-top" href="#site-top" aria-label="回到頁首"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 14 7-7 7 7"/></svg></a>
+<a class="back-to-top" href="#" aria-label="回到頁首"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 14 7-7 7 7"/></svg></a>
+<script>
+document.addEventListener('click',function(event){
+  const button=event.target instanceof Element?event.target.closest('.back-to-top'):null;
+  if(!button)return;
+  event.preventDefault();
+  const behavior=window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+  try{window.scrollTo({top:0,behavior:behavior})}catch(error){window.scrollTo(0,0)}
+});
+</script>
