@@ -12,7 +12,6 @@ description: "主導功能與自我同構，承載人格的方向與目標；輔
 permalink: "/dominant-function-goal-auxiliary-tool/"
 ---
 
-## **主導功能作為目標，輔助功能作為工具**
 
 ### **主導功能作為目標**
 
