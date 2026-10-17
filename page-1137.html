@@ -92,7 +92,8 @@ a.text-link{color:#0067ff}.shop-image{width:150px;height:150px;object-fit:cover;
     <div class="announcement-window">
       <div class="announcement-track" data-announcement-track>
         {% for post in announcement_posts %}
-          {% if post.tags contains "最新公告" and announcement_count < 3 %}
+          {% assign announcement_labels = post.tags | concat: post.categories %}
+          {% if announcement_labels contains "最新公告" and announcement_count < 3 %}
             <a class="announcement-card" href="{{ post.url | relative_url }}">
               <div class="announcement-cover">
                 {% if post.cover %}<img src="{{ post.cover | relative_url | escape }}" alt="{{ post.cover_alt | default: post.title | escape }}" loading="lazy">{% endif %}
