@@ -23,7 +23,7 @@ description: '依發佈日期瀏覽經典榮格網站的所有最新公告；新
       <a class="page-button" href="{{ '/about/' | relative_url }}">回到關於本站</a>
     </nav>
     <h1>最新公告</h1>
-    <p class="intro">公告是網站的獨立大分類，依發佈日期由新到舊排列。</p>
+
     {% assign announcement_posts = site.categories['最新公告'] | sort: "date" | reverse %}
     {% if announcement_posts and announcement_posts.size > 0 %}
       <ul class="post-list">
