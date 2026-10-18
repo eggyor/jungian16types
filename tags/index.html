@@ -36,12 +36,20 @@ description: '按主題標籤查找經典榮格心理類型學文章；各標籤
     <h1>標籤文章索引</h1>
     <p class="intro">選擇標籤，查看使用該標籤的文章。每個標籤都有獨立頁面，文章清單會在網站重新發佈時自動更新。</p>
     <ul class="tag-list">
+      {% assign curated_tag_names = site.data.person_analysis_tags %}
+      {% for tag_name in curated_tag_names %}
+        {% assign tag_posts = site.tags[tag_name] %}
+        {% capture tag_page_path %}/tags/{{ tag_name }}/{% endcapture %}
+        <li><a href="{{ tag_page_path | relative_url }}">{{ tag_name | escape }}</a><span class="count">{{ tag_posts.size | default: 0 }} 篇文章</span></li>
+      {% endfor %}
       {% assign sorted_tags = site.tags | sort %}
       {% for tag_pair in sorted_tags %}
         {% assign tag_name = tag_pair[0] %}
         {% assign tag_posts = tag_pair[1] %}
-        {% capture tag_page_path %}/tags/{{ tag_name }}/{% endcapture %}
-        <li><a href="{{ tag_page_path | relative_url }}">{{ tag_name | escape }}</a><span class="count">{{ tag_posts.size }} 篇文章</span></li>
+        {% unless curated_tag_names contains tag_name %}
+          {% capture tag_page_path %}/tags/{{ tag_name }}/{% endcapture %}
+          <li><a href="{{ tag_page_path | relative_url }}">{{ tag_name | escape }}</a><span class="count">{{ tag_posts.size }} 篇文章</span></li>
+        {% endunless %}
       {% endfor %}
     </ul>
   </main>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description | escape }}">
+  <title>{{ page.title | escape }}｜人物分析｜{{ site.title | default: "經典榮格 Classic Jung" | escape }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/tag-pages.css' | relative_url }}">
+  {% include site-theme-links.html %}
+  {% include seo-canonical.html %}
+</head>
+<body id="site-top">
+  {% include header.html %}
+  <main>
+    <nav class="page-actions" aria-label="人物分析標籤頁導覽">
+      <a class="page-button" href="{{ '/theory/people/' | relative_url }}">回到人物分析</a>
+      <a class="page-button" href="{{ '/tags/' | relative_url }}">查看所有標籤索引</a>
+    </nav>
+    <h1>{{ page.tag_name | escape }}</h1>
+    <p class="intro">使用此分析標籤的文章（依發佈日期由新到舊）</p>
+    {% assign tag_posts = site.tags[page.tag_name] | sort: "date" | reverse %}
+    {% if tag_posts and tag_posts.size > 0 %}
+      <ul class="post-list">
+        {% for post in tag_posts %}
+          <li>
+            <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+            {% assign preview = post.excerpt | default: post.content | strip_html | normalize_whitespace | truncate: 240 %}
+            <p>{{ preview | escape }}</p>
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y年%-m月%-d日" }}</time>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty">目前沒有使用此標籤的人物分析文章。</p>
+    {% endif %}
+  </main>
+  {% include footer.html %}
+</body>
+</html>

@@ -2603,6 +2603,16 @@ var CATS = [
   ],
   "featured": true,
   "note": "站主聲明：以下皆為個人主觀觀點，不代表榮格或任何學術立場。"
+ },
+ {
+  "key": "people",
+  "name": "人物分析",
+  "en": "People Analysis",
+  "lead": "以經典榮格心理類型學分析歷史人物、思想家、創作者與虛構角色；人物判型屬於基於公開資料的推論，並非確定診斷。",
+  "sections": [],
+  "items": [],
+  "pinnedUrl": {{ '/post-3399.html' | relative_url | jsonify }},
+  "tags": ["ET分析", "EF分析", "ES分析", "EN分析", "IT分析", "IF分析", "IS分析", "IN分析"]
  }
 ];
 
@@ -2622,15 +2632,25 @@ var LIVE_POSTS = {
   tags: {{ post.tags | default: empty | jsonify }},
   pv: [{{ post.excerpt | default: post.content | strip_html | normalize_whitespace | truncate: 240 | jsonify }}]
  }{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}
+ ],
+ people: [
+{% assign people_comma = false %}{% for post in site.posts %}{% if post.categories contains '理論文章' and post.subcategory == '人物分析' %}{% if people_comma %},{% endif %}{
+  t: {{ post.title | jsonify }}, url: {{ post.url | relative_url | jsonify }},
+  d: {{ post.date | date: "%Y年%-m月%-d日" | jsonify }},
+  tags: {{ post.tags | default: empty | jsonify }},
+  pv: [{{ post.excerpt | default: post.content | strip_html | normalize_whitespace | truncate: 240 | jsonify }}]
+ }{% assign people_comma = true %}{% endif %}{% endfor %}
  ]
 };
 var faqCat = CATS.filter(function(cat){ return cat.key === "faq"; })[0];
 var commentaryCat = CATS.filter(function(cat){ return cat.key === "commentary"; })[0];
+var peopleCat = CATS.filter(function(cat){ return cat.key === "people"; })[0];
 function normalizeLivePosts(items){
  return items.map(function(item){ item.tags = Array.isArray(item.tags) ? item.tags : []; return item; });
 }
 if (faqCat) faqCat.items = normalizeLivePosts(LIVE_POSTS.faq);
 if (commentaryCat) commentaryCat.items = normalizeLivePosts(LIVE_POSTS.commentary);
+if (peopleCat) peopleCat.items = normalizeLivePosts(LIVE_POSTS.people);
 
 /* ---------- 工具 ---------- */
 function $(s,r){return (r||document).querySelector(s);}
@@ -2654,12 +2674,14 @@ var BANNER_PATHS = {
   sources: "{{ '/assets/images/theory-banners/榮格原文.webp' | relative_url }}",
   compare: "{{ '/assets/images/theory-banners/系統對比.webp' | relative_url }}",
   faq: "{{ '/assets/images/theory-banners/常見問題.webp' | relative_url }}",
-  commentary: "{{ '/assets/images/theory-banners/站主銳評.webp' | relative_url }}"
+  commentary: "{{ '/assets/images/theory-banners/站主銳評.webp' | relative_url }}",
+  people: "{{ '/assets/images/theory-banners/類型描述.webp' | relative_url }}"
 };
 function headHtml(cat){
+  var banner = BANNER_PATHS[cat.key] ? '<div class="banner"><img src="'+esc(BANNER_PATHS[cat.key])+'" width="1920" height="392" alt="'+esc(cat.name)+'橫額" loading="lazy" decoding="async"></div>' : '';
   return '<div class="phead"><h1>'+esc(cat.name)+'</h1><span class="en">'+esc(cat.en)+'</span></div>'+
     '<p class="lead">'+esc(cat.lead)+'</p>'+
-    '<div class="banner"><img src="'+esc(BANNER_PATHS[cat.key])+'" width="1920" height="392" alt="'+esc(cat.name)+'橫額" loading="lazy" decoding="async"></div>';
+    banner;
 }
 
 /* ---------- 辭典面板 ---------- */
@@ -2726,6 +2748,7 @@ function rowHtml(it, i, animFrom){
 function listPanel(cat){
   var h = headHtml(cat) + '<div class="card">';
   if(cat.note){ h += '<p class="note">'+esc(cat.note)+'</p>'; }
+  if(cat.pinnedUrl){ h += '<a class="feat pinned" id="pin-'+cat.key+'" hidden></a>'; }
   if(cat.featured){ h += '<a class="feat" id="feat-'+cat.key+'" hidden></a>'; }
   h += '<div class="toolbar"><label class="sr" for="q-'+cat.key+'">搜尋文章</label>'+
     '<input id="q-'+cat.key+'" type="search" placeholder="搜尋標題、預覽文字或標籤" autocomplete="off">'+
@@ -2740,7 +2763,7 @@ function listPanel(cat){
 var PAGE = 6;
 var lists = {};
 var THEORY_URL = {{ '/theory/' | absolute_url | jsonify }};
-var SECTION_PATHS = {basics:"basics/",types:"types/",faq:"faq/",sources:"sources/",compare:"compare/",commentary:"commentary/"};
+var SECTION_PATHS = {basics:"basics/",types:"types/",faq:"faq/",sources:"sources/",compare:"compare/",commentary:"commentary/",people:"people/"};
 var SITE_TITLE = {{ site.title | default: "經典榮格 Classic Jung" | jsonify }};
 var canonicalEl = document.querySelector('link[rel="canonical"]');
 var descriptionEl = document.querySelector('meta[name="description"]');
@@ -2768,8 +2791,10 @@ function setupList(cat){
 /* animFrom >= 0：從該筆開始的新列依序淡入（載入更多）；-1：不做動畫 */
 function renderList(cat, animFrom){
   var st = lists[cat.key];
+  var pinned = cat.pinnedUrl ? cat.items.filter(function(it){ return it.url === cat.pinnedUrl; })[0] : null;
+  var pool = pinned ? cat.items.filter(function(it){ return it !== pinned; }) : cat.items;
   var active = st.tag !== "全部" || !!st.q;
-  var hit = cat.items.filter(function(it){
+  var hit = pool.filter(function(it){
     if(st.tag !== "全部" && it.tags.indexOf(st.tag) < 0) return false;
     if(st.q){
       var hay = (it.t+" "+it.pv.join(" ")+" "+it.tags.join(" ")).toLowerCase();
@@ -2780,6 +2805,15 @@ function renderList(cat, animFrom){
   /* 站主銳評：沒有篩選時，最新一篇用置頂卡片顯示，列表從第二篇開始 */
   var feat = (cat.featured && !active && hit.length) ? hit[0] : null;
   var listItems = feat ? hit.slice(1) : hit;
+  var pinnedEl = $("#pin-"+cat.key);
+  if(pinnedEl){
+    if(pinned){
+      pinnedEl.setAttribute("href", pinned.url); pinnedEl.setAttribute("target", LINK_TARGET);
+      if(LINK_TARGET==="_blank") pinnedEl.setAttribute("rel","noopener");
+      pinnedEl.innerHTML = '<span class="flag">長期置頂</span><span class="ft">'+esc(pinned.t)+'</span>'+pinned.pv.map(function(p){return '<span class="fe">'+esc(p)+'</span>';}).join("")+'<span class="fd">'+esc(pinned.d)+'</span>';
+      pinnedEl.hidden = false;
+    } else { pinnedEl.hidden = true; }
+  }
   var fEl = $("#feat-"+cat.key);
   if(fEl){
     if(feat){
@@ -2794,9 +2828,9 @@ function renderList(cat, animFrom){
   var vis = listItems.slice(0, st.shown);
   var animating = animFrom >= 0;
   $("#rows-"+cat.key).innerHTML = vis.length ? vis.map(function(it, i){ return rowHtml(it, i, animFrom); }).join("")
-    : (hit.length ? '' : '<div class="empty">找不到符合的文章，換個關鍵字或標籤試試。</div>');
-  var total = cat.items.length;
-  $("#count-"+cat.key).textContent = (active ? "符合 "+hit.length+" 篇（共 "+total+" 篇）" : "共 "+total+" 篇")+" · 依最新排序";
+    : (hit.length ? '' : '<div class="empty">'+(pinned && !active ? '目前沒有其他人物分析文章。' : '找不到符合的文章，換個關鍵字或標籤試試。')+'</div>');
+  var total = pool.length;
+  $("#count-"+cat.key).textContent = (active ? "符合 "+hit.length+" 篇（共 "+total+" 篇"+(pinned?"，另有置頂文章":"")+")" : "共 "+total+" 篇"+(pinned?"（另有置頂文章）":""))+" · 依最新排序";
 
   var all = vis.length >= listItems.length;
   var more = $("#more-"+cat.key), shown = $("#shown-"+cat.key), end = $("#end-"+cat.key);
