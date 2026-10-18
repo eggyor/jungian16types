@@ -330,3 +330,8 @@ html[data-theme="night"] .article .cover{background:#111b2d!important;border-col
 /* Tag result pages use .post-list, so include their h1 in the night palette. */
 html[data-theme="night"] body:has(.tag-list) main>h1,
 html[data-theme="night"] body:has(.post-list) main>h1{color:#e7c96f!important}
+
+/* Keep social-platform colors distinct and readable in night mode too. */
+html[data-theme="night"] .home-main .home-social-icon.instagram,html[data-theme="night"] body:has(.about-shop-grid) .about-layout-refined .social-links .social-icon.instagram,html[data-theme="night"] body:has(.about-shop-grid) .about-layout-refined .shop-instagram{background:linear-gradient(145deg,#793153,#974253 55%,#a95638)!important;color:#fff!important}
+html[data-theme="night"] .home-main .home-social-icon.threads,html[data-theme="night"] body:has(.about-shop-grid) .about-layout-refined .social-links .social-icon.threads{background:#171d22!important;color:#f4f0e7!important}
+html[data-theme="night"] .home-main .home-social-icon.discord,html[data-theme="night"] body:has(.about-shop-grid) .about-layout-refined .social-links .social-icon.discord{background:#454fb8!important;color:#fff!important}

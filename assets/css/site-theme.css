@@ -1321,3 +1321,12 @@ html[data-theme="night"] .special-thanks-link{color:#8bb7f0!important}
   .article-body img{max-height:300px;margin:15px auto}
   .article-tags,.share-block{margin-top:12px}
 }
+
+/* Give each social link its own recognizable brand color while keeping the site's paper-and-gold frame. */
+.home-social-icon.instagram,.social-icon.instagram{background:linear-gradient(145deg,#a83f73 0%,#c34e69 52%,#d87948 100%);color:#fff}
+.home-social-icon.threads,.social-icon.threads{background:#252a27;color:#fff}
+.home-social-icon.discord,.social-icon.discord{background:#5865d9;color:#fff}
+.home-social-icon.instagram:hover,.social-icon.instagram:hover{background:linear-gradient(145deg,#92345f 0%,#ad405d 52%,#c4663c 100%)}
+.home-social-icon.threads:hover,.social-icon.threads:hover{background:#111614}
+.home-social-icon.discord:hover,.social-icon.discord:hover{background:#4853c4}
+.home-social-icon:focus-visible,.social-icon:focus-visible{outline:3px solid var(--cj-gold,#a7833e);outline-offset:4px}
