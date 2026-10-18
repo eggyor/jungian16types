@@ -8,7 +8,7 @@ subcategory: 人物分析
 tags:
   - ES分析
 excerpt: "港劇《尋秦記》主角項少龍的ESTP分析。"
-cover: /assets/images/img/2026-01-25-a-step-into-the-past-1-cover.png
+cover: /assets/images/img/2026-01-25-a-step-into-the-past-1-cover-optimized-cover.webp
 cover_alt: "a step into the past 1"
 ---
 

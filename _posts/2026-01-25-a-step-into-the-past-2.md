@@ -8,7 +8,7 @@ subcategory: 人物分析
 tags:
   - ET分析
 excerpt: "港劇《尋秦記》主角嬴政/趙盤的ENTJ分析。"
-cover: /assets/images/img/2026-01-25-a-step-into-the-past-2-cover.png
+cover: /assets/images/img/2026-01-25-a-step-into-the-past-2-cover-optimized-cover.webp
 cover_alt: "a step into the past 2"
 ---
 
