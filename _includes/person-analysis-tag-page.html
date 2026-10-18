@@ -19,7 +19,8 @@
     </nav>
     <h1>{{ page.tag_name | escape }}</h1>
     <p class="intro">使用此分析標籤的文章（依發佈日期由新到舊）</p>
-    {% assign tag_posts = site.tags[page.tag_name] | sort: "date" | reverse %}
+    {% assign tag_posts = site.tags[page.tag_name] %}
+    {% if tag_posts %}{% assign tag_posts = tag_posts | sort: "date" | reverse %}{% endif %}
     {% if tag_posts and tag_posts.size > 0 %}
       <ul class="post-list">
         {% for post in tag_posts %}
