@@ -2553,6 +2553,16 @@ var CATS = [
   ]
  },
  {
+  "key": "people",
+  "name": "人物分析",
+  "en": "Character Analysis",
+  "lead": "以經典榮格心理類型學分析歷史人物、思想家、創作者與虛構角色；人物判型屬於基於公開資料的推論，並非確定診斷。",
+  "sections": [],
+  "items": [],
+  "pinnedUrl": {{ '/post-3399.html' | relative_url | jsonify }},
+  "tags": ["ET分析", "EF分析", "ES分析", "EN分析", "IT分析", "IF分析", "IS分析", "IN分析"]
+ },
+ {
   "key": "commentary",
   "name": "站主銳評",
   "en": "Commentary",
@@ -2603,16 +2613,6 @@ var CATS = [
   ],
   "featured": true,
   "note": "站主聲明：以下皆為個人主觀觀點，不代表榮格或任何學術立場。"
- },
- {
-  "key": "people",
-  "name": "人物分析",
-  "en": "People Analysis",
-  "lead": "以經典榮格心理類型學分析歷史人物、思想家、創作者與虛構角色；人物判型屬於基於公開資料的推論，並非確定診斷。",
-  "sections": [],
-  "items": [],
-  "pinnedUrl": {{ '/post-3399.html' | relative_url | jsonify }},
-  "tags": ["ET分析", "EF分析", "ES分析", "EN分析", "IT分析", "IF分析", "IS分析", "IN分析"]
  }
 ];
 
@@ -2763,7 +2763,7 @@ function listPanel(cat){
 var PAGE = 6;
 var lists = {};
 var THEORY_URL = {{ '/theory/' | absolute_url | jsonify }};
-var SECTION_PATHS = {basics:"basics/",types:"types/",faq:"faq/",sources:"sources/",compare:"compare/",commentary:"commentary/",people:"people/"};
+var SECTION_PATHS = {basics:"basics/",types:"types/",faq:"faq/",sources:"sources/",compare:"compare/",people:"people/",commentary:"commentary/"};
 var SITE_TITLE = {{ site.title | default: "經典榮格 Classic Jung" | jsonify }};
 var canonicalEl = document.querySelector('link[rel="canonical"]');
 var descriptionEl = document.querySelector('meta[name="description"]');
