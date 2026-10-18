@@ -116,3 +116,21 @@ a{color:inherit}
 @media(max-width:620px){.home-main .home-paper-panel{padding:21px 19px;border-radius:7px}.home-main .home-paper-panel h2{margin-bottom:15px;padding-bottom:11px;font-size:30px}.home-main .home-panel-kicker{font-size:10px}.home-main .site-about .support-row{margin-top:20px;gap:14px}}
 /* Keep the tall book cover off narrow phone screens; retain it on tablets and desktops. */
 @media(max-width:620px){.hero-book{display:none}}
+
+/* Desktop first fold: keep the full welcome copy and both actions within one viewport. */
+@media(min-width:901px){
+  body:has(.home-main) .home-main>.hero .hero-grid{align-items:center;gap:clamp(18px,2vw,30px)}
+  body:has(.home-main) .home-main>.hero .hero-copy{padding:clamp(18px,2vw,30px)}
+  body:has(.home-main) .home-main>.hero .hero-copy h1{margin-bottom:14px;font-size:clamp(40px,4.2vw,60px);line-height:1.13}
+  body:has(.home-main) .home-main>.hero .hero-copy .home-copy{font-size:clamp(15px,.92vw,17px);line-height:1.62}
+  body:has(.home-main) .home-main>.hero .hero-copy .home-copy p{margin-bottom:12px}
+  body:has(.home-main) .home-main>.hero .home-buttons{gap:12px;margin-top:18px}
+  body:has(.home-main) .home-main>.hero .home-buttons .home-btn{min-height:48px;padding-top:9px;padding-bottom:9px;font-size:16px}
+  body:has(.home-main) .home-main>.hero .home-note{margin-top:14px;font-size:13px;line-height:1.5}
+  body:has(.home-main) .home-main>.hero .hero-book{width:100%;height:min(62svh,600px);max-height:none!important;object-fit:contain}
+}
+
+/* Keep the homepage heading to its intended two lines on phones. */
+@media(max-width:620px){
+  body:has(.home-main) .home-main .hero h1{font-size:clamp(28px,8vw,34px);line-height:1.2;margin-bottom:15px}
+}
