@@ -127,7 +127,7 @@ a{color:inherit}
   body:has(.home-main) .home-main>.hero .home-buttons{gap:12px;margin-top:18px}
   body:has(.home-main) .home-main>.hero .home-buttons .home-btn{min-height:48px;padding-top:9px;padding-bottom:9px;font-size:16px}
   body:has(.home-main) .home-main>.hero .home-note{margin-top:14px;font-size:13px;line-height:1.5}
-  body:has(.home-main) .home-main>.hero .hero-book{width:100%;height:min(62svh,600px);max-height:none!important;object-fit:contain}
+  body:has(.home-main) .home-main>.hero .hero-book{width:auto;height:80svh;max-height:80svh!important;max-width:100%;justify-self:center;object-fit:contain}
 }
 
 /* Keep the homepage heading to its intended two lines on phones. */
