@@ -91,6 +91,12 @@ a.text-link{color:#0067ff}.shop-image{width:150px;height:150px;object-fit:cover;
   .announcement-all-link:hover{background:var(--ink,#334b3d);color:#fff}
   .announcement-all-link:focus-visible{outline:3px solid var(--accent,#b28b45);outline-offset:3px}
   @media(max-width:600px){.announcement-heading-row{flex-wrap:wrap;gap:8px;margin-bottom:16px}.announcement-all-link{padding:7px 10px;font-size:12px;white-space:nowrap}}
+    /* Keep the About page's final contact block close to its footer. */
+  body:has(.about-shop-grid) main{padding-bottom:0!important}
+  body:has(.about-shop-grid) .content{padding-bottom:0!important}
+  body:has(.about-shop-grid) .contact-section{margin-bottom:0!important}
+  body:has(.about-shop-grid)>.site-footer{margin-top:18px!important}
+  @media(max-width:760px){body:has(.about-shop-grid)>.site-footer{margin-top:12px!important}}
   </style>
  {% include seo-canonical.html %}
 </head>
