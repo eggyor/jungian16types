@@ -58,6 +58,9 @@
     .meta,.card-meta { color:var(--muted); font-size:14px; }
     .categories { display:inline-flex; gap:8px; flex-wrap:wrap; margin-left:12px; }
     .category,.tag-chip { display:inline-block; background:var(--soft); border-radius:999px; padding:2px 10px; margin:2px 4px 2px 0; }
+    .tag-chip { color:var(--ink); text-decoration:none; transition:background-color .15s ease,border-color .15s ease; }
+    .tag-chip:hover { outline:1px solid var(--green); outline-offset:1px; }
+    .tag-chip:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
     .taxonomy { margin-top:12px; color:var(--muted); font-size:14px; }
     .article-tags { max-width:820px; margin:26px auto 0; padding:18px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
     .article-tags h2 { margin:0 0 12px; font-size:1rem; }
@@ -103,7 +106,7 @@
           {% if page.categories and page.categories.size > 0 %}<span class="categories">{% for category in page.categories %}<span class="category">{{ category | escape }}</span>{% endfor %}</span>{% endif %}
           {% if page.subcategory %}<span class="category">{{ page.subcategory | escape }}</span>{% endif %}
         </div>
-        {% if page.tags and page.tags.size > 0 %}<div class="taxonomy">主題標籤：{% for tag in page.tags %}<span class="tag-chip">{{ tag | escape }}</span>{% endfor %}</div>{% endif %}
+        {% if page.tags and page.tags.size > 0 %}<div class="taxonomy">主題標籤：{% for tag in page.tags %}{% capture tag_page_path %}/tags/{{ tag }}/{% endcapture %}<a class="tag-chip" href="{{ tag_page_path | relative_url }}" aria-label="查看「{{ tag | escape }}」標籤的所有文章">{{ tag | escape }}</a>{% endfor %}</div>{% endif %}
       </header>
       {% if page.cover %}<img class="cover" src="{{ page.cover | relative_url | escape }}" alt="{{ page.cover_alt | default: page.title | escape }}">{% endif %}
       <div class="article-body">{{ content }}</div>
@@ -131,19 +134,6 @@
           </a>
         </div>
         <p class="share-status" role="status" aria-live="polite"></p>
-      </section>
-      <section class="article-tags" aria-labelledby="article-tags-heading">
-        <h2 id="article-tags-heading">本文標籤</h2>
-        {% if page.tags and page.tags.size > 0 %}
-          <div class="article-tag-list">
-            {% for tag in page.tags %}
-              {% capture tag_page_path %}/tags/{{ tag }}/{% endcapture %}
-              <a class="article-tag-link" href="{{ tag_page_path | relative_url }}">{{ tag | escape }}</a>
-            {% endfor %}
-          </div>
-        {% else %}
-          <span class="tag-empty">無</span>
-        {% endif %}
       </section>
     </article>
 
