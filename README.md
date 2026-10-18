@@ -10,6 +10,7 @@
 - [測驗題目、算分與結果跳轉](docs/測驗題目與算分跳轉說明.md)：題目分支、計分及結果頁對照。
 - [聯絡表單除錯手冊](docs/聯絡表單除錯手冊.md)：Turnstile、Cloudflare Worker、Resend。
 - [Instagram 自動更新設定](docs/Instagram自動更新設定.md)：GitHub Actions 憑證與貼文同步方式。
+- [每日瀏覽統計設定](docs/每日瀏覽統計設定.md)：GA4 測量 ID 設定與每日瀏覽量查詢方式。
 
 ## 快速開始
 
