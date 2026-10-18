@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>理論文章｜{{ site.title | default: "經典榮格 Classic Jung" }}</title>
+<title>{{ page.title | default: "理論文章" | escape }}｜{{ site.title | default: "經典榮格 Classic Jung" | escape }}</title>
 <meta name="description" content="{{ page.description | escape }}">
 <link rel="stylesheet" href="{{ '/assets/css/site-chrome.css' | relative_url }}">
 {% include site-theme-links.html %}
