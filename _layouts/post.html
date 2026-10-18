@@ -108,7 +108,7 @@
         </div>
         {% if page.tags and page.tags.size > 0 %}<div class="taxonomy">主題標籤：{% for tag in page.tags %}{% capture tag_page_path %}/tags/{{ tag }}/{% endcapture %}<a class="tag-chip" href="{{ tag_page_path | relative_url }}" aria-label="查看「{{ tag | escape }}」標籤的所有文章">{{ tag | escape }}</a>{% endfor %}</div>{% endif %}
       </header>
-      {% if page.cover %}<img class="cover" src="{{ page.cover | relative_url | escape }}" alt="{{ page.cover_alt | default: page.title | escape }}">{% endif %}
+      {% if page.cover %}<img class="cover" src="{{ page.cover | relative_url | escape }}" alt="{{ page.cover_alt | default: page.title | escape }}"{% if page.cover_width and page.cover_height %} width="{{ page.cover_width }}" height="{{ page.cover_height }}"{% endif %} decoding="async" fetchpriority="high">{% endif %}
       <div class="article-body">{{ content }}</div>
             {% capture article_share_url %}https://jungian16types.com{{ page.url }}{% endcapture %}
       {% capture article_share_text %}{{ page.title }} {{ article_share_url | strip }}{% endcapture %}
